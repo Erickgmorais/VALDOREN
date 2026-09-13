@@ -21,6 +21,5 @@ export class Moeda implements Item {
 
     public usarMoeda(): void {
         this.usada = true;
-    }
-
+    }   
 }
