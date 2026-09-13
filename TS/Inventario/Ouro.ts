@@ -4,14 +4,9 @@ import { Tipo } from "./TiposENUMs";
 
 export class Ouro implements Item {
 
-    private nome: string;
+    private nome: string = 'Ouro';
     private tipo: Tipo = Tipo.OURO; // Tipo indice
     private qtd: number = 0
-
-    constructor(nome: string){
-        this.nome = nome;
-
-    }
 
 
     getNome(): string {

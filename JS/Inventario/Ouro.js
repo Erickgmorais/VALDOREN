@@ -3,12 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Ouro = void 0;
 const TiposENUMs_1 = require("./TiposENUMs");
 class Ouro {
-    nome;
+    nome = 'Ouro';
     tipo = TiposENUMs_1.Tipo.OURO; // Tipo indice
     qtd = 0;
-    constructor(nome) {
-        this.nome = nome;
-    }
     getNome() {
         return this.nome;
     }
