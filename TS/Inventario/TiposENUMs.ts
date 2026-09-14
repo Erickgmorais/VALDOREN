@@ -1,3 +1,4 @@
+// Para Itens
 export enum TipoItem  {
     POCAO,    // 0 
     MOEDA,    // 1

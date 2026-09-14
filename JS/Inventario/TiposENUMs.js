@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EfeitoPocao = exports.TipoItem = void 0;
+// Para Itens
 var TipoItem;
 (function (TipoItem) {
     TipoItem[TipoItem["POCAO"] = 0] = "POCAO";

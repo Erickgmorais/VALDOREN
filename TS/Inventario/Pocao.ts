@@ -2,6 +2,8 @@ import { TipoItem } from "./TiposENUMs";
 import { EfeitoPocao } from "./TiposENUMs";
 import { Item } from "../Interfaces/Item";
 import { Personagem } from "../Interfaces/Personagem";
+import { blue } from "../Auxiliares/Cores";
+import { stop } from "../Auxiliares/Auxiliares";
 
 /**
  * ENUMs
@@ -36,11 +38,13 @@ export class Pocao implements Item {
     public tomarPocao(personagem: Personagem): void {
         if(this.efeito === EfeitoPocao.CURA){
             personagem.setVida(35);
-            console.log('Vida recuperada em 35!');
+            blue('Vida recuperada em 35!');
+            stop();
 
         } else if (this.efeito === EfeitoPocao.FORCA){
             personagem.setAtaque(20);
-            console.log('Aumentou 20 de Ataque do seu personagem!!');
+            blue('Ataque aumentado em 20 do seu personagem!');
+            stop();
 
         }
     }

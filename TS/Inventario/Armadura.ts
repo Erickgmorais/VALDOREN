@@ -1,4 +1,4 @@
-import { Item } from "../interfaces/Item";
+import { Item } from "../Interfaces/Item";
 import { TipoItem } from "./TiposENUMs";
 
 export class Armadura implements Item {

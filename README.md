@@ -8,6 +8,8 @@
 
 ### Mudanças Ju
 - Personagem: Troquei a forma como o inventário é composto dentro das classes de modelo (Interface base Item). Adicionei um array inventário de objetos do tipo Item que vai ter poções, armadura, arma, etc.
+- Falar sobre cores
+- Falar sobre ENUM
 
 
 ### Ideias Ju

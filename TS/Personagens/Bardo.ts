@@ -1,9 +1,10 @@
 // Ele seria um enganador, caso escolhesse ele teriamos de escolhar continuar com o tesouro ou devolver.
 // 
 
-import { logger } from "../auxiliares/Auxiliares";
-import { Item } from "../interfaces/Item";
-import { Personagem } from "../interfaces/Personagem";
+import { logger } from "../Auxiliares/Auxiliares";
+import { green } from "../Auxiliares/Cores";
+import { Item } from "../Interfaces/Item";
+import { Personagem } from "../Interfaces/Personagem";
 
 export class Bardo implements Personagem {
     private nome: string;
@@ -12,7 +13,7 @@ export class Bardo implements Personagem {
     private ataque: number;
     private defesa: number;
     // private pegouMoeda: boolean = false; A definir com erick J
-    // private ouro: number; Tirei o ouro porque eu criei ele como Item no inventário, o que acha? J
+    private ouro: number = 30;
     private inventario: Item[] = [];
 
     constructor(nome: string) {
@@ -22,7 +23,7 @@ export class Bardo implements Personagem {
         this.ataque = 12;
         this.defesa = 8;
     }
-    
+
 
     // getters e seters
     public getNome(): string {
@@ -45,6 +46,10 @@ export class Bardo implements Personagem {
         return this.defesa;
     }
 
+    public getOuro(): number {
+        return this.ouro
+    }
+
     // A definir com Erick se gostou da ideia J
     // getTemMoeda(): boolean {
     //     return this.pegouMoeda;
@@ -52,20 +57,72 @@ export class Bardo implements Personagem {
 
     public setVida(val: number): void {
         this.vida += val;
-        
+
     }
 
     public setAtaque(val: number): void {
         this.ataque += val;
     }
 
-// -- ---------------------------- --
+    public setOuro(val: number): void {
+        this.ouro += val;
+    }
 
-// Métodos da classe
+    // -- ---------------------------- --
+
+    // Métodos da classe
+
+    public adicionaInventario(item: Item): void {
+        this.inventario.push(item)
+    }
+
+
+    public removeIteminventario(item: Item): void {
+
+        const position = this.inventario.indexOf(item);
+
+        if (position > -1) {
+            this.inventario.splice(position, 1);
+        }
+    }
+
 
     public mostrarInventario(): void {
-        
+        console.clear()
+      
+        green(`
+███ █   █ █   █ █████ █   █ █████  ███  ████  ███  ███    
+ █░░██  █░█░  █░█░░░░░██  █░ ░█░░░█ ░░█ █░░░█  █░░█ ░░█   
+ █░░█░█ █░█░░ █░████░░█░█ █░░ █░░░█████░████░░ █░░█░ ░█░  
+ █░░█░░██░░█░█ ░█░░░░ █░░██░░ █░░ █░░░█░█░░█░ ░█░░█░░ █░░ 
+███░█░░ █░░ █ ░ █████░█░░ █░░ █░░ █░░░█░█░░░█░███░ ███ ░░ 
+ ░░░ ░░  ░░  ░ ░ ░░░░░ ░░  ░░  ░░  ░░  ░░░░  ░ ░░░  ░░░ ░ 
+ `)
+            
+        green(`POÇOES:`)
+        for (let item of this.inventario) {
+            if (item.getTipo() === 'POCAO') {
+                green(`- ${item.getNome()}`)
+            }
+        }
+
+        green(`\nARMADURAS E ARMAS:`)
+        for (let item of this.inventario) {
+            if (item.getTipo() === 'ARMA' || item.getTipo() === 'ARMADURA') {
+                green(`- ${item.getNome()}`)
+
+            }
+        }
+
+        green(`\nOUTROS:`)
+        for (let item of this.inventario) {
+            if (item.getTipo() === 'MOEDA') {
+                green(`- ${item.getNome()}`)
+
+            }
+        }
     }
+
 
     // FAZER PERFUMARIA NA FICHA
     public fichaPersonagem(): void {
@@ -81,11 +138,12 @@ Vida: ${this.vida}/100
 Ataque: ${this.ataque}
 Defesa: ${this.defesa}
 
+
 `)
     }
 
 
-}  
+}
 
 /** COMENTÁRIOS
  * Deixamos personagens como o "Bardo" pré definido já, ou damos a opção do usuário criar um "Bardo" do jeito que ele quiser? E

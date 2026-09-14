@@ -1,8 +1,8 @@
 // Sua arma tem um dano maior que os outros, e consegue carregar mais equipamentos.
 
 import { logger } from "../Auxiliares/Auxiliares";
-import { Item } from "../interfaces/Item";
-import { Personagem } from "../interfaces/Personagem";
+import { Item } from "../Interfaces/Item";
+import { Personagem } from "../Interfaces/Personagem";
 
 export class Cacador implements Personagem {
     private nome: string;

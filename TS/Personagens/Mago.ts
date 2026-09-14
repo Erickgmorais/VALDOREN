@@ -1,7 +1,7 @@
 import { logger } from "../Auxiliares/Auxiliares";
 
-import { Item } from "../interfaces/Item";
-import { Personagem } from "../interfaces/Personagem";
+import { Item } from "../Interfaces/Item";
+import { Personagem } from "../Interfaces/Personagem";
 
 export class Mago implements Personagem {
     private nome: string;

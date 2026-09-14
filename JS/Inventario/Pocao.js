@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Pocao = void 0;
 const TiposENUMs_1 = require("./TiposENUMs");
 const TiposENUMs_2 = require("./TiposENUMs");
+const Cores_1 = require("../Auxiliares/Cores");
+const Auxiliares_1 = require("../Auxiliares/Auxiliares");
 /**
  * ENUMs
  * Efeitos: CURA 0, FORCA 1
@@ -28,11 +30,13 @@ class Pocao {
     tomarPocao(personagem) {
         if (this.efeito === TiposENUMs_2.EfeitoPocao.CURA) {
             personagem.setVida(35);
-            console.log('Vida recuperada em 35!');
+            (0, Cores_1.blue)('Vida recuperada em 35!');
+            (0, Auxiliares_1.stop)();
         }
         else if (this.efeito === TiposENUMs_2.EfeitoPocao.FORCA) {
             personagem.setAtaque(20);
-            console.log('Aumentou 20 de Ataque do seu personagem!!');
+            (0, Cores_1.blue)('Ataque aumentado em 20 do seu personagem!');
+            (0, Auxiliares_1.stop)();
         }
     }
 }
