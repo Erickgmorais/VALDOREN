@@ -2,13 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Clerigo = void 0;
 const Auxiliares_1 = require("../Auxiliares/Auxiliares");
+const Cores_1 = require("../Auxiliares/Cores");
 class Clerigo {
     nome;
     classe;
     vida;
     ataque;
     defesa;
-    equipamento = [];
+    ouro = 30;
+    inventario = [];
     constructor(nome) {
         this.nome = nome;
         this.classe = 'Clerigo';
@@ -32,6 +34,9 @@ class Clerigo {
     getDefesa() {
         return this.defesa;
     }
+    getOuro() {
+        return this.ouro;
+    }
     // A definir com Erick se gostou da ideia J
     // getTemMoeda(): boolean {
     //     return this.pegouMoeda;
@@ -45,6 +50,33 @@ class Clerigo {
     // -- ---------------------------- --
     // Métodos da classe
     mostrarInventario() {
+        console.clear();
+        (0, Cores_1.green)(`
+    ███ █   █ █   █ █████ █   █ █████  ███  ████  ███  ███    
+     █░░██  █░█░  █░█░░░░░██  █░ ░█░░░█ ░░█ █░░░█  █░░█ ░░█   
+     █░░█░█ █░█░░ █░████░░█░█ █░░ █░░░█████░████░░ █░░█░ ░█░  
+     █░░█░░██░░█░█ ░█░░░░ █░░██░░ █░░ █░░░█░█░░█░ ░█░░█░░ █░░ 
+    ███░█░░ █░░ █ ░ █████░█░░ █░░ █░░ █░░░█░█░░░█░███░ ███ ░░ 
+     ░░░ ░░  ░░  ░ ░ ░░░░░ ░░  ░░  ░░  ░░  ░░░░  ░ ░░░  ░░░ ░ 
+     `);
+        (0, Cores_1.green)(`POÇOES:`);
+        for (let item of this.inventario) {
+            if (item.getTipo() === 'POCAO') {
+                (0, Cores_1.green)(`- ${item.getNome()}`);
+            }
+        }
+        (0, Cores_1.green)(`\nARMADURAS E ARMAS:`);
+        for (let item of this.inventario) {
+            if (item.getTipo() === 'ARMA' || item.getTipo() === 'ARMADURA') {
+                (0, Cores_1.green)(`- ${item.getNome()}`);
+            }
+        }
+        (0, Cores_1.green)(`\nOUTROS:`);
+        for (let item of this.inventario) {
+            if (item.getTipo() === 'MOEDA') {
+                (0, Cores_1.green)(`- ${item.getNome()}`);
+            }
+        }
     }
     // FAZER PERFUMARIA NA FICHA
     fichaPersonagem() {

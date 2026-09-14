@@ -3,6 +3,7 @@ import { Ouro } from "./Inventario/Ouro";
 import { Pocao } from "./Inventario/Pocao";
 import { EfeitoPocao } from "./Inventario/TiposENUMs";
 import { Bardo } from "./Personagens/Bardo";
+import { tocarSom } from "./Auxiliares/sons";
 
 const bardo: Bardo = new Bardo('bardo Teste');
 
@@ -18,6 +19,10 @@ bardo.adicionaInventario(pocao2);
 logger(pocao1)
 logger(pocao2)
 
+
+
+
+tocarSom('C:\\Users\\JULIANARODRIGUESDASI\\Documents\\UC4\\POO\\VALDOREN\\SOM\\abrirInventario.mp3');
 bardo.mostrarInventario();
 
 

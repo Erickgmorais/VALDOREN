@@ -1,13 +1,10 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const Auxiliares_1 = require("./Auxiliares/Auxiliares");
 const Pocao_1 = require("./Inventario/Pocao");
 const TiposENUMs_1 = require("./Inventario/TiposENUMs");
 const Bardo_1 = require("./Personagens/Bardo");
-const Som_1 = require("./Auxiliares/Som");
+const sons_1 = require("./Auxiliares/sons");
 const bardo = new Bardo_1.Bardo('bardo Teste');
 (0, Auxiliares_1.logger)(bardo.getOuro());
 const pocao1 = new Pocao_1.Pocao('Poção de cura', TiposENUMs_1.EfeitoPocao.CURA);
@@ -16,8 +13,5 @@ bardo.adicionaInventario(pocao1);
 bardo.adicionaInventario(pocao2);
 (0, Auxiliares_1.logger)(pocao1);
 (0, Auxiliares_1.logger)(pocao2);
+(0, sons_1.tocarSom)('C:\\Users\\JULIANARODRIGUESDASI\\Documents\\UC4\\POO\\VALDOREN\\SOM\\abrirInventario.mp3');
 bardo.mostrarInventario();
-const fs_1 = __importDefault(require("fs"));
-const caminho = "C:\\POO\\VALDOREN\\SOM\\abrirInventario.wav";
-console.log("Arquivo existe:", fs_1.default.existsSync(caminho));
-(0, Som_1.tocarSom)("C:\\POO\\VALDOREN\\SOM\\abrirInventario.wav");

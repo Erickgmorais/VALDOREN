@@ -5,7 +5,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Bardo = void 0;
 const Auxiliares_1 = require("../Auxiliares/Auxiliares");
 const Cores_1 = require("../Auxiliares/Cores");
-const Som_1 = require("../Auxiliares/Som");
 class Bardo {
     nome;
     classe;
@@ -67,7 +66,6 @@ class Bardo {
     }
     mostrarInventario() {
         console.clear();
-        (0, Som_1.tocarSom)("C:\\POO\\VALDOREN\\SOM\\abrirInventario.mp3");
         (0, Cores_1.green)(`
 ███ █   █ █   █ █████ █   █ █████  ███  ████  ███  ███    
  █░░██  █░█░  █░█░░░░░██  █░ ░█░░░█ ░░█ █░░░█  █░░█ ░░█   
