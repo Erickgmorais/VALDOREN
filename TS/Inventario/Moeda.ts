@@ -1,22 +1,22 @@
-import { Item } from "./Item";
-import { Tipo } from "./TiposENUMs";
+import { Item } from "../Interfaces/Item";
+import { TipoItem } from "./TiposENUMs";
 
 export class Moeda implements Item {
 
     private nome: string;
-    private tipo: Tipo = Tipo.MOEDA; // Moeda indice 1
+    private tipo: TipoItem = TipoItem.MOEDA; // Moeda indice 1
     private usada: boolean = false;
 
     constructor(nome: string){
         this.nome = nome;
     }
 
-    getNome(): string {
+    public getNome(): string {
         return this.nome
     }
 
-    getTipo(): string {
-        return Tipo[1] // Retorna MOEDA
+    public getTipo(): string {
+        return TipoItem[1] // Retorna MOEDA
     }
 
     public usarMoeda(): void {

@@ -1,14 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Efeito = exports.Tipo = void 0;
-var Tipo;
-(function (Tipo) {
-    Tipo[Tipo["POCAO"] = 0] = "POCAO";
-    Tipo[Tipo["MOEDA"] = 1] = "MOEDA";
-    Tipo[Tipo["OURO"] = 2] = "OURO"; // 2
-})(Tipo || (exports.Tipo = Tipo = {}));
-var Efeito;
-(function (Efeito) {
-    Efeito[Efeito["CURA"] = 0] = "CURA";
-    Efeito[Efeito["FORCA"] = 1] = "FORCA";
-})(Efeito || (exports.Efeito = Efeito = {}));
+exports.EfeitoPocao = exports.TipoItem = void 0;
+var TipoItem;
+(function (TipoItem) {
+    TipoItem[TipoItem["POCAO"] = 0] = "POCAO";
+    TipoItem[TipoItem["MOEDA"] = 1] = "MOEDA";
+    TipoItem[TipoItem["OURO"] = 2] = "OURO";
+    TipoItem[TipoItem["ARMADURA"] = 3] = "ARMADURA";
+    TipoItem[TipoItem["ARMA"] = 4] = "ARMA"; // 4
+})(TipoItem || (exports.TipoItem = TipoItem = {}));
+// Para poções. Será utilizado para fazer um if no método usarPocao para saber se ela vai dar vida ao personagem ou mais força
+var EfeitoPocao;
+(function (EfeitoPocao) {
+    EfeitoPocao[EfeitoPocao["CURA"] = 0] = "CURA";
+    EfeitoPocao[EfeitoPocao["FORCA"] = 1] = "FORCA"; // 1
+})(EfeitoPocao || (exports.EfeitoPocao = EfeitoPocao = {}));

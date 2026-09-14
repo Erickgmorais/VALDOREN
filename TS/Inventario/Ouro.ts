@@ -1,11 +1,11 @@
-import { Item } from "./Item";
-import { Tipo } from "./TiposENUMs";
+import { Item } from "../Interfaces/Item";
+import { TipoItem } from "./TiposENUMs";
 
 
 export class Ouro implements Item {
 
     private nome: string = 'Ouro';
-    private tipo: Tipo = Tipo.OURO; // Tipo indice
+    private tipo: TipoItem = TipoItem.OURO; // Tipo indice
     private qtd: number = 0;
 
     getNome(): string {
@@ -13,7 +13,7 @@ export class Ouro implements Item {
     }
 
     getTipo(): string {
-        return Tipo[2];
+        return TipoItem[2];
     }
 
     getQtdOuro(): number {
