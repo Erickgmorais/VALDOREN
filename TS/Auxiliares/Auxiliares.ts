@@ -7,3 +7,7 @@ export function stop(): void {
     ask.question('\x1b[35mPressione ENTER para continuar...\x1b[0m')
 }
 
+// Método só para nao precisar sempre ficar digitando console.clear para limpar o terminal
+export function clear(): void{
+    console.clear();
+}

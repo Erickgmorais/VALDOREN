@@ -5,26 +5,19 @@ import { EfeitoPocao } from "./Inventario/TiposENUMs";
 import { Bardo } from "./Personagens/Bardo";
 import { tocarSom } from "./Auxiliares/sons";
 
-const bardo: Bardo = new Bardo('bardo Teste');
+// const bardo: Bardo = new Bardo('bardo Teste');
 
-logger(bardo.getOuro()) 
+// logger(bardo.getOuro()) 
 
-const pocao1: Pocao = new Pocao('Poção de cura', EfeitoPocao.CURA);
-const pocao2: Pocao = new Pocao('Poção de Forca', EfeitoPocao.FORCA);
-
-
-bardo.adicionaInventario(pocao1);
-bardo.adicionaInventario(pocao2);
-
-logger(pocao1)
-logger(pocao2)
+// const pocao1: Pocao = new Pocao('Poção de cura', EfeitoPocao.CURA);
+// const pocao2: Pocao = new Pocao('Poção de Forca', EfeitoPocao.FORCA);
 
 
+// bardo.adicionaInventario(pocao1);
+// bardo.adicionaInventario(pocao2);
 
-
-tocarSom('C:\\Users\\JULIANARODRIGUESDASI\\Documents\\UC4\\POO\\VALDOREN\\SOM\\abrirInventario.mp3');
-bardo.mostrarInventario();
-
+// logger(pocao1)
+// logger(pocao2)
 
 
 

@@ -35,19 +35,19 @@ export class Pocao implements Item {
 
     // Esse método serve para que o personagem consiga usar as poções que vão ter no jogo (aumentar VIDA ou aumentar o ATAQUE).
 
-    public tomarPocao(personagem: Personagem): void {
-        if(this.efeito === EfeitoPocao.CURA){
-            personagem.setVida(35);
-            blue('Vida recuperada em 35!');
-            stop();
+    // public tomarPocao(personagem: Personagem): void {
+    //     if(this.efeito === EfeitoPocao.CURA){
+    //         personagem.setVida(35);
+    //         blue('Vida recuperada em 35!');
+    //         stop();
 
-        } else if (this.efeito === EfeitoPocao.FORCA){
-            personagem.setAtaque(20);
-            blue('Ataque aumentado em 20 do seu personagem!');
-            stop();
+    //     } else if (this.efeito === EfeitoPocao.FORCA){
+    //         personagem.setAtaque(20);
+    //         blue('Ataque aumentado em 20 do seu personagem!');
+    //         stop();
 
-        }
-    }
+    //     }
+    // }
 }
 
 /**

@@ -3,7 +3,7 @@ import { green } from "../Auxiliares/Cores";
 import { Item } from "../Interfaces/Item";
 import { Personagem } from "./Personagem";
 
-export class Berserker implements Personagem {
+export class Berserker extends Personagem {
     private nome: string;
     private classe: string;
     private vida: number;

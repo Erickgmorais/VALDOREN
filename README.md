@@ -25,7 +25,7 @@
 - Moeda no inicio do jogo para conseguir abrir uma daverna no meio do jogo J
 - controle de reputação J
 - Armas é upável J
-- Transformar a interface personagem em classe para ter herança J
+- Transformar a interface personagem em classe para ter herança J Finalizar
 - Terminar o controle do inventário para usar poções, dropar itens J
 - Organizar a função dos inimigos. Interface Inimigo J
 - Fazer e organizar a função dos inimigos E

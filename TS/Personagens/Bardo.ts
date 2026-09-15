@@ -7,8 +7,10 @@ import { Item } from "../Interfaces/Item";
 import { Personagem } from "./Personagem";
 
 export class Bardo extends Personagem {
-    
 
+    constructor(nome: string, classe: string, vida: number, ataque: number, defesa: number, ouro: number, reputacao: number) {
+        super(nome, 'Bardo', vida, ataque, defesa, ouro, reputacao)
+    }
 
     // getters e seters
     public getNome(): string {
