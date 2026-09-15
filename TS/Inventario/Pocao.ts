@@ -1,7 +1,7 @@
 import { TipoItem } from "./TiposENUMs";
 import { EfeitoPocao } from "./TiposENUMs";
 import { Item } from "../Interfaces/Item";
-import { Personagem } from "../Interfaces/Personagem";
+import { Personagem } from "../Personagens/Personagem";
 import { blue } from "../Auxiliares/Cores";
 import { stop } from "../Auxiliares/Auxiliares";
 

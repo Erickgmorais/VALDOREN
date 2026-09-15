@@ -1,8 +1,8 @@
 # VALDOREN
 
 ### A definir:
-- Arma do personagem: inicia com uma e pega uma mais forte ao decorrer do jogo OU pode upar ela (Mais dano), Inicia com nenhuma e pega uma base ao decorrer do jogo? (Acho MUITO legal a ideia de upar a arma utilizando ouro)
-- Vamos colocar quantidades máxima de itens dentro do inventário (Variável dependendo do tipo de personagem ou padrão?)
+- Arma do personagem: começa com uma arma fraca e da a possibilidade de upar ao decorrer de história (Acho MUITO legal a ideia de upar a arma utilizando ouro)
+- Vamos colocar quantidades máxima de itens dentro do inventário (Variável dependendo do tipo de personagem ou padrão?);
 - Comportamentos diferentes dependendo do modelo do jogador, vamos aplicar isso em quais e o que? (Erick criou os modelos de personagens com algumas ideias base de comportamentos, achei interessante J)
 
 
@@ -15,10 +15,19 @@
 
 ### Ideias Ju
 - Controle de reputação do personagem para ditar os finais ou até contronfotos, aparições de itens, etc (Por exemplo, se ele derrota um monstro, ele vai ganhar 30 de reputação. Se ele roubar algum item a reputação dele diminui. A ideia é fazer com que o jogador consiga visualizar se ele está virando HEROI no jogo ou VILAO)
-- Moeda no inicio do jogo para conseguir abrir uma daverna no meio do jogo (ADicionar atributo temMoeda no personagem do tipo boolean para ditar isso no codigo atraves de um IF)
 - Em algum momento do jogo, podemos fazer o personagem ir até o centro da cidade para gastar o ouro para Upar a arma dele em alguma, roubar algo (Isso vai diminuir a reputação dele) ou ajudar alguem (Aumentar reputação). 
 
+### Ideias Erick
+- Fazer comportamentos diferentes para cada modelo de personagem
+
+
 ## Fazer
-- Transformar a interface personagem em classe para ter herança
-- Terminar o controle do inventário para usar poções, dropar itens
-- Organizar a função dos inimigos. Interface Inimigo 
+- Moeda no inicio do jogo para conseguir abrir uma daverna no meio do jogo J
+- controle de reputação J
+- Armas é upável J
+- Transformar a interface personagem em classe para ter herança J
+- Terminar o controle do inventário para usar poções, dropar itens J
+- Organizar a função dos inimigos. Interface Inimigo J
+- Fazer e organizar a função dos inimigos E
+- Criar método no personagem para criar dano E 
+- Controle de ataque e dano contra inimigo na classe Personagem E 

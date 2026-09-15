@@ -1,10 +1,11 @@
 //Faz cadáveres obdecerem.
+//
 
 import { logger } from "../Auxiliares/Auxiliares";
 import { green } from "../Auxiliares/Cores";
 
 import { Item } from "../Interfaces/Item";
-import { Personagem } from "../Interfaces/Personagem";
+import { Personagem } from "./Personagem";
 
 export class Necromante implements Personagem {
     private nome: string;
@@ -121,3 +122,8 @@ Defesa: ${this.defesa}
 `)
     }
 }
+
+/** comentários
+ * tem habilidade auxiliar de chamar cadáveres para ajudar ele no combate contra inimigos
+ * 
+ */

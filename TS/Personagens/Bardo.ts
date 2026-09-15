@@ -1,28 +1,13 @@
 // Ele seria um enganador, caso escolhesse ele teriamos de escolhar continuar com o tesouro ou devolver.
-// 
+// no final da história ele é o vilão (tendencia)
 
 import { logger } from "../Auxiliares/Auxiliares";
 import { green } from "../Auxiliares/Cores";
 import { Item } from "../Interfaces/Item";
-import { Personagem } from "../Interfaces/Personagem";
+import { Personagem } from "./Personagem";
 
-export class Bardo implements Personagem {
-    private nome: string;
-    private classe: string;
-    private vida: number;
-    private ataque: number;
-    private defesa: number;
-    // private pegouMoeda: boolean = false; A definir com erick J
-    private ouro: number = 30;
-    private inventario: Item[] = [];
-
-    constructor(nome: string) {
-        this.nome = nome;
-        this.classe = 'Bardo';
-        this.vida = 90;
-        this.ataque = 12;
-        this.defesa = 8;
-    }
+export class Bardo extends Personagem {
+    
 
 
     // getters e seters
@@ -72,56 +57,7 @@ export class Bardo implements Personagem {
 
     // Métodos da classe
 
-    public adicionaInventario(item: Item): void {
-        this.inventario.push(item)
-    }
-
-
-    public removeIteminventario(item: Item): void {
-
-        const position = this.inventario.indexOf(item);
-
-        if (position > -1) {
-            this.inventario.splice(position, 1);
-        }
-    }
-
-
-    public mostrarInventario(): void {
-        console.clear()
-      
-        green(`
-███ █   █ █   █ █████ █   █ █████  ███  ████  ███  ███    
- █░░██  █░█░  █░█░░░░░██  █░ ░█░░░█ ░░█ █░░░█  █░░█ ░░█   
- █░░█░█ █░█░░ █░████░░█░█ █░░ █░░░█████░████░░ █░░█░ ░█░  
- █░░█░░██░░█░█ ░█░░░░ █░░██░░ █░░ █░░░█░█░░█░ ░█░░█░░ █░░ 
-███░█░░ █░░ █ ░ █████░█░░ █░░ █░░ █░░░█░█░░░█░███░ ███ ░░ 
- ░░░ ░░  ░░  ░ ░ ░░░░░ ░░  ░░  ░░  ░░  ░░░░  ░ ░░░  ░░░ ░ 
- `)
-            
-        green(`POÇOES:`)
-        for (let item of this.inventario) {
-            if (item.getTipo() === 'POCAO') {
-                green(`- ${item.getNome()}`)
-            }
-        }
-
-        green(`\nARMADURAS E ARMAS:`)
-        for (let item of this.inventario) {
-            if (item.getTipo() === 'ARMA' || item.getTipo() === 'ARMADURA') {
-                green(`- ${item.getNome()}`)
-
-            }
-        }
-
-        green(`\nOUTROS:`)
-        for (let item of this.inventario) {
-            if (item.getTipo() === 'MOEDA') {
-                green(`- ${item.getNome()}`)
-
-            }
-        }
-    }
+    
 
 
     // FAZER PERFUMARIA NA FICHA
@@ -142,7 +78,7 @@ Defesa: ${this.defesa}
 `)
     }
 
-
+    
 }
 
 /** COMENTÁRIOS
