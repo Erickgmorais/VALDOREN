@@ -128,7 +128,7 @@ class Personagem {
         }
     }
     fichaPersonagem() {
-        (0, Cores_1.green)(`
+        (0, Cores_1.yellow)(`
     ╔═══════════════════════════════════╗
     ║          FICHA DO JOGADOR         ║
     ╠═══════════════════════════════════╣

@@ -1,5 +1,5 @@
 import { clear, logger, stop } from "../Auxiliares/Auxiliares";
-import { blue, cyan, green, red } from "../Auxiliares/Cores";
+import { blue, cyan, green, red, yellow } from "../Auxiliares/Cores";
 import { Item } from "../Interfaces/Item";
 import { Pocao } from "../Inventario/Pocao";
 import { EfeitoPocao } from "../Inventario/TiposENUMs";
@@ -163,7 +163,7 @@ export abstract class Personagem {
 
     public fichaPersonagem(): void {
 
-        green(`
+        yellow(`
     ╔═══════════════════════════════════╗
     ║          FICHA DO JOGADOR         ║
     ╠═══════════════════════════════════╣
