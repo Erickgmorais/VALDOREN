@@ -3,7 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Berserker = void 0;
 const Auxiliares_1 = require("../Auxiliares/Auxiliares");
 const Cores_1 = require("../Auxiliares/Cores");
-class Berserker {
+const Personagem_1 = require("./Personagem");
+class Berserker extends Personagem_1.Personagem {
     nome;
     classe;
     vida;

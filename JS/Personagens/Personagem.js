@@ -1,25 +1,21 @@
-import { clear, stop } from "../Auxiliares/Auxiliares";
-import { blue, green, red } from "../Auxiliares/Cores";
-import { Item } from "../Interfaces/Item";
-import { Pocao } from "../Inventario/Pocao";
-import { EfeitoPocao } from "../Inventario/TiposENUMs";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Personagem = void 0;
+const Auxiliares_1 = require("../Auxiliares/Auxiliares");
+const Cores_1 = require("../Auxiliares/Cores");
+const TiposENUMs_1 = require("../Inventario/TiposENUMs");
 const ask = require('readline-sync');
-
-export abstract class Personagem {
-
-    protected nome: string;
-    protected classe: string;
-    protected vida: number;
-    protected ataque: number;
-    protected defesa: number;
-    protected ouro: number;
-    protected reputacao: number;
-
-    protected inventario: Item[] = [];
-    protected moeda: boolean = false;
-
-
-    constructor(nome: string, classe: string, vida: number, ataque: number, defesa: number, ouro: number, reputacao: number) {
+class Personagem {
+    nome;
+    classe;
+    vida;
+    ataque;
+    defesa;
+    ouro;
+    reputacao;
+    inventario = [];
+    moeda = false;
+    constructor(nome, classe, vida, ataque, defesa, ouro, reputacao) {
         this.nome = nome;
         this.classe = classe;
         this.vida = vida;
@@ -28,146 +24,115 @@ export abstract class Personagem {
         this.ouro = ouro;
         this.reputacao = reputacao;
     }
-
-    public getNome(): string {
+    getNome() {
         return this.nome;
     }
-
-    public getClasse(): string {
+    getClasse() {
         return this.classe;
     }
-
-    public getVida(): number {
+    getVida() {
         return this.vida;
     }
-
-    public getAtaque(): number {
-        return this.ataque
+    getAtaque() {
+        return this.ataque;
     }
-
-    public getDefesa(): number {
+    getDefesa() {
         return this.defesa;
     }
-
-    public getOuro(): number {
-        return this.ouro
+    getOuro() {
+        return this.ouro;
     }
-
-    public getTemMoeda(): boolean {
+    getTemMoeda() {
         return this.moeda;
     }
-
-    public setVida(val: number): void {
+    setVida(val) {
         this.vida += val;
     }
-
-    public setAtaque(val: number): void {
+    setAtaque(val) {
         this.ataque += val;
     }
-
     // método para ganhar adicionar ouro
-    public setOuro(val: number): void {
+    setOuro(val) {
         this.ouro += val;
     }
-
     // -- ----------------------------- --
-
     // Métodos principais
-
     // utilizado pra fazer o personagem pegar a moeda para entrar na caverna posteriormente na história
-    public pegarMoeda(): void {  
+    pegarMoeda() {
         this.moeda = true;
     }
-
     // controle de inventário dos personagens
-    
-    public adicionaInventario(item: Item): void {
-        this.inventario.push(item)
+    adicionaInventario(item) {
+        this.inventario.push(item);
     }
-
-
-    public removeIteminventario(item: Item): void {
-
+    removeIteminventario(item) {
         const position = this.inventario.indexOf(item);
-
         if (position > -1) {
             this.inventario.splice(position, 1);
         }
     }
-
-    public tomarPocao(pocao: Pocao): void {
-        if (pocao.getEfeito() === EfeitoPocao.CURA) { // CURA = 0
+    tomarPocao(pocao) {
+        if (pocao.getEfeito() === TiposENUMs_1.EfeitoPocao.CURA) { // CURA = 0
             this.setVida(35);
-            blue('Vida recuperada em 35!');
-            stop()
-
-        } else if (pocao.getEfeito() === EfeitoPocao.FORCA) { // FORÇA = 1
+            (0, Cores_1.blue)('Vida recuperada em 35!');
+            (0, Auxiliares_1.stop)();
+        }
+        else if (pocao.getEfeito() === TiposENUMs_1.EfeitoPocao.FORCA) { // FORÇA = 1
             this.setAtaque(20);
-            blue('Ataque aumentado em 20 do seu personagem!');
-            stop();
-
+            (0, Cores_1.blue)('Ataque aumentado em 20 do seu personagem!');
+            (0, Auxiliares_1.stop)();
         }
     }
-
-    public mostrarInventario(): void {
-
-    clear();
-    let temPocao: boolean = this.inventario.some((item) => item.getTipo() === 'POCAO');
-
-        green(`
+    mostrarInventario() {
+        (0, Auxiliares_1.clear)();
+        let temPocao = this.inventario.some((item) => item.getTipo() === 'POCAO');
+        (0, Cores_1.green)(`
 ███ █   █ █   █ █████ █   █ █████  ███  ████  ███  ███    
  █░░██  █░█░  █░█░░░░░██  █░ ░█░░░█ ░░█ █░░░█  █░░█ ░░█   
  █░░█░█ █░█░░ █░████░░█░█ █░░ █░░░█████░████░░ █░░█░ ░█░  
  █░░█░░██░░█░█ ░█░░░░ █░░██░░ █░░ █░░░█░█░░█░ ░█░░█░░ █░░ 
 ███░█░░ █░░ █ ░ █████░█░░ █░░ █░░ █░░░█░█░░░█░███░ ███ ░░ 
 ░░░ ░░  ░░  ░ ░ ░░░░░ ░░  ░░  ░░  ░░  ░░░░  ░ ░░░  ░░░ ░ 
- `)
-
-        green(`POÇOES:`)
+ `);
+        (0, Cores_1.green)(`POÇOES:`);
         for (let item of this.inventario) {
             if (item.getTipo() === 'POCAO') {
-                green(`- ${item.getNome()}`)
+                (0, Cores_1.green)(`- ${item.getNome()}`);
             }
         }
-
-        green(`\nARMADURAS E ARMAS:`)
+        (0, Cores_1.green)(`\nARMADURAS E ARMAS:`);
         for (let item of this.inventario) {
             if (item.getTipo() === 'ARMA' || item.getTipo() === 'ARMADURA') {
-                green(`- ${item.getNome()}`)
-
+                (0, Cores_1.green)(`- ${item.getNome()}`);
             }
         }
-
-        green(`\nOUTROS:`)
+        (0, Cores_1.green)(`\nOUTROS:`);
         for (let item of this.inventario) {
             if (item.getTipo() === 'MOEDA') {
-                green(`- ${item.getNome()}`)
-
+                (0, Cores_1.green)(`- ${item.getNome()}`);
             }
         }
-
         // verifica se tem 
         if (temPocao) {
-            green(`
+            (0, Cores_1.green)(`
                 1 - Usar pocao
                 2 - Dropar item
                 3 - Fechar inventário            
-                `)
-        } else {
-            green(`
+                `);
+        }
+        else {
+            (0, Cores_1.green)(`
                 1̶ ̶-̶ ̶U̶s̶a̶r̶ ̶p̶o̶c̶a̶o̶ (Voce não possui pocoes a serem utilizadas)
                 2 - Dropar item
                 3 - Fechar inventário    
-                `)
-
+                `);
         }
-
     } // final do método
 }
+exports.Personagem = Personagem;
 /** COMENTARIOS
  * Podemos adicionar um método "Usar Habilidade" aqui. E
  * Definir com Erick sobre moeda J
- * 
- * 
+ *
+ *
  */
-

@@ -2,9 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Pocao = void 0;
 const TiposENUMs_1 = require("./TiposENUMs");
-const TiposENUMs_2 = require("./TiposENUMs");
-const Cores_1 = require("../Auxiliares/Cores");
-const Auxiliares_1 = require("../Auxiliares/Auxiliares");
 /**
  * ENUMs
  * Efeitos: CURA 0, FORCA 1
@@ -23,21 +20,11 @@ class Pocao {
     getTipo() {
         return TiposENUMs_1.TipoItem[0];
     }
+    // O retorno do acesso de um enum, vai ser sempre um number, é a posição dele no enum, como se fosse um array
+    // Então quando eu retorno this.efeito, ele vai me retornar a posição que esse enum tem no codigo
+    // CURA = 0 e FORCA = 1
     getEfeito() {
-        return TiposENUMs_2.EfeitoPocao[1];
-    }
-    // Esse método serve para que o personagem consiga usar as poções que vão ter no jogo (aumentar VIDA ou aumentar o ATAQUE).
-    tomarPocao(personagem) {
-        if (this.efeito === TiposENUMs_2.EfeitoPocao.CURA) {
-            personagem.setVida(35);
-            (0, Cores_1.blue)('Vida recuperada em 35!');
-            (0, Auxiliares_1.stop)();
-        }
-        else if (this.efeito === TiposENUMs_2.EfeitoPocao.FORCA) {
-            personagem.setAtaque(20);
-            (0, Cores_1.blue)('Ataque aumentado em 20 do seu personagem!');
-            (0, Auxiliares_1.stop)();
-        }
+        return this.efeito;
     }
 }
 exports.Pocao = Pocao;

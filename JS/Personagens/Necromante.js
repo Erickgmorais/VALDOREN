@@ -1,5 +1,6 @@
 "use strict";
 //Faz cadáveres obdecerem.
+//
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Necromante = void 0;
 const Auxiliares_1 = require("../Auxiliares/Auxiliares");
@@ -97,3 +98,7 @@ Defesa: ${this.defesa}
     }
 }
 exports.Necromante = Necromante;
+/** comentários
+ * tem habilidade auxiliar de chamar cadáveres para ajudar ele no combate contra inimigos
+ *
+ */ 

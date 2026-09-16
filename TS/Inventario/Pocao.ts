@@ -29,25 +29,13 @@ export class Pocao implements Item {
         return TipoItem[0];
     }
 
-    getEfeito(): string {
-        return EfeitoPocao[1];
+    // O retorno do acesso de um enum, vai ser sempre um number, é a posição dele no enum, como se fosse um array
+    // Então quando eu retorno this.efeito, ele vai me retornar a posição que esse enum tem no codigo
+    // CURA = 0 e FORCA = 1
+    getEfeito(): number { 
+        return this.efeito;
     }
 
-    // Esse método serve para que o personagem consiga usar as poções que vão ter no jogo (aumentar VIDA ou aumentar o ATAQUE).
-
-    // public tomarPocao(personagem: Personagem): void {
-    //     if(this.efeito === EfeitoPocao.CURA){
-    //         personagem.setVida(35);
-    //         blue('Vida recuperada em 35!');
-    //         stop();
-
-    //     } else if (this.efeito === EfeitoPocao.FORCA){
-    //         personagem.setAtaque(20);
-    //         blue('Ataque aumentado em 20 do seu personagem!');
-    //         stop();
-
-    //     }
-    // }
 }
 
 /**

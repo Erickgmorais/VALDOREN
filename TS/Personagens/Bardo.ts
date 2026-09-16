@@ -8,8 +8,8 @@ import { Personagem } from "./Personagem";
 
 export class Bardo extends Personagem {
 
-    constructor(nome: string, classe: string, vida: number, ataque: number, defesa: number, ouro: number, reputacao: number) {
-        super(nome, 'Bardo', vida, ataque, defesa, ouro, reputacao)
+    constructor(nome: string) {
+        super(nome, 'Bardo', 100, 12, 10, 30, 40)
     }
 
     // getters e seters

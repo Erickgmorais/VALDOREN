@@ -1,17 +1,32 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.teste = void 0;
+exports.testeEnum = testeEnum;
 const Auxiliares_1 = require("./Auxiliares/Auxiliares");
-const Pocao_1 = require("./Inventario/Pocao");
-const TiposENUMs_1 = require("./Inventario/TiposENUMs");
-const Bardo_1 = require("./Personagens/Bardo");
-const sons_1 = require("./Auxiliares/sons");
-const bardo = new Bardo_1.Bardo('bardo Teste');
-(0, Auxiliares_1.logger)(bardo.getOuro());
-const pocao1 = new Pocao_1.Pocao('Poção de cura', TiposENUMs_1.EfeitoPocao.CURA);
-const pocao2 = new Pocao_1.Pocao('Poção de Forca', TiposENUMs_1.EfeitoPocao.FORCA);
-bardo.adicionaInventario(pocao1);
-bardo.adicionaInventario(pocao2);
-(0, Auxiliares_1.logger)(pocao1);
-(0, Auxiliares_1.logger)(pocao2);
-(0, sons_1.tocarSom)('C:\\Users\\JULIANARODRIGUESDASI\\Documents\\UC4\\POO\\VALDOREN\\SOM\\abrirInventario.mp3');
-bardo.mostrarInventario();
+// const bardo: Bardo = new Bardo('bardo Teste');
+// logger(bardo.getOuro()) 
+// const pocao1: Pocao = new Pocao('Poção de cura', EfeitoPocao.CURA);
+// const pocao2: Pocao = new Pocao('Poção de Forca', EfeitoPocao.FORCA);
+// bardo.mostrarInventario()
+// stop()
+// bardo.adicionaInventario(pocao1);
+// bardo.adicionaInventario(pocao2);
+// bardo.fichaPersonagem()
+// stop()
+// logger(pocao1.getEfeito())
+// logger(pocao2.getEfeito())
+// logger(pocao1)
+// logger(pocao2)
+// bardo.tomarPocao(pocao1)
+// bardo.tomarPocao(pocao2)
+var teste;
+(function (teste) {
+    teste[teste["JULIANA"] = 0] = "JULIANA";
+    teste[teste["AMANDA"] = 1] = "AMANDA";
+})(teste || (exports.teste = teste = {}));
+;
+(0, Auxiliares_1.logger)(teste.AMANDA, teste.JULIANA);
+function testeEnum() {
+    return teste[0];
+}
+(0, Auxiliares_1.logger)(testeEnum());
