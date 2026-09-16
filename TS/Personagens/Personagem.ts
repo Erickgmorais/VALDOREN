@@ -1,5 +1,5 @@
-import { clear, stop } from "../Auxiliares/Auxiliares";
-import { blue, green, red } from "../Auxiliares/Cores";
+import { clear, logger, stop } from "../Auxiliares/Auxiliares";
+import { blue, cyan, green, red } from "../Auxiliares/Cores";
 import { Item } from "../Interfaces/Item";
 import { Pocao } from "../Inventario/Pocao";
 import { EfeitoPocao } from "../Inventario/TiposENUMs";
@@ -75,12 +75,12 @@ export abstract class Personagem {
     // Métodos principais
 
     // utilizado pra fazer o personagem pegar a moeda para entrar na caverna posteriormente na história
-    public pegarMoeda(): void {  
+    public pegarMoeda(): void {
         this.moeda = true;
     }
 
     // controle de inventário dos personagens
-    
+
     public adicionaInventario(item: Item): void {
         this.inventario.push(item)
     }
@@ -111,8 +111,8 @@ export abstract class Personagem {
 
     public mostrarInventario(): void {
 
-    clear();
-    let temPocao: boolean = this.inventario.some((item) => item.getTipo() === 'POCAO');
+        clear();
+        let temPocao: boolean = this.inventario.some((item) => item.getTipo() === 'POCAO');
 
         green(`
 ███ █   █ █   █ █████ █   █ █████  ███  ████  ███  ███    
@@ -149,20 +149,39 @@ export abstract class Personagem {
         // verifica se tem 
         if (temPocao) {
             green(`
-                1 - Usar pocao
-                2 - Dropar item
-                3 - Fechar inventário            
+        1 - Usar pocao
+        2 - Dropar item
+        3 - Fechar inventário            
                 `)
         } else {
             green(`
-                1̶ ̶-̶ ̶U̶s̶a̶r̶ ̶p̶o̶c̶a̶o̶ (Voce não possui pocoes a serem utilizadas)
-                2 - Dropar item
-                3 - Fechar inventário    
-                `)
-
+        1̶ ̶-̶ ̶U̶s̶a̶r̶ ̶p̶o̶c̶a̶o̶ (Voce não possui pocoes a serem utilizadas)
+        2 - Dropar item
+        3 - Fechar inventário`)
         }
+    }
 
-    } // final do método
+    public fichaPersonagem(): void {
+
+        green(`
+    ╔═══════════════════════════════════╗
+    ║          FICHA DO JOGADOR         ║
+    ╠═══════════════════════════════════╣
+    ║                                   ║
+    ║  NOME   : ${this.nome.padEnd(23)} ║
+    ║  CLASSE : ${this.classe.padEnd(23)} ║
+    ║                                   ║
+    ╠═══════════════════════════════════╣
+    ║            ATRIBUTOS              ║
+    ╠═══════════════════════════════════╣
+    ║                                   ║
+    ║  VIDA   : ${String(this.vida + '/100').padEnd(23)} ║
+    ║  ATAQUE : ${String(this.ataque).padEnd(23)} ║
+    ║  DEFESA : ${String(this.defesa).padEnd(23)} ║
+    ║                                   ║
+    ╚═══════════════════════════════════╝
+    `)
+    }
 }
 /** COMENTARIOS
  * Podemos adicionar um método "Usar Habilidade" aqui. E

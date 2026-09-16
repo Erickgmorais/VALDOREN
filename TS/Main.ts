@@ -1,25 +1,26 @@
 import { logger, stop } from "./Auxiliares/Auxiliares";
-import { Ouro } from "./Inventario/Ouro";
 import { Pocao } from "./Inventario/Pocao";
+
 import { EfeitoPocao } from "./Inventario/TiposENUMs";
 import { Bardo } from "./Personagens/Bardo";
-import { tocarSom } from "./Auxiliares/sons";
+// import { tocarSom } from "./Auxiliares/sons";
 
-// const bardo: Bardo = new Bardo('bardo Teste');
+const bardo: Bardo = new Bardo('bardo Teste');
 
 // logger(bardo.getOuro()) 
 
-// const pocao1: Pocao = new Pocao('Poção de cura', EfeitoPocao.CURA);
-// const pocao2: Pocao = new Pocao('Poção de Forca', EfeitoPocao.FORCA);
+const pocao1: Pocao = new Pocao('Poção de cura', EfeitoPocao.CURA);
+const pocao2: Pocao = new Pocao('Poção de Forca', EfeitoPocao.FORCA);
 
 // bardo.mostrarInventario()
 // stop()
 
 
+
 // bardo.adicionaInventario(pocao1);
 // bardo.adicionaInventario(pocao2);
-// bardo.fichaPersonagem()
-// stop()
+bardo.fichaPersonagem()
+stop()
 // logger(pocao1.getEfeito())
 // logger(pocao2.getEfeito())
 
@@ -29,15 +30,7 @@ import { tocarSom } from "./Auxiliares/sons";
 // bardo.tomarPocao(pocao1)
 // bardo.tomarPocao(pocao2)
 
-export enum teste {JULIANA, AMANDA};
-
-logger(teste.AMANDA, teste.JULIANA)
-
-export function testeEnum(): string {
- return teste[0]
-}
-
-logger(testeEnum())
+// bardo.fichaPersonagem()
 
 
 

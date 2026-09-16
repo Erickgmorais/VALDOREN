@@ -115,19 +115,38 @@ class Personagem {
         // verifica se tem 
         if (temPocao) {
             (0, Cores_1.green)(`
-                1 - Usar pocao
-                2 - Dropar item
-                3 - Fechar inventário            
+        1 - Usar pocao
+        2 - Dropar item
+        3 - Fechar inventário            
                 `);
         }
         else {
             (0, Cores_1.green)(`
-                1̶ ̶-̶ ̶U̶s̶a̶r̶ ̶p̶o̶c̶a̶o̶ (Voce não possui pocoes a serem utilizadas)
-                2 - Dropar item
-                3 - Fechar inventário    
-                `);
+        1̶ ̶-̶ ̶U̶s̶a̶r̶ ̶p̶o̶c̶a̶o̶ (Voce não possui pocoes a serem utilizadas)
+        2 - Dropar item
+        3 - Fechar inventário`);
         }
-    } // final do método
+    }
+    fichaPersonagem() {
+        (0, Cores_1.green)(`
+    ╔═══════════════════════════════════╗
+    ║          FICHA DO JOGADOR         ║
+    ╠═══════════════════════════════════╣
+    ║                                   ║
+    ║  NOME   : ${this.nome.padEnd(23)} ║
+    ║  CLASSE : ${this.classe.padEnd(23)} ║
+    ║                                   ║
+    ╠═══════════════════════════════════╣
+    ║            ATRIBUTOS              ║
+    ╠═══════════════════════════════════╣
+    ║                                   ║
+    ║  VIDA   : ${String(this.vida + '/100').padEnd(23)} ║
+    ║  ATAQUE : ${String(this.ataque).padEnd(23)} ║
+    ║  DEFESA : ${String(this.defesa).padEnd(23)} ║
+    ║                                   ║
+    ╚═══════════════════════════════════╝
+    `);
+    }
 }
 exports.Personagem = Personagem;
 /** COMENTARIOS
