@@ -1,16 +1,32 @@
 // Ele seria um enganador, caso escolhesse ele teriamos de escolhar continuar com o tesouro ou devolver.
 // no final da história ele é o vilão (tendencia)
 
+import { consoleEspecial } from "../Auxiliares/Auxiliares";
+import { blue } from "../Auxiliares/Cores";
+import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "./Personagem";
 
 export class Bardo extends Personagem {
 
     constructor(nome: string) {
-        super(nome, 'Bardo', 90, 12, 8, 50, 40)
+        super(nome, 'Bardo', 150, 18, 8, 50, 40)
     }
 
-    usarAtaqueEspecial(): number {
-        return 0
+    public usarAtaqueEspecial(inimigo: Inimigo): number {
+
+        const danoFinal = this.ataque + 500;
+
+        if (this.usouAtaqueEspecial) {
+
+            inimigo.tomarDano(danoFinal)
+            consoleEspecial()
+            blue(`Que a minha melodia desperte o poder que repousa em minha alma! O ATAQUE CAUSOU ${danoFinal} DE DANO!`);
+            this.setEspecial() // Seta o especial = true
+            return danoFinal;
+
+        }
+
+        return danoFinal;
     }
 
     // fazer algum método especifico?

@@ -64,6 +64,29 @@ class Personagem {
     pegarMoeda() {
         this.moeda = true;
     }
+    // Métodos de combate
+    tomarDano(dano) {
+        const defesaAleatoria = Math.floor(Math.random() * (this.defesa + 1));
+        // o max me retorna o maior valor entre os dois, se o dano por acaso ficar negativo, o dano será zerado
+        const danoFinal = Math.max(0, dano - defesaAleatoria);
+        this.vida -= danoFinal;
+        (0, Cores_1.blue)(`
+    -- ----------------------------------------- --
+        ${this.nome.toUpperCase()} TOMOU DANO!
+        Dano recebido: ${dano}
+        Defesa: ${defesaAleatoria}
+        Dano efetivo recebido: ${danoFinal}
+    -- ----------------------------------------- --        
+            `);
+        if (this.vida < 0) {
+            this.vida = 0;
+        }
+        return danoFinal;
+    }
+    atacar(inimigo) {
+        inimigo.tomarDano(this.ataque);
+    }
+    // -- -------------------------------------- --
     // -- controle de inventário dos personagens --
     adicionaInventario(item) {
         this.inventario.push(item);

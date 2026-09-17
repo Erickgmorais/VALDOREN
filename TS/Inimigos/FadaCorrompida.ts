@@ -1,23 +1,15 @@
-//Causa dano em dobro
-import { green, yellow} from "../Auxiliares/Cores";
+//Causa dano em dobro dependendo de uma chance variável 
+import { red, yellow } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "../Personagens/Personagem";
 
 
 export class FadaCorrompida implements Inimigo {
-    private nome: string;
-    private vida: number;
-    private ataque: number;
-    private defesa: number;
-    private habilidade: string
-
-    constructor(nome: string, vida: number, ataque: number, defesa: number, habilidade: string) {
-        this.nome = nome;
-        this.vida = vida;
-        this.ataque = ataque;
-        this.defesa = defesa;
-        this.habilidade = habilidade;
-    }
+    private nome: string = 'Fada Corrompida';
+    private vida: number = 30;
+    private ataque: number = 9;
+    private defesa: number = 3;
+    private habilidade: string = 'Dano em dobro'
 
     getNome(): string {
         return this.nome
@@ -35,11 +27,61 @@ export class FadaCorrompida implements Inimigo {
         return this.defesa
     }
 
+    public tomarDano(dano: number): number {
+
+        const defesaAleatoria = Math.floor(Math.random() * (this.defesa + 1)); // defesa aleatória
+
+        // o max me retorna o maior valor entre os dois, se o dano por acaso ficar negativo, o dano será zerado
+        const danoFinal = Math.max(0, dano - defesaAleatoria);
+
+
+        this.vida -= danoFinal;
+        red(`
+    -- ----------------------------------------- --        
+        ${this.nome.toUpperCase()} TOMOU DANO!
+        Dano recebido: ${dano}
+        Defesa: ${defesaAleatoria}
+        Dano efetivo recebido: ${danoFinal}
+    -- ----------------------------------------- --    
+        `)
+
+        if (this.vida < 0) {
+            this.vida = 0;
+            red('Inimigo morreu');
+            return dano;
+        }
+        return dano;
+    }
+
     //Método de ataque.
-    Ataque(personagem: Personagem): void {
+    public atacar(personagem: Personagem): void {
+
+        const chance: number = Math.random();
         const danoAleatorio: number = Math.floor(Math.random() * this.ataque) + 1;
-        const danoFinal: number = personagem.tomarDano(danoAleatorio);
-        yellow(`
+        let danoFinal: number;
+
+
+        if (chance < 0.60) { // 60% de chance de ter ataque duplo
+            danoFinal = danoAleatorio * 2;
+            red(`
+        ATAQUE DO INIMIGO:
+        ╔════════════════════════════════════════╗
+        ║          HABILIDADE ESPECIAL           ║
+        ╠════════════════════════════════════════╣
+        ║                                        ║
+        ║ ${this.nome} ativou ATAQUE DUPLO!      ║
+        ║                                        ║
+        ║ DANO CAUSADO  : ${danoFinal}           ║
+        ║                                        ║
+        ║                                        ║
+        ╚════════════════════════════════════════╝
+        `);
+            personagem.tomarDano(danoFinal);
+
+        } else {
+            danoFinal = danoAleatorio;
+            yellow(`
+        ATAQUE DO INIMIGO:
         ╔════════════════════════════════════════╗
         ║                 ATAQUE                 ║
         ╠════════════════════════════════════════╣
@@ -47,16 +89,17 @@ export class FadaCorrompida implements Inimigo {
         ║ ${this.nome} atacou ${personagem.getNome()}!║
         ║                                        ║
         ║ DANO CAUSADO  : ${danoFinal}           ║
-        ║ VIDA RESTANTE : ${personagem.getVida()}║
         ║                                        ║
         ╚════════════════════════════════════════╝
-        `)
+            `)
+        }
+
     }
 
     //Método de habilidade do inimigo
     usarHabilidade(personagem: Personagem): void {
         const dano: number = personagem.tomarDano(this.ataque * 2);
-        yellow(`
+        red(`
         ╔════════════════════════════════════════╗
         ║          HABILIDADE ESPECIAL           ║
         ╠════════════════════════════════════════╣
@@ -71,7 +114,7 @@ export class FadaCorrompida implements Inimigo {
     }
 
     //Mostrar dados do inimigo
-    mostrarInimigo(): void {
+    public fichaInimigo(): void {
         yellow(`
         ╔════════════════════════════════════════╗
         ║                 INIMIGO                ║

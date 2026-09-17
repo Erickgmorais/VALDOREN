@@ -18,7 +18,7 @@
 - Em algum momento do jogo, podemos fazer o personagem ir até o centro da cidade para gastar o ouro para Upar a arma dele em alguma, roubar algo (Isso vai diminuir a reputação dele) ou ajudar alguem (Aumentar reputação). 
 
 ### Ideias Erick
-- Fazer comportamentos diferentes para cada modelo de personagem
+- Fazer comportamentos diferentes para cada modelo de personagem 
 
 
 ## Fazer
@@ -31,3 +31,6 @@
 - Criar método no personagem para criar dano E 
 - Controle de ataque e dano contra inimigo na classe Personagem E 
 - 
+
+## Confronto
+- tomarDano e atacar são os métodos principais que todos os inimigos e os personagens tem. Dentro do método atacar de cada um vamos chamar o método tomar dano (Com as devidas validações especiais, como por exemplo, o fantasma tem a opção de se esquivar do dano, inclusive podendo moggar o usar especial do personagem)

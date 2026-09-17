@@ -1,103 +1,99 @@
 //Chance de ignorar completamente um ataque
-import { green, yellow} from "../Auxiliares/Cores";
+import { red, yellow } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "../Personagens/Personagem";
 
 export class Fantasma implements Inimigo {
-    private nome: string;
-    private vida: number;
-    private ataque: number;
-    private defesa: number;
-    private habilidade: string;
+    private nome: string = 'Fantasma do Clerigo';
+    private vida: number = 50;
+    private ataque: number = 15;
+    private defesa: number = 3;
+    private habilidade: string = 'Esquiva';
 
-
-    constructor(nome: string, vida: number, ataque: number, defesa: number, habilidade: string, rouboVida: number) {
-        this.nome = nome;
-        this.vida = vida;
-        this.ataque = ataque;
-        this.defesa = defesa;
-        this.habilidade = habilidade;
-    }
-
-    getNome(): string {
+    public getNome(): string {
         return this.nome
     }
 
-    getVida(): number {
+    public getVida(): number {
         return this.vida
     }
 
-    getAtaque(): number {
+    public getAtaque(): number {
         return this.ataque
     }
 
-    getDefesa(): number {
+    public getDefesa(): number {
         return this.defesa
     }
 
     //Método de ataque.
-    Ataque(personagem: Personagem): void {
-        const danoAleatorio: number = Math.floor(Math.random() * this.ataque) + 1;
-        const danoFinal: number = personagem.tomarDano(danoAleatorio);
-        yellow(`
-        ╔════════════════════════════════════════╗
-        ║                 ATAQUE                 ║
-        ╠════════════════════════════════════════╣
-        ║                                        ║
-        ║ ${this.nome} atacou ${personagem.getNome()}!║
-        ║                                        ║
-        ║ DANO CAUSADO  : ${danoFinal}           ║
-        ║ VIDA RESTANTE : ${personagem.getVida()}║
-        ║                                        ║
-        ╚════════════════════════════════════════╝
-        `);
+    public atacar(personagem: Personagem): void {
+
+        const danoFinal: number = Math.floor(Math.random() * this.ataque) + 1; // calculo o dano aleatorio 
+        personagem.tomarDano(danoFinal);             // executo o dano no inimigo
     }
 
-    //Método de habilidade do inimigo
-    usarHabilidade(personagem: Personagem): void {
-        const chance: number = Math.random();
+    public tomarDano(dano: number): number { // coloquei aqui a possibilidade de esquiva do fantasma 
+
+        const chance: number = Math.random(); // controlar a chance do personagem se esquivar do dano!
+        const defesaAleatoria = Math.floor(Math.random() * (this.defesa + 1)); // defesa aleatória
+
+        // o max me retorna o maior valor entre os dois, se o dano por acaso ficar negativo, o dano será zerado
+        const danoFinal = Math.max(0, dano - defesaAleatoria);
+
 
         if (chance < 0.30) {
-                yellow(`
-        ╔════════════════════════════════════════╗
-        ║           INTANGIBILIDADE!             ║
-        ╠════════════════════════════════════════╣
-        ║                                        ║
-        ║ ${this.nome} ignorou completamente o   ║
-        ║ ataque!                                ║
-        ║                                        ║
-        ║ CHANCE DE ESQUIVA : 30%                ║
-        ║                                        ║
-        ╚════════════════════════════════════════╝
+       red(`    
+    ╔═══════════════════════════════════════════════╗
+    ║               INTANGIBILIDADE!                ║
+    ╠═══════════════════════════════════════════════╣
+    ║ ${String(this.nome).padEnd(45)} ║
+    ║                                               ║
+    ║ ignorou completamente o ataque e se           ║
+    ║ esquivou do dano recebido!                    ║
+    ║                                               ║
+    ║ CHANCE DE ESQUIVA : 30%                       ║
+    ║                                               ║
+    ╚═══════════════════════════════════════════════╝
         `)
+        } else {
+
+            this.vida -= danoFinal;
+
+            red(`
+    -- ----------------------------------------- --            
+        ${this.nome.toUpperCase()} TOMOU DANO!
+        Dano recebido: ${dano}
+        Defesa: ${defesaAleatoria}
+        Dano efetivo recebido: ${danoFinal}
+    -- ----------------------------------------- -- 
+        `)
+
         }
 
-        yellow(`
-        ╔════════════════════════════════════════╗
-        ║              ATAQUE                    ║
-        ╠════════════════════════════════════════╣
-        ║                                        ║
-        ║ ${this.nome} não conseguiu ignorar!    ║
-        ║                                        ║
-        ╚════════════════════════════════════════╝
-        `);
-
+        if (this.vida < 0) {
+            this.vida = 0;
+            red('Inimigo morreu');
+            return dano;
+        }
+        return dano;
     }
 
+
     //Mostrar dados do inimigo
-    mostrarInimigo(): void {
-        yellow(`
-        ╔════════════════════════════════════════╗
-        ║                 INIMIGO                ║
-        ╠════════════════════════════════════════╣
-        ║                                        ║
-        ║ NOME        : ${this.nome}             ║
-        ║ VIDA        : ${this.vida}             ║
-        ║ ATAQUE      : ${this.ataque}           ║
-        ║ DEFESA      : ${this.defesa}           ║
-        ║ HABILIDADE  : ${this.habilidade}       ║
-        ║                                        ║
-        ╚════════════════════════════════════════╝
-        `);
+    public fichaInimigo(): void {
+        red(`
+    ╔════════════════════════════════════════╗
+    ║                 INIMIGO                ║
+    ╠════════════════════════════════════════╣
+    ║                                        ║
+    ║ NOME        : ${String(this.nome).padEnd(23)}  ║
+    ║ VIDA        : ${String(this.vida).padEnd(23)}  ║
+    ║ ATAQUE      : ${String(this.ataque).padEnd(23)}  ║
+    ║ DEFESA      : ${String(this.defesa).padEnd(23)}  ║
+    ║ HABILIDADE  : ${String(this.habilidade).padEnd(23)}  ║
+    ║                                        ║
+    ╚════════════════════════════════════════╝
+`);
     }
 }

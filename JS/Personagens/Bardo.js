@@ -3,13 +3,23 @@
 // no final da história ele é o vilão (tendencia)
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Bardo = void 0;
+const Auxiliares_1 = require("../Auxiliares/Auxiliares");
+const Cores_1 = require("../Auxiliares/Cores");
 const Personagem_1 = require("./Personagem");
 class Bardo extends Personagem_1.Personagem {
     constructor(nome) {
-        super(nome, 'Bardo', 90, 12, 8, 50, 40);
+        super(nome, 'Bardo', 150, 18, 8, 50, 40);
     }
-    usarAtaqueEspecial() {
-        return 0;
+    usarAtaqueEspecial(inimigo) {
+        const danoFinal = this.ataque + 500;
+        if (this.usouAtaqueEspecial) {
+            inimigo.tomarDano(danoFinal);
+            (0, Auxiliares_1.consoleEspecial)();
+            (0, Cores_1.blue)(`Que a minha melodia desperte o poder que repousa em minha alma! O ATAQUE CAUSOU ${danoFinal} DE DANO!`);
+            this.setEspecial(); // Seta o especial = true
+            return danoFinal;
+        }
+        return danoFinal;
     }
 }
 exports.Bardo = Bardo;

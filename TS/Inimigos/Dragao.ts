@@ -1,24 +1,18 @@
 //Perde HP para aumentar muito o ataque
-import { logger } from "../Auxiliares/Auxiliares";
-import { green, yellow} from "../Auxiliares/Cores";
+
+import { stop } from "../Auxiliares/Auxiliares";
+import { red, yellow } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "../Personagens/Personagem";
 
 
-export class FadaCorrompida implements Inimigo {
-    private nome: string;
-    private vida: number;
-    private ataque: number;
-    private defesa: number;
-    private habilidade: string
+export class Dragao implements Inimigo {
+    private nome: string = 'Dragao da montanha';
+    private vida: number = 90;
+    private ataque: number = 12;
+    private defesa: number = 3;
+    private habilidade: string = 'Conversão vida em Ataque'
 
-    constructor(nome: string, vida: number, ataque: number, defesa: number, habilidade: string) {
-        this.nome = nome;
-        this.vida = vida;
-        this.ataque = ataque;
-        this.defesa = defesa;
-        this.habilidade = habilidade;
-    }
 
     getNome(): string {
         return this.nome
@@ -36,56 +30,98 @@ export class FadaCorrompida implements Inimigo {
         return this.defesa
     }
 
-    //Método de ataque.
-    Ataque(personagem: Personagem): void {
-        const danoAleatorio: number = Math.floor(Math.random() * this.ataque) + 1;
-        const danoFinal: number = personagem.tomarDano(danoAleatorio);
-        yellow(`
-        ╔════════════════════════════════════════╗
-        ║                 ATAQUE                 ║
-        ╠════════════════════════════════════════╣
-        ║                                        ║
-        ║ ${this.nome} atacou ${personagem.getNome()}!║
-        ║                                        ║
-        ║ DANO CAUSADO  : ${danoFinal}           ║
-        ║ VIDA RESTANTE : ${personagem.getVida()}║
-        ║                                        ║
-        ╚════════════════════════════════════════╝
-        `)
-    };
+    public tomarDano(dano: number): number {
 
-    //Método de habilidade do inimigo
-    usarHabilidade(personagem: Personagem): void {
-        this.vida -= 5
-        this.ataque += 40
-        yellow(`
-        ╔════════════════════════════════════════╗
-        ║                ESPECIAL!               ║
-        ╠════════════════════════════════════════╣
-        ║                                        ║
-        ║ ${this.nome} sacrificou 5 de vida!     ║
-        ║                                        ║
-        ║ ATAQUE AUMENTADO : +40                 ║
-        ║ ATAQUE ATUAL : ${this.ataque}          ║
-        ║                                        ║
-        ╚════════════════════════════════════════╝
-        `);
+        const defesaAleatoria = Math.floor(Math.random() * (this.defesa + 1)); // defesa aleatória
+
+        // o max me retorna o maior valor entre os dois, se o dano por acaso ficar negativo, o dano será zerado
+        const danoFinal = Math.max(0, dano - defesaAleatoria);
+
+        this.vida -= danoFinal;
+
+        red(`
+    -- ----------------------------------------- --        
+        ${this.nome.toUpperCase()} TOMOU DANO!
+        Dano recebido: ${dano}
+        Defesa: ${defesaAleatoria}
+        Dano efetivo recebido: ${danoFinal}
+    -- ----------------------------------------- --    
+        `)
+
+        if (this.vida < 0) {
+            this.vida = 0;
+            red('Inimigo morreu');
+            return dano;
+        }
+        return dano;
     }
 
+    //Método de ataque. Rouba hp para dar mais dano
+    public atacar(personagem: Personagem): void {
+
+        const chance: number = Math.random(); // controlar a chance do personagem roubar HP para dar mais dano
+        let danoFinal: number;
+
+        if (chance < 0.30) { // 30% de chance de aumentar o dano dele
+            
+            this.vida -= 5;
+            this.ataque += 8;
+            
+            danoFinal = Math.floor(Math.random() * this.ataque) + 1; // cálculo aleatório do dado do inimigo
+            
+            red(`
+    ATAQUE DO INIMIGO:
+    ╔════════════════════════════════════════╗
+    ║               ESPECIAL!                ║
+    ╠════════════════════════════════════════╣
+    ║                                        ║
+    ║ ${this.nome} sacrificou 5 de vida!     ║
+    ║                                        ║
+    ║ ATAQUE AUMENTADO : +8                  ║
+    ║ ATAQUE ATUAL : ${this.ataque}          ║
+    ║                                        ║
+    ╚════════════════════════════════════════╝
+                `);
+                personagem.tomarDano(danoFinal); // personagem tomando dano 
+                stop()
+        } else {
+
+            danoFinal = Math.floor(Math.random() * this.ataque) + 1; // Calculo o dano final de acordo com a variante da minha chance de especial
+            
+        red(`
+    ATAQUE DO INIMIGO:        
+    ╔════════════════════════════════════════╗
+    ║                 ATAQUE                 ║
+    ╠════════════════════════════════════════╣
+    ║                                        ║
+    ║ ${`${this.nome} atacou ${personagem.getNome()}!`.padEnd(39)}║
+    ║                                        ║
+    ║ DANO CAUSADO  : ${String(danoFinal).padEnd(23)}║
+    ║ VIDA RESTANTE : ${String(personagem.getVida()).padEnd(23)}║
+    ║                                        ║
+    ╚════════════════════════════════════════╝
+                `)
+                
+                personagem.tomarDano(danoFinal); // personagem tomando dano 
+                stop()
+
+        }
+    };
+
     //Mostrar dados do inimigo
-    mostrarInimigo(): void {
-        yellow(`
-        ╔════════════════════════════════════════╗
-        ║                 INIMIGO                ║
-        ╠════════════════════════════════════════╣
-        ║                                        ║
-        ║ NOME        : ${this.nome}             ║
-        ║ VIDA        : ${this.vida}             ║
-        ║ ATAQUE      : ${this.ataque}           ║
-        ║ DEFESA      : ${this.defesa}           ║
-        ║ HABILIDADE  : ${this.habilidade}       ║
-        ║                                        ║
-        ╚════════════════════════════════════════╝
+    fichaInimigo(): void {
+        red(`      
+    ╔═════════════════════════════════════════╗
+    ║                 INIMIGO                 ║
+    ╠═════════════════════════════════════════╣
+    ║                                         ║
+    ║ NOME        : ${String(this.nome).padEnd(23)}   ║
+    ║ VIDA        : ${String(this.vida).padEnd(23)}   ║
+    ║ ATAQUE      : ${String(this.ataque).padEnd(23)}   ║
+    ║ DEFESA      : ${String(this.defesa).padEnd(23)}   ║
+    ║ HABILIDADE  : ${String(this.habilidade).padEnd(23)} ║
+    ║                                         ║
+    ╚═════════════════════════════════════════╝
         `);
     }
 }

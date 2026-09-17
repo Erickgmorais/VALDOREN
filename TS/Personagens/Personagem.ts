@@ -1,5 +1,6 @@
-import { clear, logger, stop } from "../Auxiliares/Auxiliares";
-import { blue, cyan, green, red, yellow } from "../Auxiliares/Cores";
+import { clear, stop } from "../Auxiliares/Auxiliares";
+import { blue, green, yellow } from "../Auxiliares/Cores";
+import { Inimigo } from "../Interfaces/Inimigo";
 import { Item } from "../Interfaces/Item";
 import { Pocao } from "../Inventario/Pocao";
 import { EfeitoPocao } from "../Inventario/TiposENUMs";
@@ -71,20 +72,51 @@ export abstract class Personagem {
         this.ouro += val;
     }
 
+    
+    
     // método para setar que o jogador já usou o ataque especial
     public setEspecial(): void {
         this.usouAtaqueEspecial = true;
     }
-
+    
     // utilizado pra fazer o personagem pegar a moeda para entrar na caverna posteriormente na história
     public pegarMoeda(): void {
         this.moeda = true;
     }
-
+    
     // método que será implementado em cada classe de uma maneira
-    abstract usarAtaqueEspecial(): number;
+    abstract usarAtaqueEspecial(inimigo: Inimigo): number; 
+    
+    // Métodos de combate
+    public tomarDano(dano: number): number {
+        
+        const defesaAleatoria = Math.floor(Math.random() * (this.defesa + 1));
+        
+        // o max me retorna o maior valor entre os dois, se o dano por acaso ficar negativo, o dano será zerado
+        const danoFinal = Math.max(0, dano - defesaAleatoria); 
+        this.vida -= danoFinal;
+
+        blue(`
+    -- ----------------------------------------- --
+        ${this.nome.toUpperCase()} TOMOU DANO!
+        Dano recebido: ${dano}
+        Defesa: ${defesaAleatoria}
+        Dano efetivo recebido: ${danoFinal}
+    -- ----------------------------------------- --        
+            `)
+
+        if(this.vida < 0){
+            this.vida = 0;
+        }
+        return danoFinal;
+    }
 
 
+    public atacar(inimigo: Inimigo): void {
+        inimigo.tomarDano(this.ataque)
+    }
+
+    // -- -------------------------------------- --
     // -- controle de inventário dos personagens --
 
     public adicionaInventario(item: Item): void {

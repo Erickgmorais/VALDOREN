@@ -1,25 +1,20 @@
-import { logger } from "../Auxiliares/Auxiliares";
-import { green, red, yellow } from "../Auxiliares/Cores";
+// esse personagem não da dano, apenas rouba a sua vida, como se fosse um dementador
+// Esse oponente em questão não terá defesa.. porque ele ja vai soubar vida do oponente e pegar para Si
+
+import { clear, stop } from "../Auxiliares/Auxiliares";
+import { red, yellow } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "../Personagens/Personagem";
 
 
 
 export class Esqueleto implements Inimigo {
-    private nome: string;
-    private vida: number;
-    private ataque: number;
-    private defesa: number;
-    private habilidade: string;
+    private nome: string = 'Esqueleto das Trevas';
+    private vida: number = 40;
+    private ataque: number = 15; 
+    private defesa: number = 0;
+    private habilidade: string = 'Roubo de vida do oponente';
 
-    constructor(nome: string, vida: number, ataque: number, defesa: number, habilidade: string) {
-        this.nome = nome;
-        this.vida = vida;
-        this.ataque = ataque;
-        this.defesa = defesa;
-        this.habilidade = habilidade;
-
-    }
 
     getNome(): string {
         return this.nome
@@ -37,60 +32,68 @@ export class Esqueleto implements Inimigo {
         return this.defesa
     }
 
-    //Método de ataque.
-    Ataque(personagem: Personagem): void {
-        const danoAleatorio: number = Math.floor(Math.random() * this.ataque) + 1;
-        const danoFinal: number = personagem.tomarDano(danoAleatorio);
-        yellow(`
-        ╔════════════════════════════════════════╗
-        ║                 ATAQUE                 ║
-        ╠════════════════════════════════════════╣
-        ║                                        ║
-        ║ ${this.nome} atacou ${personagem.getNome()}!║
-        ║                                        ║
-        ║ DANO CAUSADO  : ${danoFinal}           ║
-        ║ VIDA RESTANTE : ${personagem.getVida()}║
-        ║                                        ║
-        ╚════════════════════════════════════════╝
-        `)
-    } 
+    public tomarDano(dano: number): number {
+        
+        this.vida -= dano;
+        
 
-    //Método de habilidade do inimigo
-    usarHabilidade(personagem: Personagem): void {
-        const rouboAleatorio: number = Math.floor(Math.random() * 5) + 3
-        personagem.setVida(-rouboAleatorio);
-        this.vida += rouboAleatorio;
-        yellow(`
-        ╔════════════════════════════════════════╗
-        ║             ROUBO DE VIDA              ║
-        ╠════════════════════════════════════════╣
-        ║                                        ║
-        ║ ${this.nome} roubou vida de ${personagem.getNome()}!║
-        ║                                        ║
-        ║ DANO CAUSADO  : ${rouboAleatorio}      ║
-        ║ VIDA ROUBADA  : ${rouboAleatorio}      ║
-        ║ VIDA ATUAL    : ${this.vida}           ║
-        ║                                        ║
-        ╚════════════════════════════════════════╝
-        `);
+        red(`
+    -- ----------------------------------------- --
+        ${this.nome.toUpperCase()} TOMOU DANO! 
+        Dano recebido: ${dano}
+    -- ----------------------------------------- --
+        `)
+        stop()
+
+        if(this.vida < 0){
+            this.vida = 0;
+            red('Inimigo morreu');
+            stop()
+            return dano;
+        }
+        return dano;
+    }
+
+    //Método de ataque.
+    public atacar(personagem: Personagem): void {
+
+        clear();
+
+        const rouboAleatorio: number = Math.floor(Math.random() * this.ataque) + 1;
+        const vidaRoubada = personagem.tomarDano(rouboAleatorio); // método de tomar dano retorna o dano efetivo
+        this.vida += vidaRoubada;
+
+        red(`
+    ATAQUE DO INIMIGO:        
+    ╔════════════════════════════════════════╗
+    ║             ROUBO DE VIDA              ║
+    ╠════════════════════════════════════════╣
+    ║                                        ║
+    ║ ${`${this.nome}                   ║
+    ║ atacou ${personagem.getNome()}!`.padEnd(39)}            ║
+    ║                                        ║
+    ║ VIDA ROUBADA : ${String(vidaRoubada).padEnd(23)} ║
+    ║                                        ║
+    ║                                        ║
+    ╚════════════════════════════════════════╝
+        `)
+        stop()
     } 
     
     //Mostrar dados do inimigo
-    mostrarInimigo(): void {
-        yellow(`
-        ╔════════════════════════════════════════╗
-        ║                 INIMIGO                ║
-        ╠════════════════════════════════════════╣
-        ║                                        ║
-        ║ NOME        : ${this.nome}             ║
-        ║ VIDA        : ${this.vida}             ║
-        ║ ATAQUE      : ${this.ataque}           ║
-        ║ DEFESA      : ${this.defesa}           ║
-        ║ HABILIDADE  : ${this.habilidade}       ║
-        ║                                        ║
-        ╚════════════════════════════════════════╝
+    public fichaInimigo(): void {
+        red(`      
+    ╔═════════════════════════════════════════╗
+    ║                 INIMIGO                 ║
+    ╠═════════════════════════════════════════╣
+    ║                                         ║
+    ║ NOME        : ${String(this.nome).padEnd(23)}   ║
+    ║ VIDA        : ${String(this.vida).padEnd(23)}   ║
+    ║ ATAQUE      : ${String(this.ataque).padEnd(23)}   ║
+    ║ DEFESA      : ${String(this.defesa).padEnd(23)}   ║
+    ║ HABILIDADE  : ${String(this.habilidade).padEnd(23)} ║
+    ║                                         ║
+    ╚═════════════════════════════════════════╝
         `);
     }
-    
-
 }
