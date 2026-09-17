@@ -10,7 +10,7 @@
 - Personagem: Troquei a forma como o inventário é composto dentro das classes de modelo (Interface base Item). Adicionei um array inventário de objetos do tipo Item que vai ter poções, armadura, arma, etc.
 - Acho melhor trocar a interface personagem para uma classe que vai ser usada herança nos modelos pra poder mexer nos métodos em um lugar só em vez de ir modelo a modelo
 - Falar sobre cores
-- Falar sobre ENUM
+- Falar sobre ENUM 
 
 
 ### Ideias Ju
@@ -22,11 +22,12 @@
 
 
 ## Fazer
-- Moeda no inicio do jogo para conseguir abrir uma daverna no meio do jogo J
-- controle de reputação J
-- Armas é upável J
-- Transformar a interface personagem em classe para ter herança J 
+- Moeda no inicio do jogo para conseguir abrir uma daverna no meio do jogo J OK
+- controle de reputação J           
+- Armas é upável J              
+- Transformar a interface personagem em classe para ter herança J OK
 - Terminar o controle do inventário para usar poções, dropar itens J OK
 - Fazer e organizar a função dos inimigos E
 - Criar método no personagem para criar dano E 
 - Controle de ataque e dano contra inimigo na classe Personagem E 
+- 

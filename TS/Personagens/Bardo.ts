@@ -1,16 +1,19 @@
 // Ele seria um enganador, caso escolhesse ele teriamos de escolhar continuar com o tesouro ou devolver.
 // no final da história ele é o vilão (tendencia)
 
-import { logger } from "../Auxiliares/Auxiliares";
-import { green } from "../Auxiliares/Cores";
-import { Item } from "../Interfaces/Item";
 import { Personagem } from "./Personagem";
 
 export class Bardo extends Personagem {
 
     constructor(nome: string) {
-        super(nome, 'Bardo', 50, 12, 10, 30, 40)
+        super(nome, 'Bardo', 90, 12, 8, 50, 40)
     }
+
+    usarAtaqueEspecial(): number {
+        return 0
+    }
+
+    // fazer algum método especifico?
 
 }
 /** COMENTÁRIOS

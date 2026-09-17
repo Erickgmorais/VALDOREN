@@ -14,6 +14,7 @@ export abstract class Personagem {
     protected defesa: number;
     protected ouro: number;
     protected reputacao: number;
+    protected usouAtaqueEspecial: boolean = false;
 
     protected inventario: Item[] = [];
     protected moeda: boolean = false;
@@ -70,16 +71,21 @@ export abstract class Personagem {
         this.ouro += val;
     }
 
-    // -- ----------------------------- --
-
-    // Métodos principais
+    // método para setar que o jogador já usou o ataque especial
+    public setEspecial(): void {
+        this.usouAtaqueEspecial = true;
+    }
 
     // utilizado pra fazer o personagem pegar a moeda para entrar na caverna posteriormente na história
     public pegarMoeda(): void {
         this.moeda = true;
     }
 
-    // controle de inventário dos personagens
+    // método que será implementado em cada classe de uma maneira
+    abstract usarAtaqueEspecial(): number;
+
+
+    // -- controle de inventário dos personagens --
 
     public adicionaInventario(item: Item): void {
         this.inventario.push(item)
@@ -162,8 +168,8 @@ export abstract class Personagem {
     }
 
     public fichaPersonagem(): void {
-
-        yellow(`
+        if(this.usouAtaqueEspecial){
+            yellow(`
     ╔═══════════════════════════════════╗
     ║          FICHA DO JOGADOR         ║
     ╠═══════════════════════════════════╣
@@ -175,12 +181,34 @@ export abstract class Personagem {
     ║            ATRIBUTOS              ║
     ╠═══════════════════════════════════╣
     ║                                   ║
-    ║  VIDA   : ${String(this.vida + '/100').padEnd(23)} ║
+    ║  VIDA   : ${String(this.vida).padEnd(23)} ║
     ║  ATAQUE : ${String(this.ataque).padEnd(23)} ║
     ║  DEFESA : ${String(this.defesa).padEnd(23)} ║
     ║                                   ║
     ╚═══════════════════════════════════╝
-    `)
+                `)
+        } else {
+            yellow(`
+    ╔═══════════════════════════════════╗
+    ║          FICHA DO JOGADOR         ║
+    ╠═══════════════════════════════════╣
+    ║                                   ║
+    ║  NOME   : ${this.nome.padEnd(23)} ║
+    ║  CLASSE : ${this.classe.padEnd(23)} ║
+    ║                                   ║
+    ╠═══════════════════════════════════╣
+    ║            ATRIBUTOS              ║
+    ╠═══════════════════════════════════╣
+    ║                                   ║
+    ║  VIDA   : ${String(this.vida).padEnd(23)} ║
+    ║  ATAQUE : ${String(this.ataque).padEnd(23)} ║
+    ║  DEFESA : ${String(this.defesa).padEnd(23)} ║
+    ║                                   ║
+    ║  ATAQUE ESPECIAL AINDA DISPONIVEL ║
+    ║                                   ║
+    ╚═══════════════════════════════════╝
+    `);
+        }
     }
 }
 /** COMENTARIOS

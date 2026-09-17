@@ -3,9 +3,10 @@ import { Pocao } from "./Inventario/Pocao";
 
 import { EfeitoPocao } from "./Inventario/TiposENUMs";
 import { Bardo } from "./Personagens/Bardo";
+import { Necromante } from "./Personagens/Necromante";
 // import { tocarSom } from "./Auxiliares/sons";
 
-const bardo: Bardo = new Bardo('bardo Teste');
+const demon: Bardo = new Necromante('demonio teddy');
 
 // logger(bardo.getOuro()) 
 
@@ -19,7 +20,7 @@ const pocao2: Pocao = new Pocao('Poção de Forca', EfeitoPocao.FORCA);
 
 // bardo.adicionaInventario(pocao1);
 // bardo.adicionaInventario(pocao2);
-bardo.fichaPersonagem()
+demon.fichaPersonagem()
 stop()
 // logger(pocao1.getEfeito())
 // logger(pocao2.getEfeito())

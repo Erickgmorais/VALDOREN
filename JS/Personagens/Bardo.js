@@ -6,7 +6,10 @@ exports.Bardo = void 0;
 const Personagem_1 = require("./Personagem");
 class Bardo extends Personagem_1.Personagem {
     constructor(nome) {
-        super(nome, 'Bardo', 50, 12, 10, 30, 40);
+        super(nome, 'Bardo', 90, 12, 8, 50, 40);
+    }
+    usarAtaqueEspecial() {
+        return 0;
     }
 }
 exports.Bardo = Bardo;

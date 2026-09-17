@@ -3,9 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Auxiliares_1 = require("./Auxiliares/Auxiliares");
 const Pocao_1 = require("./Inventario/Pocao");
 const TiposENUMs_1 = require("./Inventario/TiposENUMs");
-const Bardo_1 = require("./Personagens/Bardo");
+const Necromante_1 = require("./Personagens/Necromante");
 // import { tocarSom } from "./Auxiliares/sons";
-const bardo = new Bardo_1.Bardo('bardo Teste');
+const demon = new Necromante_1.Necromante('demonio teddy');
 // logger(bardo.getOuro()) 
 const pocao1 = new Pocao_1.Pocao('Poção de cura', TiposENUMs_1.EfeitoPocao.CURA);
 const pocao2 = new Pocao_1.Pocao('Poção de Forca', TiposENUMs_1.EfeitoPocao.FORCA);
@@ -13,7 +13,7 @@ const pocao2 = new Pocao_1.Pocao('Poção de Forca', TiposENUMs_1.EfeitoPocao.FO
 // stop()
 // bardo.adicionaInventario(pocao1);
 // bardo.adicionaInventario(pocao2);
-bardo.fichaPersonagem();
+demon.fichaPersonagem();
 (0, Auxiliares_1.stop)();
 // logger(pocao1.getEfeito())
 // logger(pocao2.getEfeito())
