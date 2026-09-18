@@ -1,23 +1,25 @@
-import { clear, escolhasCombate, inimigoDerrotado, morreu, stop } from "../Auxiliares/Auxiliares";
-import { green, purple, red } from "../Auxiliares/Cores";
+import { clear, escolhasCombate, arteInimigoDerrotado, arteVoceMorreu, stop, mostrarInfoCombate, arteInicioConfronto } from "../Auxiliares/Auxiliares";
+import { purple, red } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "../Personagens/Personagem";
 const ask = require('readline-sync');
 
 export function iniciarConfronto(personagem: Personagem, inimigo: Inimigo) {
 
-    purple(`O confronto entre ${personagem.getNome()} e ${inimigo.getNome()} comecou!`);
-    stop()
     let finalConfronto = false;
     let option: number;
+
+    clear()
+    arteInicioConfronto()
+    stop()
 
     while (!finalConfronto) {
 
         if (personagem.getVida() > 0) {
 
             if (inimigo.getVida() > 0) {
-
                 clear()
+                mostrarInfoCombate(personagem, inimigo)
                 escolhasCombate(personagem);
                 option = Number(ask.question());
 
@@ -27,8 +29,11 @@ export function iniciarConfronto(personagem: Personagem, inimigo: Inimigo) {
                         clear()
                         personagem.atacar(inimigo);
                         stop()
-                        inimigo.atacar(personagem);
-                        
+                        if (inimigo.getVida() > 0) {
+                            clear()
+                            inimigo.atacar(personagem);
+                        }
+
                         break;
 
                     case 2: // Abrir inventário
@@ -39,13 +44,27 @@ export function iniciarConfronto(personagem: Personagem, inimigo: Inimigo) {
                         switch (option) {
 
                             case 1:
+                                clear()
                                 const pocao = personagem.escolherPocao();
-
+                                
                                 if (pocao !== null) {
+                                    clear()
                                     personagem.tomarPocao(pocao);
-                                    stop();
+                                    // stop();
                                 }
+                                break;
 
+                            case 2:
+                                clear()
+                                red('Ainda em desenvolvimento!')
+                                stop()
+                                
+                                break;
+
+                            default:
+                                clear()
+                                red('Opcao invalida!')
+                                stop()
                                 break;
                         }
 
@@ -65,7 +84,7 @@ export function iniciarConfronto(personagem: Personagem, inimigo: Inimigo) {
 
             } else {
                 clear()
-                inimigoDerrotado() // Arte de inimigo derrotado
+                arteInimigoDerrotado() // Arte de inimigo derrotado
                 finalConfronto = true;
                 stop()
 
@@ -74,7 +93,7 @@ export function iniciarConfronto(personagem: Personagem, inimigo: Inimigo) {
         } else {
 
             clear()
-            morreu() // Arte de morte
+            arteVoceMorreu() // Arte de morte
             process.exit();
 
         }

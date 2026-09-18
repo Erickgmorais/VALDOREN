@@ -21,6 +21,9 @@ class Fantasma {
     getDefesa() {
         return this.defesa;
     }
+    getHabilidade() {
+        return this.habilidade;
+    }
     //Método de ataque.
     atacar(personagem) {
         const danoFinal = Math.floor(Math.random() * this.ataque) + 1; // calculo o dano aleatorio 
@@ -36,7 +39,7 @@ class Fantasma {
     ╔═══════════════════════════════════════════════╗
     ║               INTANGIBILIDADE!                ║
     ╠═══════════════════════════════════════════════╣
-    ║ ${String(this.nome).padEnd(45)} ║
+    ║ ${String(this.nome).padEnd(45)} 
     ║                                               ║
     ║ ignorou completamente o ataque e se           ║
     ║ esquivou do dano recebido!                    ║
@@ -48,13 +51,13 @@ class Fantasma {
         }
         else {
             this.vida -= danoFinal;
-            (0, Cores_1.red)(`
-    -- ----------------------------------------- --            
-        ${this.nome.toUpperCase()} TOMOU DANO!
-        Dano recebido: ${dano}
-        Defesa: ${defesaAleatoria}
-        Dano efetivo recebido: ${danoFinal}
-    -- ----------------------------------------- -- 
+            (0, Cores_1.blue)(`
+-- ----------------------------------------- --            
+    ${this.nome.toUpperCase()} TOMOU DANO!
+    Dano recebido: ${dano}
+    Defesa: ${defesaAleatoria}
+    Dano efetivo recebido: ${danoFinal}
+-- ----------------------------------------- -- 
         `);
         }
         if (this.vida < 0) {
@@ -70,11 +73,11 @@ class Fantasma {
     ║                 INIMIGO                ║
     ╠════════════════════════════════════════╣
     ║                                        ║
-    ║ NOME        : ${String(this.nome).padEnd(23)}  ║
-    ║ VIDA        : ${String(this.vida).padEnd(23)}  ║
-    ║ ATAQUE      : ${String(this.ataque).padEnd(23)}  ║
-    ║ DEFESA      : ${String(this.defesa).padEnd(23)}  ║
-    ║ HABILIDADE  : ${String(this.habilidade).padEnd(23)}  ║
+    ║ NOME        : ${String(this.nome).padEnd(23)}  
+    ║ VIDA        : ${String(this.vida).padEnd(23)}  
+    ║ ATAQUE      : ${String(this.ataque).padEnd(23)}  
+    ║ DEFESA      : ${String(this.defesa).padEnd(23)}  
+    ║ HABILIDADE  : ${String(this.habilidade).padEnd(23)}  
     ║                                        ║
     ╚════════════════════════════════════════╝
 `);

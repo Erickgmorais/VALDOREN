@@ -18,10 +18,10 @@ export class Mago extends Personagem {
         if (!this.usouAtaqueEspecial) {
 
             consoleEspecial();
-            inimigo.tomarDano(danoFinal)
             blue(`
 As forças arcanas respondem ao meu chamado... prepare-se para ser consumido! 
 O ATAQUE CAUSOU ${danoFinal} DE DANO!`);
+            inimigo.tomarDano(danoFinal)
             this.setEspecial() // Seta o especial = true
             return danoFinal;
 

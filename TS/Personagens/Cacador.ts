@@ -18,8 +18,8 @@ export class Cacador extends Personagem {
         if (!this.usouAtaqueEspecial) {
 
             consoleEspecial();
-            inimigo.tomarDano(danoFinal)
             blue(`Você pode tentar fugir... mas minha flecha sempre encontra seu alvo! O ATAQUE CAUSOU ${danoFinal} DE DANO!`);
+            inimigo.tomarDano(danoFinal)
             this.setEspecial() // Seta o especial = true
             return danoFinal;
 

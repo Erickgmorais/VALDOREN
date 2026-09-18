@@ -90,6 +90,7 @@ class Personagem {
         return danoFinal;
     }
     atacar(inimigo) {
+        (0, Cores_1.blue)(`ATAQUE DE ${this.nome.toUpperCase()}`);
         inimigo.tomarDano(this.ataque);
     }
     // -- -------------------------------------- --
@@ -124,11 +125,11 @@ class Personagem {
         if (pocoes.length === 0) {
             return null;
         }
-        (0, Cores_1.green)(`\nEscolha uma poção:`);
+        (0, Cores_1.green)(`\nEscolha uma poção: `);
         pocoes.forEach((pocao, index) => {
             (0, Cores_1.green)(`${index + 1} - ${pocao.getNome()}`);
         });
-        const escolha = ask.questionInt("Escolha: ");
+        const escolha = ask.questionInt();
         if (escolha < 1 || escolha > pocoes.length) {
             (0, Cores_1.red)("Poção inválida!");
             return null;
@@ -163,20 +164,24 @@ class Personagem {
             if (item.getTipo() === 'MOEDA') {
                 (0, Cores_1.green)(`- ${item.getNome()}`);
             }
+            (0, Cores_1.green)(`
+-----------------------------------------------            
+            `);
         }
         // verifica se tem 
         if (temPocao) {
             (0, Cores_1.green)(`
-        1 - Usar pocao
-        2 - Dropar item
-        3 - Fechar inventário            
+Opcoes:                
+1 - Usar pocao
+2 - Dropar item
+3 - Fechar inventário            
                 `);
         }
         else {
             (0, Cores_1.green)(`
-        1̶ ̶-̶ ̶U̶s̶a̶r̶ ̶p̶o̶c̶a̶o̶ (Voce não possui pocoes a serem utilizadas)
-        2 - Dropar item
-        3 - Fechar inventário`);
+1̶ ̶-̶ ̶U̶s̶a̶r̶ ̶p̶o̶c̶a̶o̶ (Voce não possui pocoes a serem utilizadas)
+2 - Dropar item
+3 - Fechar inventário`);
         }
     }
     fichaPersonagem() {

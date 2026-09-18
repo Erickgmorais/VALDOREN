@@ -2,7 +2,7 @@
 // Esse oponente em questão não terá defesa.. porque ele ja vai soubar vida do oponente e pegar para Si
 
 import { clear, stop } from "../Auxiliares/Auxiliares";
-import { red, yellow } from "../Auxiliares/Cores";
+import { blue, red, yellow } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "../Personagens/Personagem";
 
@@ -32,16 +32,20 @@ export class Esqueleto implements Inimigo {
         return this.defesa
     }
 
+    public getHabilidade(): string {
+        return this.habilidade
+    }
+
     public tomarDano(dano: number): number {
         
         this.vida -= dano;
         
 
-        red(`
-    -- ----------------------------------------- --
-        ${this.nome.toUpperCase()} TOMOU DANO! 
-        Dano recebido: ${dano}
-    -- ----------------------------------------- --
+        blue(`        
+-- ----------------------------------------- --
+    ${this.nome.toUpperCase()} TOMOU DANO! 
+    Dano recebido: ${dano}
+-- ----------------------------------------- --
         `)
         stop()
 
@@ -68,10 +72,10 @@ export class Esqueleto implements Inimigo {
     ║             ROUBO DE VIDA              ║
     ╠════════════════════════════════════════╣
     ║                                        ║
-    ║ ${`${this.nome}                   ║
-    ║ atacou ${personagem.getNome()}!`.padEnd(39)}            ║
+    ║ ${this.nome}                   
+    ║ atacou ${personagem.getNome()}            
     ║                                        ║
-    ║ VIDA ROUBADA : ${String(vidaRoubada).padEnd(23)} ║
+    ║ VIDA ROUBADA : ${String(vidaRoubada).padEnd(23)} 
     ║                                        ║
     ║                                        ║
     ╚════════════════════════════════════════╝

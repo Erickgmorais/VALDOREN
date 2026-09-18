@@ -6,9 +6,9 @@ const Auxiliares_1 = require("../Auxiliares/Auxiliares");
 const Cores_1 = require("../Auxiliares/Cores");
 class Dragao {
     nome = 'Dragao da montanha';
-    vida = 90;
-    ataque = 12;
-    defesa = 3;
+    vida = 100;
+    ataque = 25;
+    defesa = 10;
     habilidade = 'Conversão vida em Ataque';
     getNome() {
         return this.nome;
@@ -22,18 +22,21 @@ class Dragao {
     getDefesa() {
         return this.defesa;
     }
+    getHabilidade() {
+        return this.habilidade;
+    }
     tomarDano(dano) {
         const defesaAleatoria = Math.floor(Math.random() * (this.defesa + 1)); // defesa aleatória
         // o max me retorna o maior valor entre os dois, se o dano por acaso ficar negativo, o dano será zerado
         const danoFinal = Math.max(0, dano - defesaAleatoria);
         this.vida -= danoFinal;
-        (0, Cores_1.red)(`
-    -- ----------------------------------------- --        
-        ${this.nome.toUpperCase()} TOMOU DANO!
-        Dano recebido: ${dano}
-        Defesa: ${defesaAleatoria}
-        Dano efetivo recebido: ${danoFinal}
-    -- ----------------------------------------- --    
+        (0, Cores_1.blue)(`
+-- ----------------------------------------- --        
+    ${this.nome.toUpperCase()} TOMOU DANO!
+    Dano recebido: ${dano}
+    Defesa: ${defesaAleatoria}
+    Dano efetivo recebido: ${danoFinal}
+-- ----------------------------------------- --    
         `);
         if (this.vida < 0) {
             this.vida = 0;
@@ -50,18 +53,19 @@ class Dragao {
             this.ataque += 8;
             danoFinal = Math.floor(Math.random() * this.ataque) + 1; // cálculo aleatório do dado do inimigo
             (0, Cores_1.red)(`
-    ATAQUE DO INIMIGO:
+    ${this.nome.toUpperCase()}
     ╔════════════════════════════════════════╗
-    ║               ESPECIAL!                ║
+    ║              ESPECIAL!                 ║
     ╠════════════════════════════════════════╣
     ║                                        ║
-    ║ ${this.nome} sacrificou 5 de vida!     ║
+    ║ ${this.nome.toUpperCase().padEnd(38)} 
+    ║ sacrificou 5 de vida!                  ║
     ║                                        ║
     ║ ATAQUE AUMENTADO : +8                  ║
-    ║ ATAQUE ATUAL : ${this.ataque}          ║
+    ║ ATAQUE ATUAL     : ${String(this.ataque).padEnd(17)}   
     ║                                        ║
     ╚════════════════════════════════════════╝
-                `);
+`);
             personagem.tomarDano(danoFinal); // personagem tomando dano 
             (0, Auxiliares_1.stop)();
         }
@@ -69,16 +73,15 @@ class Dragao {
             danoFinal = Math.floor(Math.random() * this.ataque) + 1; // Calculo o dano final de acordo com a variante da minha chance de especial
             (0, Cores_1.red)(`
     ATAQUE DO INIMIGO:        
-    ╔════════════════════════════════════════╗
-    ║                 ATAQUE                 ║
-    ╠════════════════════════════════════════╣
-    ║                                        ║
-    ║ ${`${this.nome} atacou ${personagem.getNome()}!`.padEnd(39)}║
-    ║                                        ║
-    ║ DANO CAUSADO  : ${String(danoFinal).padEnd(23)}║
-    ║ VIDA RESTANTE : ${String(personagem.getVida()).padEnd(23)}║
-    ║                                        ║
-    ╚════════════════════════════════════════╝
+    ╔═══════════════════════════════════════════════╗
+    ║                 ATAQUE                        ║
+    ╠═══════════════════════════════════════════════╣
+    ║                                               ║
+    ║ ${this.nome} atacou                           
+    ║                                               ║
+    ║ DANO ENVIADO  : ${String(danoFinal).padEnd(27)}
+    ║                                               ║
+    ╚═══════════════════════════════════════════════╝
                 `);
             personagem.tomarDano(danoFinal); // personagem tomando dano 
             (0, Auxiliares_1.stop)();

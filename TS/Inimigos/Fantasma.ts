@@ -1,5 +1,5 @@
 //Chance de ignorar completamente um ataque
-import { red, yellow } from "../Auxiliares/Cores";
+import { blue, red, yellow } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "../Personagens/Personagem";
 
@@ -24,6 +24,10 @@ export class Fantasma implements Inimigo {
 
     public getDefesa(): number {
         return this.defesa
+    }   
+
+    public getHabilidade(): string {
+        return this.habilidade
     }
 
     //Método de ataque.
@@ -47,7 +51,7 @@ export class Fantasma implements Inimigo {
     ╔═══════════════════════════════════════════════╗
     ║               INTANGIBILIDADE!                ║
     ╠═══════════════════════════════════════════════╣
-    ║ ${String(this.nome).padEnd(45)} ║
+    ║ ${String(this.nome).padEnd(45)} 
     ║                                               ║
     ║ ignorou completamente o ataque e se           ║
     ║ esquivou do dano recebido!                    ║
@@ -60,13 +64,13 @@ export class Fantasma implements Inimigo {
 
             this.vida -= danoFinal;
 
-            red(`
-    -- ----------------------------------------- --            
-        ${this.nome.toUpperCase()} TOMOU DANO!
-        Dano recebido: ${dano}
-        Defesa: ${defesaAleatoria}
-        Dano efetivo recebido: ${danoFinal}
-    -- ----------------------------------------- -- 
+            blue(`
+-- ----------------------------------------- --            
+    ${this.nome.toUpperCase()} TOMOU DANO!
+    Dano recebido: ${dano}
+    Defesa: ${defesaAleatoria}
+    Dano efetivo recebido: ${danoFinal}
+-- ----------------------------------------- -- 
         `)
 
         }
@@ -86,11 +90,11 @@ export class Fantasma implements Inimigo {
     ║                 INIMIGO                ║
     ╠════════════════════════════════════════╣
     ║                                        ║
-    ║ NOME        : ${String(this.nome).padEnd(23)}  ║
-    ║ VIDA        : ${String(this.vida).padEnd(23)}  ║
-    ║ ATAQUE      : ${String(this.ataque).padEnd(23)}  ║
-    ║ DEFESA      : ${String(this.defesa).padEnd(23)}  ║
-    ║ HABILIDADE  : ${String(this.habilidade).padEnd(23)}  ║
+    ║ NOME        : ${String(this.nome).padEnd(23)}  
+    ║ VIDA        : ${String(this.vida).padEnd(23)}  
+    ║ ATAQUE      : ${String(this.ataque).padEnd(23)}  
+    ║ DEFESA      : ${String(this.defesa).padEnd(23)}  
+    ║ HABILIDADE  : ${String(this.habilidade).padEnd(23)}  
     ║                                        ║
     ╚════════════════════════════════════════╝
 `);

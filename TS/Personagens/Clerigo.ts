@@ -18,8 +18,8 @@ export class Clerigo extends Personagem {
         if (!this.usouAtaqueEspecial) {
 
             consoleEspecial();
-            inimigo.tomarDano(danoFinal)
             blue(`Que a luz divina me envolva e expulse as trevas deste mundo! O ATAQUE CAUSOU ${danoFinal} DE DANO!`);
+            inimigo.tomarDano(danoFinal)
             this.setEspecial() // Seta o especial = true
             return danoFinal;
 

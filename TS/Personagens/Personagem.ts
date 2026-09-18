@@ -120,6 +120,7 @@ export abstract class Personagem {
 
 
     public atacar(inimigo: Inimigo): void {
+        blue(`ATAQUE DE ${this.nome.toUpperCase()}`)
         inimigo.tomarDano(this.ataque)
     }
 
@@ -170,13 +171,13 @@ export abstract class Personagem {
             return null;
         }
 
-        green(`\nEscolha uma poção:`);
+        green(`\nEscolha uma poção: `);
 
         pocoes.forEach((pocao, index) => {
             green(`${index + 1} - ${pocao.getNome()}`);
         });
 
-        const escolha = ask.questionInt("Escolha: ");
+        const escolha = ask.questionInt();
 
         if (escolha < 1 || escolha > pocoes.length) {
             red("Poção inválida!");
@@ -221,20 +222,24 @@ export abstract class Personagem {
                 green(`- ${item.getNome()}`)
 
             }
+        green(`
+-----------------------------------------------            
+            `)            
         }
 
         // verifica se tem 
         if (temPocao) {
             green(`
-        1 - Usar pocao
-        2 - Dropar item
-        3 - Fechar inventário            
+Opcoes:                
+1 - Usar pocao
+2 - Dropar item
+3 - Fechar inventário            
                 `)
         } else {
             green(`
-        1̶ ̶-̶ ̶U̶s̶a̶r̶ ̶p̶o̶c̶a̶o̶ (Voce não possui pocoes a serem utilizadas)
-        2 - Dropar item
-        3 - Fechar inventário`)
+1̶ ̶-̶ ̶U̶s̶a̶r̶ ̶p̶o̶c̶a̶o̶ (Voce não possui pocoes a serem utilizadas)
+2 - Dropar item
+3 - Fechar inventário`)
         }
     }
 

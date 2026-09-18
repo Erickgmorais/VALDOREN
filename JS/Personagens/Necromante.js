@@ -13,9 +13,9 @@ class Necromante extends Personagem_1.Personagem {
     usarAtaqueEspecial(inimigo) {
         const danoFinal = this.ataque + 500;
         if (!this.usouAtaqueEspecial) {
-            inimigo.tomarDano(danoFinal);
             (0, Auxiliares_1.consoleEspecial)();
             (0, Cores_1.blue)(`OS CADÁVERES SE ERGUEM E AVANÇAM SOBRE ${inimigo.getNome()}! O ATAQUE CAUSOU ${danoFinal} DE DANO!`);
+            inimigo.tomarDano(danoFinal);
             this.setEspecial(); // Seta o especial = true
             return danoFinal;
         }

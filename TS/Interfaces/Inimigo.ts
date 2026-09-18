@@ -5,6 +5,7 @@ export interface Inimigo {
     getVida(): number;
     getAtaque(): number;
     getDefesa(): number;
+    getHabilidade(): string;
     fichaInimigo(): void;
     // usarHabilidade(personagem: Personagem): void;
     atacar(personagem: Personagem): void;

@@ -13,12 +13,12 @@ export class Berserker extends Personagem {
     public usarAtaqueEspecial(inimigo: Inimigo): number {
 
         const danoFinal = this.ataque + 500;
-
+        
         if (!this.usouAtaqueEspecial) {
-
-            inimigo.tomarDano(danoFinal)
+            
             consoleEspecial();
             blue(`A dor não me enfraquece... ELA ME TORNA MAIS FORTE! O ATAQUE CAUSOU ${danoFinal} DE DANO!`);
+            inimigo.tomarDano(danoFinal)
             this.setEspecial() // Seta o especial = true
             return danoFinal;
 

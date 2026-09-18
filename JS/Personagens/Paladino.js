@@ -12,8 +12,8 @@ class Paladino extends Personagem_1.Personagem {
         const danoFinal = this.ataque + 500;
         if (!this.usouAtaqueEspecial) {
             (0, Auxiliares_1.consoleEspecial)();
-            inimigo.tomarDano(danoFinal);
             (0, Cores_1.blue)(`Pela luz sagrada, meu juramento será cumprido e as trevas serão destruídas! O ATAQUE CAUSOU ${danoFinal} DE DANO!`);
+            inimigo.tomarDano(danoFinal);
             this.setEspecial(); // Seta o especial = true
             return danoFinal;
         }

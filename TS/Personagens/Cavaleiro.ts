@@ -16,8 +16,8 @@ export class Cavaleiro extends Personagem {
             if (!this.usouAtaqueEspecial) {
     
                 consoleEspecial();
-                inimigo.tomarDano(danoFinal)
                 blue(`Pela honra e pelo meu juramento, nenhum inimigo permanecerá de pé! O ATAQUE CAUSOU ${danoFinal} DE DANO!`);
+                inimigo.tomarDano(danoFinal)
                 this.setEspecial() // Seta o especial = true
                 return danoFinal;
     

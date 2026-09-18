@@ -4,9 +4,11 @@ exports.logger = void 0;
 exports.stop = stop;
 exports.clear = clear;
 exports.consoleEspecial = consoleEspecial;
-exports.inimigoDerrotado = inimigoDerrotado;
-exports.morreu = morreu;
+exports.arteInicioConfronto = arteInicioConfronto;
+exports.arteInimigoDerrotado = arteInimigoDerrotado;
+exports.arteVoceMorreu = arteVoceMorreu;
 exports.escolhasCombate = escolhasCombate;
+exports.mostrarInfoCombate = mostrarInfoCombate;
 const Cores_1 = require("./Cores");
 const ask = require('readline-sync');
 exports.logger = console.log;
@@ -20,6 +22,7 @@ function clear() {
 }
 function consoleEspecial() {
     (0, Cores_1.purple)(`
+--------------------------------------------------------------------------------------        
  ███  █████  ███   ███  █   █ █████    █████  ████ ████  █████  ███  ███  ███  █       
 █ ░░█  ░█░░░█ ░░█ █ ░░█ █░  █░█░░░░░   █░░░░░█ ░░░░█░░░█ █░░░░░█ ░░░  █░░█ ░░█ █░      
 █████░  █░░░█████░█░ ░█░█░░ █░████░░░  ████░░░███░░████░░████░░█░ ░░░ █░░█████░█░░     
@@ -27,10 +30,24 @@ function consoleEspecial() {
 █░░░█░░ █░░ █░░░█░░██ █ ░███ ░█████░   █████░████░░█░░░░░█████░ ███  ███░█░░░█░█████   
  ░░  ░░  ░░  ░░  ░░ ░░ ░  ░░░ ░░░░░░    ░░░░░ ░░░░ ░░░    ░░░░░  ░░░  ░░░ ░░  ░░░░░░░  
   ░   ░   ░   ░   ░  ░░ ░  ░░░  ░░░░░    ░░░░░ ░░░░  ░     ░░░░░  ░░░  ░░░ ░   ░ ░░░░░ 
+--------------------------------------------------------------------------------------   
         `);
 }
-function inimigoDerrotado() {
-    (0, Cores_1.red)(`
+function arteInicioConfronto() {
+    (0, Cores_1.blue)(`
+----------------------------------------------------------------------------------------------------    
+ ███   ███  █   █ █████ ████   ███  █   █ █████  ███     ███ █   █ ███  ███  ███  ███  ████   ███    
+█ ░░░ █ ░░█ ██  █░█░░░░░█░░░█ █ ░░█ ██  █░ ░█░░░█ ░░█     █░░██  █░ █░░█ ░░░  █░░█ ░░█ █░░░█ █ ░░█   
+█░ ░░░█░ ░█░█░█ █░████░░████░░█░ ░█░█░█ █░░ █░░░█░ ░█░    █░░█░█ █░░█░░█░ ░░░ █░░█████░█░░░█░█░ ░█░  
+█░░   █░░ █░█░░██░█░░░░ █░░█░ █░░ █░█░░██░░ █░░ █░░ █░░   █░░█░░██░░█░░█░░    █░░█░░░█░█░░ █░█░░ █░░ 
+ ███   ███ ░█░░ █░█░░░░░█░░░█░ ███ ░█░░ █░░ █░░  ███ ░░  ███░█░░ █░███░ ███  ███░█░░░█░████ ░░███ ░░ 
+  ░░░   ░░░ ░░░  ░░░░    ░░  ░  ░░░ ░░░  ░░  ░░   ░░░ ░   ░░░ ░░  ░░░░░  ░░░  ░░░ ░░  ░░░░░░ ░ ░░░ ░ 
+   ░░░   ░░░  ░   ░ ░     ░   ░  ░░░  ░   ░   ░    ░░░     ░░░ ░   ░ ░░░  ░░░  ░░░ ░   ░ ░░░░   ░░░  
+----------------------------------------------------------------------------------------------------
+    `);
+}
+function arteInimigoDerrotado() {
+    (0, Cores_1.green)(`
 ---------------------------------------------------------------------------------------------                    
 ███ █   █ ███ █   █ ███  ███   ███     ████  █████ ████  ████   ███  █████  ███  ████   ███    
  █░░██  █░ █░░██ ██░ █░░█ ░░░ █ ░░█    █░░░█ █░░░░░█░░░█ █░░░█ █ ░░█  ░█░░░█ ░░█ █░░░█ █ ░░█   
@@ -42,10 +59,9 @@ function inimigoDerrotado() {
 ---------------------------------------------------------------------------------------------                     
                     `);
 }
-function morreu() {
+function arteVoceMorreu() {
     (0, Cores_1.red)(`
 --------------------------------------------------------------------
-
 █   █  ███   ███  █████    █   █  ███  ████  ████  █████ █   █   
 █░  █░█ ░░█ █ ░░░ █░░░░░   ██ ██░█ ░░█ █░░░█ █░░░█ █░░░░░█░  █░  
 █░░ █░█░ ░█░█░ ░░░████░░░  █░█ █░█░ ░█░████░░████░░████░░█░░ █░░ 
@@ -53,15 +69,14 @@ function morreu() {
   █ ░ ░███ ░░███  █████░   █░░ █░░███ ░█░░░█░█░░░█░█████░ ███ ░░ 
    ░ ░  ░░░ ░ ░░░  ░░░░░    ░░  ░░ ░░░ ░░░  ░ ░░  ░ ░░░░░  ░░░ ░ 
     ░    ░░░   ░░░  ░░░░░    ░   ░  ░░░  ░   ░ ░   ░ ░░░░░  ░░░                  
-                
-    ----------------- SUA JORNADA ACABOU ------------
+--------------------- SUA JORNADA ACABOU ---------------------------
     `);
 }
 function escolhasCombate(personagem) {
     if (personagem.getUsouAtaqueEspecial()) {
         (0, Cores_1.green)(`
 =================================
-QUAL A SUA AÇÃO A SEGUIR?
+    QUAL A SUA AÇÃO A SEGUIR?
 =================================
 1 - Ataque
 2 - Abrir inventario
@@ -75,7 +90,22 @@ QUAL A SUA AÇÃO A SEGUIR?
 =================================
 1 - Ataque
 2 - Abrir inventario
-3 - ! UTLIZAR ATAQUE ESPECIAL !
+3 - !!!! UTILIZAR ATAQUE ESPECIAL !!!!
             `);
     }
+}
+function mostrarInfoCombate(personagem, inimigo) {
+    (0, Cores_1.yellow)(`
+╔═══════════════════════════════════╗     ╔═════════════════════════════════════════╗
+║            PERSONAGEM             ║     ║                 INIMIGO                 ║
+╠═══════════════════════════════════╣     ╠═════════════════════════════════════════╣
+║                                   ║     ║                                         ║
+║  NOME   : ${String(personagem.getNome()).padEnd(23)} ║     ║ NOME        : ${String(inimigo.getNome()).padEnd(23)}   ║
+║  VIDA   : ${String(personagem.getVida()).padEnd(23)} ║     ║ VIDA        : ${String(inimigo.getVida()).padEnd(23)}   ║
+║  ATAQUE : ${String(personagem.getAtaque()).padEnd(23)} ║     ║ ATAQUE      : ${String(inimigo.getAtaque()).padEnd(23)}   ║
+║  DEFESA : ${String(personagem.getDefesa()).padEnd(23)} ║     ║ DEFESA      : ${String(inimigo.getDefesa()).padEnd(23)}   ║
+║                                   ║     ║ HABILIDADE  : ${String(inimigo.getHabilidade()).padEnd(23)}  ║
+║                                   ║     ║                                         ║
+╚═══════════════════════════════════╝     ╚═════════════════════════════════════════╝
+`);
 }

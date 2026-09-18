@@ -19,9 +19,9 @@ export class Necromante extends Personagem {
 
         if (!this.usouAtaqueEspecial) {
 
-            inimigo.tomarDano(danoFinal)
             consoleEspecial()
             blue(`OS CADÁVERES SE ERGUEM E AVANÇAM SOBRE ${inimigo.getNome()}! O ATAQUE CAUSOU ${danoFinal} DE DANO!`);
+            inimigo.tomarDano(danoFinal)
             this.setEspecial() // Seta o especial = true
             return danoFinal;
 

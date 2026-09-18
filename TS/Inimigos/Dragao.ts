@@ -1,16 +1,16 @@
 //Perde HP para aumentar muito o ataque
 
 import { stop } from "../Auxiliares/Auxiliares";
-import { red, yellow } from "../Auxiliares/Cores";
+import { blue, red, yellow } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "../Personagens/Personagem";
 
 
 export class Dragao implements Inimigo {
     private nome: string = 'Dragao da montanha';
-    private vida: number = 90;
-    private ataque: number = 12;
-    private defesa: number = 3;
+    private vida: number = 100;
+    private ataque: number = 25;
+    private defesa: number = 10;
     private habilidade: string = 'Conversão vida em Ataque'
 
 
@@ -30,6 +30,10 @@ export class Dragao implements Inimigo {
         return this.defesa
     }
 
+    public getHabilidade(): string {
+        return this.habilidade
+    }
+
     public tomarDano(dano: number): number {
 
         const defesaAleatoria = Math.floor(Math.random() * (this.defesa + 1)); // defesa aleatória
@@ -39,13 +43,13 @@ export class Dragao implements Inimigo {
 
         this.vida -= danoFinal;
 
-        red(`
-    -- ----------------------------------------- --        
-        ${this.nome.toUpperCase()} TOMOU DANO!
-        Dano recebido: ${dano}
-        Defesa: ${defesaAleatoria}
-        Dano efetivo recebido: ${danoFinal}
-    -- ----------------------------------------- --    
+        blue(`
+-- ----------------------------------------- --        
+    ${this.nome.toUpperCase()} TOMOU DANO!
+    Dano recebido: ${dano}
+    Defesa: ${defesaAleatoria}
+    Dano efetivo recebido: ${danoFinal}
+-- ----------------------------------------- --    
         `)
 
         if (this.vida < 0) {
@@ -62,47 +66,48 @@ export class Dragao implements Inimigo {
         let danoFinal: number;
 
         if (chance < 0.30) { // 30% de chance de aumentar o dano dele
-            
+
             this.vida -= 5;
             this.ataque += 8;
-            
+
             danoFinal = Math.floor(Math.random() * this.ataque) + 1; // cálculo aleatório do dado do inimigo
-            
+
             red(`
-    ATAQUE DO INIMIGO:
+    ${this.nome.toUpperCase()}
     ╔════════════════════════════════════════╗
-    ║               ESPECIAL!                ║
+    ║              ESPECIAL!                 ║
     ╠════════════════════════════════════════╣
     ║                                        ║
-    ║ ${this.nome} sacrificou 5 de vida!     ║
+    ║ ${this.nome.toUpperCase().padEnd(38)} 
+    ║ sacrificou 5 de vida!                  ║
     ║                                        ║
     ║ ATAQUE AUMENTADO : +8                  ║
-    ║ ATAQUE ATUAL : ${this.ataque}          ║
+    ║ ATAQUE ATUAL     : ${String(this.ataque).padEnd(17)}   
     ║                                        ║
     ╚════════════════════════════════════════╝
-                `);
-                personagem.tomarDano(danoFinal); // personagem tomando dano 
-                stop()
+`);
+
+            personagem.tomarDano(danoFinal); // personagem tomando dano 
+            stop()
         } else {
 
             danoFinal = Math.floor(Math.random() * this.ataque) + 1; // Calculo o dano final de acordo com a variante da minha chance de especial
-            
-        red(`
+
+            red(`
     ATAQUE DO INIMIGO:        
-    ╔════════════════════════════════════════╗
-    ║                 ATAQUE                 ║
-    ╠════════════════════════════════════════╣
-    ║                                        ║
-    ║ ${`${this.nome} atacou ${personagem.getNome()}!`.padEnd(39)}║
-    ║                                        ║
-    ║ DANO CAUSADO  : ${String(danoFinal).padEnd(23)}║
-    ║ VIDA RESTANTE : ${String(personagem.getVida()).padEnd(23)}║
-    ║                                        ║
-    ╚════════════════════════════════════════╝
+    ╔═══════════════════════════════════════════════╗
+    ║                 ATAQUE                        ║
+    ╠═══════════════════════════════════════════════╣
+    ║                                               ║
+    ║ ${this.nome} atacou                           
+    ║                                               ║
+    ║ DANO ENVIADO  : ${String(danoFinal).padEnd(27)}
+    ║                                               ║
+    ╚═══════════════════════════════════════════════╝
                 `)
-                
-                personagem.tomarDano(danoFinal); // personagem tomando dano 
-                stop()
+
+            personagem.tomarDano(danoFinal); // personagem tomando dano 
+            stop()
 
         }
     };

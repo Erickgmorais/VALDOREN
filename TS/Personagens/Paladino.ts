@@ -19,8 +19,8 @@ export class Paladino extends Personagem {
         if (!this.usouAtaqueEspecial) {
 
             consoleEspecial();
-            inimigo.tomarDano(danoFinal)
             blue(`Pela luz sagrada, meu juramento será cumprido e as trevas serão destruídas! O ATAQUE CAUSOU ${danoFinal} DE DANO!`);
+            inimigo.tomarDano(danoFinal)
             this.setEspecial() // Seta o especial = true
             return danoFinal;
 

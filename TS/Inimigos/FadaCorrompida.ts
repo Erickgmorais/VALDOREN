@@ -1,5 +1,5 @@
 //Causa dano em dobro dependendo de uma chance variável 
-import { red, yellow } from "../Auxiliares/Cores";
+import { blue, red, yellow } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "../Personagens/Personagem";
 
@@ -27,6 +27,10 @@ export class FadaCorrompida implements Inimigo {
         return this.defesa
     }
 
+    public getHabilidade(): string {
+        return this.habilidade
+    }
+
     public tomarDano(dano: number): number {
 
         const defesaAleatoria = Math.floor(Math.random() * (this.defesa + 1)); // defesa aleatória
@@ -36,14 +40,15 @@ export class FadaCorrompida implements Inimigo {
 
 
         this.vida -= danoFinal;
-        red(`
-    -- ----------------------------------------- --        
-        ${this.nome.toUpperCase()} TOMOU DANO!
-        Dano recebido: ${dano}
-        Defesa: ${defesaAleatoria}
-        Dano efetivo recebido: ${danoFinal}
-    -- ----------------------------------------- --    
+        blue(`
+-- ----------------------------------------- --        
+    ${this.nome.toUpperCase()} TOMOU DANO!
+    Dano recebido: ${dano}
+    Defesa: ${defesaAleatoria}
+    Dano efetivo recebido: ${danoFinal}
+-- ----------------------------------------- --    
         `)
+
 
         if (this.vida < 0) {
             this.vida = 0;
@@ -68,9 +73,9 @@ export class FadaCorrompida implements Inimigo {
         ║          HABILIDADE ESPECIAL           ║
         ╠════════════════════════════════════════╣
         ║                                        ║
-        ║ ${this.nome} ativou ATAQUE DUPLO!      ║
+        ║ ${this.nome} ativou ATAQUE DUPLO!      
         ║                                        ║
-        ║ DANO CAUSADO  : ${danoFinal}           ║
+        ║ DANO CAUSADO  : ${danoFinal}           
         ║                                        ║
         ║                                        ║
         ╚════════════════════════════════════════╝
@@ -85,7 +90,7 @@ export class FadaCorrompida implements Inimigo {
         ║                 ATAQUE                 ║
         ╠════════════════════════════════════════╣
         ║                                        ║
-        ║ ${this.nome} atacou ${personagem.getNome()}!║
+        ║ ${this.nome} atacou ${personagem.getNome()}!
         ║                                        ║
         ║ DANO CAUSADO  : ${danoFinal}           ║
         ║                                        ║
@@ -103,10 +108,10 @@ export class FadaCorrompida implements Inimigo {
         ║          HABILIDADE ESPECIAL           ║
         ╠════════════════════════════════════════╣
         ║                                        ║
-        ║ ${this.nome} ativou ATAQUE DUPLO!      ║
+        ║ ${this.nome} ativou ATAQUE DUPLO!      
         ║                                        ║
-        ║ DANO CAUSADO  : ${dano}                ║
-        ║ VIDA RESTANTE : ${personagem.getVida()}║
+        ║ DANO CAUSADO  : ${dano}                
+        ║ VIDA RESTANTE : ${personagem.getVida()}
         ║                                        ║
         ╚════════════════════════════════════════╝
         `);

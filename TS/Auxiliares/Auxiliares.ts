@@ -1,5 +1,6 @@
+import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "../Personagens/Personagem";
-import { green, purple, red } from "./Cores";
+import { blue, green, purple, red, yellow } from "./Cores";
 
 const ask = require('readline-sync')
 
@@ -17,6 +18,7 @@ export function clear(): void{
 
 export function consoleEspecial(): void {
     purple(`
+--------------------------------------------------------------------------------------        
  ███  █████  ███   ███  █   █ █████    █████  ████ ████  █████  ███  ███  ███  █       
 █ ░░█  ░█░░░█ ░░█ █ ░░█ █░  █░█░░░░░   █░░░░░█ ░░░░█░░░█ █░░░░░█ ░░░  █░░█ ░░█ █░      
 █████░  █░░░█████░█░ ░█░█░░ █░████░░░  ████░░░███░░████░░████░░█░ ░░░ █░░█████░█░░     
@@ -24,11 +26,26 @@ export function consoleEspecial(): void {
 █░░░█░░ █░░ █░░░█░░██ █ ░███ ░█████░   █████░████░░█░░░░░█████░ ███  ███░█░░░█░█████   
  ░░  ░░  ░░  ░░  ░░ ░░ ░  ░░░ ░░░░░░    ░░░░░ ░░░░ ░░░    ░░░░░  ░░░  ░░░ ░░  ░░░░░░░  
   ░   ░   ░   ░   ░  ░░ ░  ░░░  ░░░░░    ░░░░░ ░░░░  ░     ░░░░░  ░░░  ░░░ ░   ░ ░░░░░ 
+--------------------------------------------------------------------------------------   
         `)
 }
 
-export function inimigoDerrotado(): void {
-    red(`
+export function arteInicioConfronto(): void {
+blue(`
+----------------------------------------------------------------------------------------------------    
+ ███   ███  █   █ █████ ████   ███  █   █ █████  ███     ███ █   █ ███  ███  ███  ███  ████   ███    
+█ ░░░ █ ░░█ ██  █░█░░░░░█░░░█ █ ░░█ ██  █░ ░█░░░█ ░░█     █░░██  █░ █░░█ ░░░  █░░█ ░░█ █░░░█ █ ░░█   
+█░ ░░░█░ ░█░█░█ █░████░░████░░█░ ░█░█░█ █░░ █░░░█░ ░█░    █░░█░█ █░░█░░█░ ░░░ █░░█████░█░░░█░█░ ░█░  
+█░░   █░░ █░█░░██░█░░░░ █░░█░ █░░ █░█░░██░░ █░░ █░░ █░░   █░░█░░██░░█░░█░░    █░░█░░░█░█░░ █░█░░ █░░ 
+ ███   ███ ░█░░ █░█░░░░░█░░░█░ ███ ░█░░ █░░ █░░  ███ ░░  ███░█░░ █░███░ ███  ███░█░░░█░████ ░░███ ░░ 
+  ░░░   ░░░ ░░░  ░░░░    ░░  ░  ░░░ ░░░  ░░  ░░   ░░░ ░   ░░░ ░░  ░░░░░  ░░░  ░░░ ░░  ░░░░░░ ░ ░░░ ░ 
+   ░░░   ░░░  ░   ░ ░     ░   ░  ░░░  ░   ░   ░    ░░░     ░░░ ░   ░ ░░░  ░░░  ░░░ ░   ░ ░░░░   ░░░  
+----------------------------------------------------------------------------------------------------
+    `)
+}
+
+export function arteInimigoDerrotado(): void {
+    green(`
 ---------------------------------------------------------------------------------------------                    
 ███ █   █ ███ █   █ ███  ███   ███     ████  █████ ████  ████   ███  █████  ███  ████   ███    
  █░░██  █░ █░░██ ██░ █░░█ ░░░ █ ░░█    █░░░█ █░░░░░█░░░█ █░░░█ █ ░░█  ░█░░░█ ░░█ █░░░█ █ ░░█   
@@ -41,10 +58,9 @@ export function inimigoDerrotado(): void {
                     `)
 }
 
-export function morreu(): void {
+export function arteVoceMorreu(): void {
     red(`
 --------------------------------------------------------------------
-
 █   █  ███   ███  █████    █   █  ███  ████  ████  █████ █   █   
 █░  █░█ ░░█ █ ░░░ █░░░░░   ██ ██░█ ░░█ █░░░█ █░░░█ █░░░░░█░  █░  
 █░░ █░█░ ░█░█░ ░░░████░░░  █░█ █░█░ ░█░████░░████░░████░░█░░ █░░ 
@@ -52,8 +68,7 @@ export function morreu(): void {
   █ ░ ░███ ░░███  █████░   █░░ █░░███ ░█░░░█░█░░░█░█████░ ███ ░░ 
    ░ ░  ░░░ ░ ░░░  ░░░░░    ░░  ░░ ░░░ ░░░  ░ ░░  ░ ░░░░░  ░░░ ░ 
     ░    ░░░   ░░░  ░░░░░    ░   ░  ░░░  ░   ░ ░   ░ ░░░░░  ░░░                  
-                
-    ----------------- SUA JORNADA ACABOU ------------
+--------------------- SUA JORNADA ACABOU ---------------------------
     `);
 }
 
@@ -61,7 +76,7 @@ export function escolhasCombate(personagem: Personagem): void {
     if(personagem.getUsouAtaqueEspecial()) {
         green(`
 =================================
-QUAL A SUA AÇÃO A SEGUIR?
+    QUAL A SUA AÇÃO A SEGUIR?
 =================================
 1 - Ataque
 2 - Abrir inventario
@@ -75,7 +90,26 @@ QUAL A SUA AÇÃO A SEGUIR?
 =================================
 1 - Ataque
 2 - Abrir inventario
-3 - ! UTLIZAR ATAQUE ESPECIAL !
+3 - !!!! UTILIZAR ATAQUE ESPECIAL !!!!
             `)
     }
 }
+
+export function mostrarInfoCombate(personagem: Personagem, inimigo: Inimigo): void {
+    
+yellow(`
+╔═══════════════════════════════════╗     ╔═════════════════════════════════════════╗
+║            PERSONAGEM             ║     ║                 INIMIGO                 ║
+╠═══════════════════════════════════╣     ╠═════════════════════════════════════════╣
+║                                   ║     ║                                         ║
+║  NOME   : ${String(personagem.getNome()).padEnd(23)} ║     ║ NOME        : ${String(inimigo.getNome()).padEnd(23)}   ║
+║  VIDA   : ${String(personagem.getVida()).padEnd(23)} ║     ║ VIDA        : ${String(inimigo.getVida()).padEnd(23)}   ║
+║  ATAQUE : ${String(personagem.getAtaque()).padEnd(23)} ║     ║ ATAQUE      : ${String(inimigo.getAtaque()).padEnd(23)}   ║
+║  DEFESA : ${String(personagem.getDefesa()).padEnd(23)} ║     ║ DEFESA      : ${String(inimigo.getDefesa()).padEnd(23)}   ║
+║                                   ║     ║ HABILIDADE  : ${String(inimigo.getHabilidade()).padEnd(23)}  ║
+║                                   ║     ║                                         ║
+╚═══════════════════════════════════╝     ╚═════════════════════════════════════════╝
+`);
+
+}
+

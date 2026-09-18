@@ -21,18 +21,21 @@ class FadaCorrompida {
     getDefesa() {
         return this.defesa;
     }
+    getHabilidade() {
+        return this.habilidade;
+    }
     tomarDano(dano) {
         const defesaAleatoria = Math.floor(Math.random() * (this.defesa + 1)); // defesa aleatória
         // o max me retorna o maior valor entre os dois, se o dano por acaso ficar negativo, o dano será zerado
         const danoFinal = Math.max(0, dano - defesaAleatoria);
         this.vida -= danoFinal;
-        (0, Cores_1.red)(`
-    -- ----------------------------------------- --        
-        ${this.nome.toUpperCase()} TOMOU DANO!
-        Dano recebido: ${dano}
-        Defesa: ${defesaAleatoria}
-        Dano efetivo recebido: ${danoFinal}
-    -- ----------------------------------------- --    
+        (0, Cores_1.blue)(`
+-- ----------------------------------------- --        
+    ${this.nome.toUpperCase()} TOMOU DANO!
+    Dano recebido: ${dano}
+    Defesa: ${defesaAleatoria}
+    Dano efetivo recebido: ${danoFinal}
+-- ----------------------------------------- --    
         `);
         if (this.vida < 0) {
             this.vida = 0;
@@ -53,9 +56,9 @@ class FadaCorrompida {
         ║          HABILIDADE ESPECIAL           ║
         ╠════════════════════════════════════════╣
         ║                                        ║
-        ║ ${this.nome} ativou ATAQUE DUPLO!      ║
+        ║ ${this.nome} ativou ATAQUE DUPLO!      
         ║                                        ║
-        ║ DANO CAUSADO  : ${danoFinal}           ║
+        ║ DANO CAUSADO  : ${danoFinal}           
         ║                                        ║
         ║                                        ║
         ╚════════════════════════════════════════╝
@@ -70,7 +73,7 @@ class FadaCorrompida {
         ║                 ATAQUE                 ║
         ╠════════════════════════════════════════╣
         ║                                        ║
-        ║ ${this.nome} atacou ${personagem.getNome()}!║
+        ║ ${this.nome} atacou ${personagem.getNome()}!
         ║                                        ║
         ║ DANO CAUSADO  : ${danoFinal}           ║
         ║                                        ║
@@ -86,10 +89,10 @@ class FadaCorrompida {
         ║          HABILIDADE ESPECIAL           ║
         ╠════════════════════════════════════════╣
         ║                                        ║
-        ║ ${this.nome} ativou ATAQUE DUPLO!      ║
+        ║ ${this.nome} ativou ATAQUE DUPLO!      
         ║                                        ║
-        ║ DANO CAUSADO  : ${dano}                ║
-        ║ VIDA RESTANTE : ${personagem.getVida()}║
+        ║ DANO CAUSADO  : ${dano}                
+        ║ VIDA RESTANTE : ${personagem.getVida()}
         ║                                        ║
         ╚════════════════════════════════════════╝
         `);

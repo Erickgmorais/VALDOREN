@@ -23,13 +23,16 @@ class Esqueleto {
     getDefesa() {
         return this.defesa;
     }
+    getHabilidade() {
+        return this.habilidade;
+    }
     tomarDano(dano) {
         this.vida -= dano;
-        (0, Cores_1.red)(`
-    -- ----------------------------------------- --
-        ${this.nome.toUpperCase()} TOMOU DANO! 
-        Dano recebido: ${dano}
-    -- ----------------------------------------- --
+        (0, Cores_1.blue)(`        
+-- ----------------------------------------- --
+    ${this.nome.toUpperCase()} TOMOU DANO! 
+    Dano recebido: ${dano}
+-- ----------------------------------------- --
         `);
         (0, Auxiliares_1.stop)();
         if (this.vida < 0) {
@@ -51,10 +54,10 @@ class Esqueleto {
     ║             ROUBO DE VIDA              ║
     ╠════════════════════════════════════════╣
     ║                                        ║
-    ║ ${`${this.nome}                   ║
-    ║ atacou ${personagem.getNome()}!`.padEnd(39)}            ║
+    ║ ${this.nome}                   
+    ║ atacou ${personagem.getNome()}            
     ║                                        ║
-    ║ VIDA ROUBADA : ${String(vidaRoubada).padEnd(23)} ║
+    ║ VIDA ROUBADA : ${String(vidaRoubada).padEnd(23)} 
     ║                                        ║
     ║                                        ║
     ╚════════════════════════════════════════╝
