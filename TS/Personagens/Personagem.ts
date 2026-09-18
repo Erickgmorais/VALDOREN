@@ -1,5 +1,5 @@
 import { clear, stop } from "../Auxiliares/Auxiliares";
-import { blue, green, yellow } from "../Auxiliares/Cores";
+import { blue, green, red, yellow } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Item } from "../Interfaces/Item";
 import { Pocao } from "../Inventario/Pocao";
@@ -59,6 +59,10 @@ export abstract class Personagem {
         return this.moeda;
     }
 
+    public getUsouAtaqueEspecial(): boolean {
+        return this.usouAtaqueEspecial;
+    }
+
     public setVida(val: number): void {
         this.vida += val;
     }
@@ -72,28 +76,31 @@ export abstract class Personagem {
         this.ouro += val;
     }
 
-    
-    
+    public getItens(): Item[] {
+        return this.inventario
+    }
+
+
     // método para setar que o jogador já usou o ataque especial
     public setEspecial(): void {
         this.usouAtaqueEspecial = true;
     }
-    
+
     // utilizado pra fazer o personagem pegar a moeda para entrar na caverna posteriormente na história
     public pegarMoeda(): void {
         this.moeda = true;
     }
-    
+
     // método que será implementado em cada classe de uma maneira
-    abstract usarAtaqueEspecial(inimigo: Inimigo): number; 
-    
+    abstract usarAtaqueEspecial(inimigo: Inimigo): number;
+
     // Métodos de combate
     public tomarDano(dano: number): number {
-        
+
         const defesaAleatoria = Math.floor(Math.random() * (this.defesa + 1));
-        
+
         // o max me retorna o maior valor entre os dois, se o dano por acaso ficar negativo, o dano será zerado
-        const danoFinal = Math.max(0, dano - defesaAleatoria); 
+        const danoFinal = Math.max(0, dano - defesaAleatoria);
         this.vida -= danoFinal;
 
         blue(`
@@ -105,7 +112,7 @@ export abstract class Personagem {
     -- ----------------------------------------- --        
             `)
 
-        if(this.vida < 0){
+        if (this.vida < 0) {
             this.vida = 0;
         }
         return danoFinal;
@@ -145,6 +152,38 @@ export abstract class Personagem {
             stop();
 
         }
+
+        const indice = this.inventario.indexOf(pocao);
+
+        if (indice !== -1) {
+            this.inventario.splice(indice, 1);
+        }
+    }
+
+    public escolherPocao(): Pocao | null {
+
+        const pocoes = this.inventario.filter(
+            (item) => item.getTipo() === 'POCAO'
+        ) as Pocao[];
+
+        if (pocoes.length === 0) {
+            return null;
+        }
+
+        green(`\nEscolha uma poção:`);
+
+        pocoes.forEach((pocao, index) => {
+            green(`${index + 1} - ${pocao.getNome()}`);
+        });
+
+        const escolha = ask.questionInt("Escolha: ");
+
+        if (escolha < 1 || escolha > pocoes.length) {
+            red("Poção inválida!");
+            return null;
+        }
+
+        return pocoes[escolha - 1];
     }
 
     public mostrarInventario(): void {
@@ -200,7 +239,7 @@ export abstract class Personagem {
     }
 
     public fichaPersonagem(): void {
-        if(this.usouAtaqueEspecial){
+        if (this.usouAtaqueEspecial) {
             yellow(`
     ╔═══════════════════════════════════╗
     ║          FICHA DO JOGADOR         ║

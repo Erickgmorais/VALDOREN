@@ -12,9 +12,9 @@ class Bardo extends Personagem_1.Personagem {
     }
     usarAtaqueEspecial(inimigo) {
         const danoFinal = this.ataque + 500;
-        if (this.usouAtaqueEspecial) {
+        (0, Auxiliares_1.consoleEspecial)();
+        if (!this.usouAtaqueEspecial) {
             inimigo.tomarDano(danoFinal);
-            (0, Auxiliares_1.consoleEspecial)();
             (0, Cores_1.blue)(`Que a minha melodia desperte o poder que repousa em minha alma! O ATAQUE CAUSOU ${danoFinal} DE DANO!`);
             this.setEspecial(); // Seta o especial = true
             return danoFinal;

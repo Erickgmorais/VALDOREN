@@ -16,7 +16,7 @@ export class Paladino extends Personagem {
 
         const danoFinal = this.ataque + 500;
 
-        if (this.usouAtaqueEspecial) {
+        if (!this.usouAtaqueEspecial) {
 
             consoleEspecial();
             inimigo.tomarDano(danoFinal)

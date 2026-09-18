@@ -14,7 +14,7 @@ export class Berserker extends Personagem {
 
         const danoFinal = this.ataque + 500;
 
-        if (this.usouAtaqueEspecial) {
+        if (!this.usouAtaqueEspecial) {
 
             inimigo.tomarDano(danoFinal)
             consoleEspecial();

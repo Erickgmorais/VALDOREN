@@ -33,4 +33,4 @@
 - 
 
 ## Confronto
-- tomarDano e atacar são os métodos principais que todos os inimigos e os personagens tem. Dentro do método atacar de cada um vamos chamar o método tomar dano (Com as devidas validações especiais, como por exemplo, o fantasma tem a opção de se esquivar do dano, inclusive podendo moggar o usar especial do personagem)
+- tomarDano e atacar são os métodos principais que todos os inimigos e os personagens tem. Dentro do método atacar de cada um vamos chamar o método tomar dano (Com as devidas validações especiais, como por exemplo, o fantasma tem a opção de se esquivar do dano, inclusive podendo moggar o usar especial do personagem);

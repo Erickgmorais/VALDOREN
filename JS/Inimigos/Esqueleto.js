@@ -34,7 +34,6 @@ class Esqueleto {
         (0, Auxiliares_1.stop)();
         if (this.vida < 0) {
             this.vida = 0;
-            (0, Cores_1.red)('Inimigo morreu');
             (0, Auxiliares_1.stop)();
             return dano;
         }

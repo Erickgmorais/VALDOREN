@@ -37,7 +37,6 @@ class Dragao {
         `);
         if (this.vida < 0) {
             this.vida = 0;
-            (0, Cores_1.red)('Inimigo morreu');
             return dano;
         }
         return dano;

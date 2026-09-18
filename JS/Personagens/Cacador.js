@@ -11,7 +11,7 @@ class Cacador extends Personagem_1.Personagem {
     }
     usarAtaqueEspecial(inimigo) {
         const danoFinal = this.ataque + 500;
-        if (this.usouAtaqueEspecial) {
+        if (!this.usouAtaqueEspecial) {
             (0, Auxiliares_1.consoleEspecial)();
             inimigo.tomarDano(danoFinal);
             (0, Cores_1.blue)(`Você pode tentar fugir... mas minha flecha sempre encontra seu alvo! O ATAQUE CAUSOU ${danoFinal} DE DANO!`);

@@ -46,6 +46,9 @@ class Personagem {
     getTemMoeda() {
         return this.moeda;
     }
+    getUsouAtaqueEspecial() {
+        return this.usouAtaqueEspecial;
+    }
     setVida(val) {
         this.vida += val;
     }
@@ -55,6 +58,9 @@ class Personagem {
     // método para ganhar adicionar ouro
     setOuro(val) {
         this.ouro += val;
+    }
+    getItens() {
+        return this.inventario;
     }
     // método para setar que o jogador já usou o ataque especial
     setEspecial() {
@@ -108,6 +114,26 @@ class Personagem {
             (0, Cores_1.blue)('Ataque aumentado em 20 do seu personagem!');
             (0, Auxiliares_1.stop)();
         }
+        const indice = this.inventario.indexOf(pocao);
+        if (indice !== -1) {
+            this.inventario.splice(indice, 1);
+        }
+    }
+    escolherPocao() {
+        const pocoes = this.inventario.filter((item) => item.getTipo() === 'POCAO');
+        if (pocoes.length === 0) {
+            return null;
+        }
+        (0, Cores_1.green)(`\nEscolha uma poção:`);
+        pocoes.forEach((pocao, index) => {
+            (0, Cores_1.green)(`${index + 1} - ${pocao.getNome()}`);
+        });
+        const escolha = ask.questionInt("Escolha: ");
+        if (escolha < 1 || escolha > pocoes.length) {
+            (0, Cores_1.red)("Poção inválida!");
+            return null;
+        }
+        return pocoes[escolha - 1];
     }
     mostrarInventario() {
         (0, Auxiliares_1.clear)();

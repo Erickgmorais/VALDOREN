@@ -1,4 +1,6 @@
 import { logger, stop } from "./Auxiliares/Auxiliares";
+import { red } from "./Auxiliares/Cores";
+import { iniciarConfronto } from "./Inimigos/Confronto";
 import { Dragao } from "./Inimigos/Dragao";
 import { Esqueleto } from "./Inimigos/Esqueleto";
 import { Fantasma } from "./Inimigos/Fantasma";
@@ -13,38 +15,13 @@ const p1: Bardo = new Bardo('Bardo teste juliana');
 
 const pocao1: Pocao = new Pocao('Poção de cura', EfeitoPocao.CURA);
 const pocao2: Pocao = new Pocao('Poção de Forca', EfeitoPocao.FORCA);
-p1.adicionaInventario(pocao1);
-p1.adicionaInventario(pocao2);
-
-const bicho: Dragao = new Dragao()
-
-// bicho.fichaInimigo()
-
-// p1.atacar(bicho);
-
-// bicho.fichaInimigo()
-
-bicho.fichaInimigo()
-
-bicho.atacar(p1)
-
-bicho.fichaInimigo()
 
 
+const bicho: Dragao = new Dragao();
 
-// p1.fichaPersonagem()
-// stop()
+iniciarConfronto(p1, bicho);
 
-// logger(pocao1.getEfeito())
-// logger(pocao2.getEfeito())
 
-// logger(pocao1)
-// logger(pocao2)
-
-// p1.tomarPocao(pocao1)
-// p1.tomarPocao(pocao2)
-
-// p1.fichaPersonagem()
 
 
 

@@ -50,7 +50,6 @@ export class Dragao implements Inimigo {
 
         if (this.vida < 0) {
             this.vida = 0;
-            red('Inimigo morreu');
             return dano;
         }
         return dano;

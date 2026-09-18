@@ -15,11 +15,11 @@ export class Bardo extends Personagem {
     public usarAtaqueEspecial(inimigo: Inimigo): number {
 
         const danoFinal = this.ataque + 500;
+        consoleEspecial()
 
-        if (this.usouAtaqueEspecial) {
+        if (!this.usouAtaqueEspecial) {
 
             inimigo.tomarDano(danoFinal)
-            consoleEspecial()
             blue(`Que a minha melodia desperte o poder que repousa em minha alma! O ATAQUE CAUSOU ${danoFinal} DE DANO!`);
             this.setEspecial() // Seta o especial = true
             return danoFinal;
