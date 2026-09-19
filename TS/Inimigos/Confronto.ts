@@ -26,12 +26,16 @@ export function iniciarConfronto(personagem: Personagem, inimigo: Inimigo) {
                 switch (option) {
 
                     case 1: // atacar
+
                         clear()
                         personagem.atacar(inimigo);
-                        stop()
+                        stop();
+
                         if (inimigo.getVida() > 0) {
+                            
                             clear()
                             inimigo.atacar(personagem);
+                            stop();
                         }
 
                         break;

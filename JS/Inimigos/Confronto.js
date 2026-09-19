@@ -25,6 +25,7 @@ function iniciarConfronto(personagem, inimigo) {
                         if (inimigo.getVida() > 0) {
                             (0, Auxiliares_1.clear)();
                             inimigo.atacar(personagem);
+                            (0, Auxiliares_1.stop)();
                         }
                         break;
                     case 2: // Abrir inventário

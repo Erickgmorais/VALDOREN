@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Fantasma = void 0;
-//Chance de ignorar completamente um ataque
 const Cores_1 = require("../Auxiliares/Cores");
 class Fantasma {
     nome = 'Fantasma do Clerigo';
@@ -27,6 +26,20 @@ class Fantasma {
     //Método de ataque.
     atacar(personagem) {
         const danoFinal = Math.floor(Math.random() * this.ataque) + 1; // calculo o dano aleatorio 
+        (0, Cores_1.red)(`
+    ATAQUE DO INIMIGO:        
+    ╔════════════════════════════════════════╗
+    ║                ATAQUE                  ║
+    ╠════════════════════════════════════════╣
+    ║                                        ║
+    ║ ${this.nome}                   
+    ║ atacou ${personagem.getNome()}            
+    ║                                        ║
+    ║ DANO EFETIVO : ${String(danoFinal).padEnd(23)} 
+    ║                                        ║
+    ║                                        ║
+    ╚════════════════════════════════════════╝
+            `);
         personagem.tomarDano(danoFinal); // executo o dano no inimigo
     }
     tomarDano(dano) {

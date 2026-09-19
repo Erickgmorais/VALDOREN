@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Confronto_1 = require("./Inimigos/Confronto");
-const Dragao_1 = require("./Inimigos/Dragao");
+const Fantasma_1 = require("./Inimigos/Fantasma");
 const Pocao_1 = require("./Inventario/Pocao");
 const TiposENUMs_1 = require("./Inventario/TiposENUMs");
 const Berserker_1 = require("./Personagens/Berserker");
@@ -11,5 +11,5 @@ const pocao1 = new Pocao_1.Pocao('Poção de cura', TiposENUMs_1.EfeitoPocao.CUR
 const pocao2 = new Pocao_1.Pocao('Poção de Forca', TiposENUMs_1.EfeitoPocao.FORCA);
 p1.adicionaInventario(pocao1);
 p1.adicionaInventario(pocao2);
-const bicho = new Dragao_1.Dragao();
+const bicho = new Fantasma_1.Fantasma();
 (0, Confronto_1.iniciarConfronto)(p1, bicho);

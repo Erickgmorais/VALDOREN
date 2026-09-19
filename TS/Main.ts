@@ -3,6 +3,7 @@ import { red } from "./Auxiliares/Cores";
 import { iniciarConfronto } from "./Inimigos/Confronto";
 import { Dragao } from "./Inimigos/Dragao";
 import { Esqueleto } from "./Inimigos/Esqueleto";
+import { FadaCorrompida } from "./Inimigos/FadaCorrompida";
 import { Fantasma } from "./Inimigos/Fantasma";
 import { Pocao } from "./Inventario/Pocao";
 
@@ -21,7 +22,7 @@ const pocao2: Pocao = new Pocao('Poção de Forca', EfeitoPocao.FORCA);
 p1.adicionaInventario(pocao1)
 p1.adicionaInventario(pocao2)
 
-const bicho: Dragao = new Dragao();
+const bicho: Fantasma = new Fantasma();
 
 
 iniciarConfronto(p1, bicho);

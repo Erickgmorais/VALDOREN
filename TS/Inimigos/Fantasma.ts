@@ -1,4 +1,5 @@
 //Chance de ignorar completamente um ataque
+import { stop } from "../Auxiliares/Auxiliares";
 import { blue, red, yellow } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "../Personagens/Personagem";
@@ -34,7 +35,22 @@ export class Fantasma implements Inimigo {
     public atacar(personagem: Personagem): void {
 
         const danoFinal: number = Math.floor(Math.random() * this.ataque) + 1; // calculo o dano aleatorio 
-        personagem.tomarDano(danoFinal);             // executo o dano no inimigo
+        red(`
+    ATAQUE DO INIMIGO:        
+    ╔════════════════════════════════════════╗
+    ║                ATAQUE                  ║
+    ╠════════════════════════════════════════╣
+    ║                                        ║
+    ║ ${this.nome}                   
+    ║ atacou ${personagem.getNome()}            
+    ║                                        ║
+    ║ DANO EFETIVO : ${String(danoFinal).padEnd(23)} 
+    ║                                        ║
+    ║                                        ║
+    ╚════════════════════════════════════════╝
+            `)
+            personagem.tomarDano(danoFinal);             // executo o dano no inimigo
+            
     }
 
     public tomarDano(dano: number): number { // coloquei aqui a possibilidade de esquiva do fantasma 
