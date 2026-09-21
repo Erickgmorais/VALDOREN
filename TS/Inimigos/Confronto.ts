@@ -1,17 +1,20 @@
-import { clear, escolhasCombate, arteInimigoDerrotado, arteVoceMorreu, stop, mostrarInfoCombate, arteInicioConfronto } from "../Auxiliares/Auxiliares";
-import { purple, red } from "../Auxiliares/Cores";
+import { clear, escolhasCombate, arteInimigoDerrotado, arteVoceMorreu, stop, mostrarInfoCombate, arteInicioConfronto, infosConfronto } from "../Auxiliares/Auxiliares";
+import { red } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "../Personagens/Personagem";
+
 const ask = require('readline-sync');
 
 export function iniciarConfronto(personagem: Personagem, inimigo: Inimigo) {
 
-    let finalConfronto = false;
-    let option: number;
+    let finalConfronto = false; // atributo para controlar quando o confronto vai acabar
+    let option: number;         // Variável para controlar a opção desejada, ela vai ser reutilizada ao decorrer do código
 
-    clear()
-    arteInicioConfronto()
-    stop()
+    clear();
+    arteInicioConfronto();
+    infosConfronto();
+    inimigo.fichaHabilidade();
+    stop();
 
     while (!finalConfronto) {
 
@@ -31,11 +34,12 @@ export function iniciarConfronto(personagem: Personagem, inimigo: Inimigo) {
                         personagem.atacar(inimigo);
                         stop();
 
+                        // If para que caso o inimigo morrer com o meu ataque, ele nao me contra atacar
                         if (inimigo.getVida() > 0) {
                             
-                            clear()
+                            clear();
                             inimigo.atacar(personagem);
-                            stop();
+                            // stop();
                         }
 
                         break;
@@ -60,14 +64,18 @@ export function iniciarConfronto(personagem: Personagem, inimigo: Inimigo) {
 
                             case 2:
                                 clear()
-                                red('Ainda em desenvolvimento!')
+                                red('Ainda em desenvolvimento!');
                                 stop()
                                 
                                 break;
 
+                            case 3:
+                                //Apenas faz voltar para o menu
+                                break;    
+
                             default:
                                 clear()
-                                red('Opcao invalida!')
+                                red('Opcao invalida!');
                                 stop()
                                 break;
                         }
@@ -75,29 +83,31 @@ export function iniciarConfronto(personagem: Personagem, inimigo: Inimigo) {
                         break;
 
                     case 3: // usar especial e setar o useiEspecial true
-                        clear()
+                        clear();
                         personagem.usarAtaqueEspecial(inimigo); // inimigo com certeza vai morrer
-                        stop()
+                        stop();
                         break;
 
                     default:
-                        red('Opcao inválida')
-                        stop()
+                        red('Opcao inválida');
+                        stop();
                         break;
                 }
 
             } else {
-                clear()
-                arteInimigoDerrotado() // Arte de inimigo derrotado
+
+                clear();
+                arteInimigoDerrotado();      // Arte de inimigo derrotado
+                personagem.setReputacao(15); // ao vencer confronto, ganha reputação 
                 finalConfronto = true;
-                stop()
+                stop();
 
             }
 
         } else {
 
-            clear()
-            arteVoceMorreu() // Arte de morte
+            clear();
+            arteVoceMorreu(); // Arte de morte
             process.exit();
 
         }

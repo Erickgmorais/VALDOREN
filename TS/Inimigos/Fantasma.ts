@@ -1,6 +1,6 @@
 //Chance de ignorar completamente um ataque
-import { stop } from "../Auxiliares/Auxiliares";
-import { blue, red, yellow } from "../Auxiliares/Cores";
+
+import { blue, red } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "../Personagens/Personagem";
 
@@ -25,10 +25,17 @@ export class Fantasma implements Inimigo {
 
     public getDefesa(): number {
         return this.defesa
-    }   
+    }
 
     public getHabilidade(): string {
         return this.habilidade
+    }
+
+    public fichaHabilidade(): void {
+        red(`
+O inimigo que voce irá combater tem o seguinte especial:
+Com uma chance de 40%, esse inimigo poderá se esquivar totalmente do dano do seu ataque.        
+        `);
     }
 
     //Método de ataque.
@@ -49,8 +56,8 @@ export class Fantasma implements Inimigo {
     ║                                        ║
     ╚════════════════════════════════════════╝
             `)
-            personagem.tomarDano(danoFinal);             // executo o dano no inimigo
-            
+        personagem.tomarDano(danoFinal); // executo o dano no inimigo
+
     }
 
     public tomarDano(dano: number): number { // coloquei aqui a possibilidade de esquiva do fantasma 
@@ -62,8 +69,8 @@ export class Fantasma implements Inimigo {
         const danoFinal = Math.max(0, dano - defesaAleatoria);
 
 
-        if (chance < 0.30) {
-       red(`    
+        if (chance < 0.40) {
+            red(`    
     ╔═══════════════════════════════════════════════╗
     ║               INTANGIBILIDADE!                ║
     ╠═══════════════════════════════════════════════╣

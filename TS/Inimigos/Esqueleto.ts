@@ -1,8 +1,8 @@
 // esse personagem não da dano, apenas rouba a sua vida, como se fosse um dementador
-// Esse oponente em questão não terá defesa.. porque ele ja vai soubar vida do oponente e pegar para Si
+// Esse oponente em questão não terá defesa.. porque ele ja vai roubar vida do oponente e pegar para Si
 
 import { clear, stop } from "../Auxiliares/Auxiliares";
-import { blue, red, yellow } from "../Auxiliares/Cores";
+import { blue, red } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "../Personagens/Personagem";
 
@@ -36,6 +36,13 @@ export class Esqueleto implements Inimigo {
         return this.habilidade
     }
 
+    public fichaHabilidade(): void {
+        red(`
+O inimigo que voce ira combater tem o seguinte especial:
+Seu método de ataque é roubo de vida. A cada dano causado, sua vida aumenta no mesmo valor.        
+        `)
+    }
+
     public tomarDano(dano: number): number {
         
         this.vida -= dano;
@@ -47,11 +54,9 @@ export class Esqueleto implements Inimigo {
     Dano recebido: ${dano}
 -- ----------------------------------------- --
         `)
-        stop()
 
         if(this.vida < 0){
             this.vida = 0;
-            stop()
             return dano;
         }
         return dano;
@@ -90,11 +95,11 @@ export class Esqueleto implements Inimigo {
     ║                 INIMIGO                 ║
     ╠═════════════════════════════════════════╣
     ║                                         ║
-    ║ NOME        : ${String(this.nome).padEnd(23)}   ║
-    ║ VIDA        : ${String(this.vida).padEnd(23)}   ║
-    ║ ATAQUE      : ${String(this.ataque).padEnd(23)}   ║
-    ║ DEFESA      : ${String(this.defesa).padEnd(23)}   ║
-    ║ HABILIDADE  : ${String(this.habilidade).padEnd(23)} ║
+    ║ NOME        : ${String(this.nome).padEnd(23)}   
+    ║ VIDA        : ${String(this.vida).padEnd(23)}   
+    ║ ATAQUE      : ${String(this.ataque).padEnd(23)}   
+    ║ DEFESA      : ${String(this.defesa).padEnd(23)}   
+    ║ HABILIDADE  : ${String(this.habilidade).padEnd(23)} 
     ║                                         ║
     ╚═════════════════════════════════════════╝
         `);

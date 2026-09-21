@@ -1,4 +1,5 @@
 "use strict";
+//Chance de ignorar completamente um ataque
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Fantasma = void 0;
 const Cores_1 = require("../Auxiliares/Cores");
@@ -22,6 +23,12 @@ class Fantasma {
     }
     getHabilidade() {
         return this.habilidade;
+    }
+    fichaHabilidade() {
+        (0, Cores_1.red)(`
+O inimigo que voce irá combater tem o seguinte especial:
+Com uma chance de 40%, esse inimigo poderá se esquivar totalmente do dano do seu ataque.        
+        `);
     }
     //Método de ataque.
     atacar(personagem) {
@@ -47,7 +54,7 @@ class Fantasma {
         const defesaAleatoria = Math.floor(Math.random() * (this.defesa + 1)); // defesa aleatória
         // o max me retorna o maior valor entre os dois, se o dano por acaso ficar negativo, o dano será zerado
         const danoFinal = Math.max(0, dano - defesaAleatoria);
-        if (chance < 0.30) {
+        if (chance < 0.40) {
             (0, Cores_1.red)(`    
     ╔═══════════════════════════════════════════════╗
     ║               INTANGIBILIDADE!                ║

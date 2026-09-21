@@ -4,6 +4,7 @@ import { Inimigo } from "../Interfaces/Inimigo";
 import { Item } from "../Interfaces/Item";
 import { Pocao } from "../Inventario/Pocao";
 import { EfeitoPocao } from "../Inventario/TiposENUMs";
+
 const ask = require('readline-sync');
 
 export abstract class Personagem {
@@ -80,6 +81,17 @@ export abstract class Personagem {
         return this.inventario
     }
 
+    // Método possui uma validação para que, se o valor for neg\pos, vai mostrar mensagens diferentes no terminal para o jogador.
+    public setReputacao(val: number): void {
+
+        this.reputacao += val;
+
+        if (val > 0) {
+            blue(`Seu personagem ganhou ${val} de reputacao! Isso ira te trazer consequencias futuro da sua jornada`);
+        } else {
+            red(`Seu personagem perdeu ${val} de reputacao! Isso ira te trazer consequencias futuro da sua jornada`);
+        }
+    }
 
     // método para setar que o jogador já usou o ataque especial
     public setEspecial(): void {
@@ -161,11 +173,11 @@ export abstract class Personagem {
         }
     }
 
+    // Feito por IA
     public escolherPocao(): Pocao | null {
 
-        const pocoes = this.inventario.filter(
-            (item) => item.getTipo() === 'POCAO'
-        ) as Pocao[];
+        // faz um array de poções percorrendo item a item do meu array de itens
+        const pocoes = this.inventario.filter((item) => item.getTipo() === 'POCAO') as Pocao[];
 
         if (pocoes.length === 0) {
             return null;
@@ -173,14 +185,14 @@ export abstract class Personagem {
 
         green(`\nEscolha uma poção: `);
 
-        pocoes.forEach((pocao, index) => {
-            green(`${index + 1} - ${pocao.getNome()}`);
+        pocoes.forEach((pocao, posicao) => {
+            green(`${posicao + 1} - ${pocao.getNome()}`);
         });
 
         const escolha = ask.questionInt();
 
         if (escolha < 1 || escolha > pocoes.length) {
-            red("Poção inválida!");
+            red("Pocao invalida!");
             return null;
         }
 
@@ -222,10 +234,10 @@ export abstract class Personagem {
                 green(`- ${item.getNome()}`)
 
             }
-        green(`
------------------------------------------------            
-            `)            
         }
+
+        green(`
+-----------------------------------------------`)
 
         // verifica se tem 
         if (temPocao) {
@@ -251,15 +263,15 @@ Opcoes:
     ╠═══════════════════════════════════╣
     ║                                   ║
     ║  NOME   : ${this.nome.padEnd(23)} ║
-    ║  CLASSE : ${this.classe.padEnd(23)} ║
+    ║  CLASSE : ${this.classe.padEnd(23)} 
     ║                                   ║
     ╠═══════════════════════════════════╣
     ║            ATRIBUTOS              ║
     ╠═══════════════════════════════════╣
     ║                                   ║
-    ║  VIDA   : ${String(this.vida).padEnd(23)} ║
-    ║  ATAQUE : ${String(this.ataque).padEnd(23)} ║
-    ║  DEFESA : ${String(this.defesa).padEnd(23)} ║
+    ║  VIDA   : ${String(this.vida).padEnd(23)} 
+    ║  ATAQUE : ${String(this.ataque).padEnd(23)} 
+    ║  DEFESA : ${String(this.defesa).padEnd(23)} 
     ║                                   ║
     ╚═══════════════════════════════════╝
                 `)
@@ -269,16 +281,16 @@ Opcoes:
     ║          FICHA DO JOGADOR         ║
     ╠═══════════════════════════════════╣
     ║                                   ║
-    ║  NOME   : ${this.nome.padEnd(23)} ║
-    ║  CLASSE : ${this.classe.padEnd(23)} ║
+    ║  NOME   : ${this.nome.padEnd(23)} 
+    ║  CLASSE : ${this.classe.padEnd(23)} 
     ║                                   ║
     ╠═══════════════════════════════════╣
     ║            ATRIBUTOS              ║
     ╠═══════════════════════════════════╣
     ║                                   ║
-    ║  VIDA   : ${String(this.vida).padEnd(23)} ║
-    ║  ATAQUE : ${String(this.ataque).padEnd(23)} ║
-    ║  DEFESA : ${String(this.defesa).padEnd(23)} ║
+    ║  VIDA   : ${String(this.vida).padEnd(23)} 
+    ║  ATAQUE : ${String(this.ataque).padEnd(23)} 
+    ║  DEFESA : ${String(this.defesa).padEnd(23)} 
     ║                                   ║
     ║  ATAQUE ESPECIAL AINDA DISPONIVEL ║
     ║                                   ║

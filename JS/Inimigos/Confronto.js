@@ -5,10 +5,12 @@ const Auxiliares_1 = require("../Auxiliares/Auxiliares");
 const Cores_1 = require("../Auxiliares/Cores");
 const ask = require('readline-sync');
 function iniciarConfronto(personagem, inimigo) {
-    let finalConfronto = false;
-    let option;
+    let finalConfronto = false; // atributo para controlar quando o confronto vai acabar
+    let option; // Variável para controlar a opção desejada, ela vai ser reutilizada ao decorrer do código
     (0, Auxiliares_1.clear)();
     (0, Auxiliares_1.arteInicioConfronto)();
+    (0, Auxiliares_1.infosConfronto)();
+    inimigo.fichaHabilidade();
     (0, Auxiliares_1.stop)();
     while (!finalConfronto) {
         if (personagem.getVida() > 0) {
@@ -22,10 +24,11 @@ function iniciarConfronto(personagem, inimigo) {
                         (0, Auxiliares_1.clear)();
                         personagem.atacar(inimigo);
                         (0, Auxiliares_1.stop)();
+                        // If para que caso o inimigo morrer com o meu ataque, ele nao me contra atacar
                         if (inimigo.getVida() > 0) {
                             (0, Auxiliares_1.clear)();
                             inimigo.atacar(personagem);
-                            (0, Auxiliares_1.stop)();
+                            // stop();
                         }
                         break;
                     case 2: // Abrir inventário
@@ -45,6 +48,9 @@ function iniciarConfronto(personagem, inimigo) {
                                 (0, Auxiliares_1.clear)();
                                 (0, Cores_1.red)('Ainda em desenvolvimento!');
                                 (0, Auxiliares_1.stop)();
+                                break;
+                            case 3:
+                                //Apenas faz voltar para o menu
                                 break;
                             default:
                                 (0, Auxiliares_1.clear)();
@@ -67,6 +73,7 @@ function iniciarConfronto(personagem, inimigo) {
             else {
                 (0, Auxiliares_1.clear)();
                 (0, Auxiliares_1.arteInimigoDerrotado)(); // Arte de inimigo derrotado
+                personagem.setReputacao(15); // ao vencer confronto, ganha reputação 
                 finalConfronto = true;
                 (0, Auxiliares_1.stop)();
             }

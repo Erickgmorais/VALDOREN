@@ -2,25 +2,27 @@
 
 
 import { consoleEspecial } from "../Auxiliares/Auxiliares";
-import { blue, red, yellow } from "../Auxiliares/Cores";
+import { blue } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
+import { Arma } from "../Inventario/Arma";
 import { Personagem } from "./Personagem";
 
 export class Necromante extends Personagem {
 
     constructor(nome: string) {
         super(nome, 'Necromante', 130, 20, 10, 60, -30)
+        this.inventario.push(new Arma('Foice das Almas', 10))
     }
 
     // método especial de ataque subscrito 
     public usarAtaqueEspecial(inimigo: Inimigo): number {
 
-        const danoFinal = this.ataque + 500;
+        const danoFinal = this.ataque + 200;
 
         if (!this.usouAtaqueEspecial) {
 
             consoleEspecial()
-            blue(`OS CADÁVERES SE ERGUEM E AVANÇAM SOBRE ${inimigo.getNome()}! O ATAQUE CAUSOU ${danoFinal} DE DANO!`);
+            blue(`OS CADÁVERES SE ERGUEM E AVANÇAM SOBRE ${inimigo.getNome()}! ATAQUE AUMENTADO EM 200!!`);
             inimigo.tomarDano(danoFinal)
             this.setEspecial() // Seta o especial = true
             return danoFinal;

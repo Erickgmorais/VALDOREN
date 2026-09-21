@@ -62,6 +62,16 @@ class Personagem {
     getItens() {
         return this.inventario;
     }
+    // Método possui uma validação para que, se o valor for neg\pos, vai mostrar mensagens diferentes no terminal para o jogador.
+    setReputacao(val) {
+        this.reputacao += val;
+        if (val > 0) {
+            (0, Cores_1.blue)(`Seu personagem ganhou ${val} de reputacao! Isso ira te trazer consequencias futuro da sua jornada`);
+        }
+        else {
+            (0, Cores_1.red)(`Seu personagem perdeu ${val} de reputacao! Isso ira te trazer consequencias futuro da sua jornada`);
+        }
+    }
     // método para setar que o jogador já usou o ataque especial
     setEspecial() {
         this.usouAtaqueEspecial = true;
@@ -120,18 +130,20 @@ class Personagem {
             this.inventario.splice(indice, 1);
         }
     }
+    // Feito por IA
     escolherPocao() {
+        // faz um array de poções percorrendo item a item do meu array de itens
         const pocoes = this.inventario.filter((item) => item.getTipo() === 'POCAO');
         if (pocoes.length === 0) {
             return null;
         }
         (0, Cores_1.green)(`\nEscolha uma poção: `);
-        pocoes.forEach((pocao, index) => {
-            (0, Cores_1.green)(`${index + 1} - ${pocao.getNome()}`);
+        pocoes.forEach((pocao, posicao) => {
+            (0, Cores_1.green)(`${posicao + 1} - ${pocao.getNome()}`);
         });
         const escolha = ask.questionInt();
         if (escolha < 1 || escolha > pocoes.length) {
-            (0, Cores_1.red)("Poção inválida!");
+            (0, Cores_1.red)("Pocao invalida!");
             return null;
         }
         return pocoes[escolha - 1];
@@ -164,10 +176,9 @@ class Personagem {
             if (item.getTipo() === 'MOEDA') {
                 (0, Cores_1.green)(`- ${item.getNome()}`);
             }
-            (0, Cores_1.green)(`
------------------------------------------------            
-            `);
         }
+        (0, Cores_1.green)(`
+-----------------------------------------------`);
         // verifica se tem 
         if (temPocao) {
             (0, Cores_1.green)(`
@@ -192,15 +203,15 @@ Opcoes:
     ╠═══════════════════════════════════╣
     ║                                   ║
     ║  NOME   : ${this.nome.padEnd(23)} ║
-    ║  CLASSE : ${this.classe.padEnd(23)} ║
+    ║  CLASSE : ${this.classe.padEnd(23)} 
     ║                                   ║
     ╠═══════════════════════════════════╣
     ║            ATRIBUTOS              ║
     ╠═══════════════════════════════════╣
     ║                                   ║
-    ║  VIDA   : ${String(this.vida).padEnd(23)} ║
-    ║  ATAQUE : ${String(this.ataque).padEnd(23)} ║
-    ║  DEFESA : ${String(this.defesa).padEnd(23)} ║
+    ║  VIDA   : ${String(this.vida).padEnd(23)} 
+    ║  ATAQUE : ${String(this.ataque).padEnd(23)} 
+    ║  DEFESA : ${String(this.defesa).padEnd(23)} 
     ║                                   ║
     ╚═══════════════════════════════════╝
                 `);
@@ -211,16 +222,16 @@ Opcoes:
     ║          FICHA DO JOGADOR         ║
     ╠═══════════════════════════════════╣
     ║                                   ║
-    ║  NOME   : ${this.nome.padEnd(23)} ║
-    ║  CLASSE : ${this.classe.padEnd(23)} ║
+    ║  NOME   : ${this.nome.padEnd(23)} 
+    ║  CLASSE : ${this.classe.padEnd(23)} 
     ║                                   ║
     ╠═══════════════════════════════════╣
     ║            ATRIBUTOS              ║
     ╠═══════════════════════════════════╣
     ║                                   ║
-    ║  VIDA   : ${String(this.vida).padEnd(23)} ║
-    ║  ATAQUE : ${String(this.ataque).padEnd(23)} ║
-    ║  DEFESA : ${String(this.defesa).padEnd(23)} ║
+    ║  VIDA   : ${String(this.vida).padEnd(23)} 
+    ║  ATAQUE : ${String(this.ataque).padEnd(23)} 
+    ║  DEFESA : ${String(this.defesa).padEnd(23)} 
     ║                                   ║
     ║  ATAQUE ESPECIAL AINDA DISPONIVEL ║
     ║                                   ║

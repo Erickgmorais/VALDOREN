@@ -24,6 +24,12 @@ class FadaCorrompida {
     getHabilidade() {
         return this.habilidade;
     }
+    fichaHabilidade() {
+        (0, Cores_1.red)(`
+O inimigo que voce ira combater tem o seguinte especial:
+Com uma chance de 60%, esse inimigo podera dar dano duplo.        
+        `);
+    }
     tomarDano(dano) {
         const defesaAleatoria = Math.floor(Math.random() * (this.defesa + 1)); // defesa aleatória
         // o max me retorna o maior valor entre os dois, se o dano por acaso ficar negativo, o dano será zerado
@@ -104,11 +110,11 @@ class FadaCorrompida {
         ║                 INIMIGO                ║
         ╠════════════════════════════════════════╣
         ║                                        ║
-        ║ NOME        : ${this.nome}             ║
-        ║ VIDA        : ${this.vida}             ║
-        ║ ATAQUE      : ${this.ataque}           ║
-        ║ DEFESA      : ${this.defesa}           ║
-        ║ HABILIDADE  : ${this.habilidade}       ║
+        ║ NOME        : ${this.nome}             
+        ║ VIDA        : ${this.vida}             
+        ║ ATAQUE      : ${this.ataque}           
+        ║ DEFESA      : ${this.defesa}           
+        ║ HABILIDADE  : ${this.habilidade}       
         ║                                        ║
         ╚════════════════════════════════════════╝
         `);

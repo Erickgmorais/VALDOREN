@@ -34,6 +34,14 @@ export class Dragao implements Inimigo {
         return this.habilidade
     }
 
+    // Método utilizado no inicio do combate em cada confronto
+    public fichaHabilidade(): void {
+        red(`
+O inimigo que voce ira combater tem o seguinte especial:
+Com uma chande de 40% em cada ataque, ele poderá perder -5 de vida para aumentar seu ataque em +8        
+        `)
+    }
+
     public tomarDano(dano: number): number {
 
         const defesaAleatoria = Math.floor(Math.random() * (this.defesa + 1)); // defesa aleatória
@@ -65,7 +73,7 @@ export class Dragao implements Inimigo {
         const chance: number = Math.random(); // controlar a chance do personagem roubar HP para dar mais dano
         let danoFinal: number;
 
-        if (chance < 0.30) { // 30% de chance de aumentar o dano dele
+        if (chance < 0.40) { // 34% de chance de aumentar o dano dele
 
             this.vida -= 5;
             this.ataque += 8;
@@ -119,11 +127,11 @@ export class Dragao implements Inimigo {
     ║                 INIMIGO                 ║
     ╠═════════════════════════════════════════╣
     ║                                         ║
-    ║ NOME        : ${String(this.nome).padEnd(23)}   ║
-    ║ VIDA        : ${String(this.vida).padEnd(23)}   ║
-    ║ ATAQUE      : ${String(this.ataque).padEnd(23)}   ║
-    ║ DEFESA      : ${String(this.defesa).padEnd(23)}   ║
-    ║ HABILIDADE  : ${String(this.habilidade).padEnd(23)} ║
+    ║ NOME        : ${String(this.nome).padEnd(23)}   
+    ║ VIDA        : ${String(this.vida).padEnd(23)}   
+    ║ ATAQUE      : ${String(this.ataque).padEnd(23)}   
+    ║ DEFESA      : ${String(this.defesa).padEnd(23)}   
+    ║ HABILIDADE  : ${String(this.habilidade).padEnd(23)} 
     ║                                         ║
     ╚═════════════════════════════════════════╝
         `);

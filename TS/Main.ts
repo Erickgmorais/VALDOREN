@@ -14,7 +14,7 @@ import { Necromante } from "./Personagens/Necromante";
 import { Personagem } from "./Personagens/Personagem";
 // import { tocarSom } from "./Auxiliares/sons";
 
-const p1: Berserker = new Berserker('Juliana');
+const p1: Bardo = new Bardo('alouuuuu');
 
 const pocao1: Pocao = new Pocao('Poção de cura', EfeitoPocao.CURA);
 const pocao2: Pocao = new Pocao('Poção de Forca', EfeitoPocao.FORCA);
@@ -22,8 +22,7 @@ const pocao2: Pocao = new Pocao('Poção de Forca', EfeitoPocao.FORCA);
 p1.adicionaInventario(pocao1)
 p1.adicionaInventario(pocao2)
 
-const bicho: Fantasma = new Fantasma();
-
+const bicho: Esqueleto = new Esqueleto();
 
 iniciarConfronto(p1, bicho);
 

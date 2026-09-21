@@ -25,6 +25,13 @@ class Dragao {
     getHabilidade() {
         return this.habilidade;
     }
+    // Método utilizado no inicio do combate em cada confronto
+    fichaHabilidade() {
+        (0, Cores_1.red)(`
+O inimigo que voce ira combater tem o seguinte especial:
+Com uma chande de 40% em cada ataque, ele poderá perder -5 de vida para aumentar seu ataque em +8        
+        `);
+    }
     tomarDano(dano) {
         const defesaAleatoria = Math.floor(Math.random() * (this.defesa + 1)); // defesa aleatória
         // o max me retorna o maior valor entre os dois, se o dano por acaso ficar negativo, o dano será zerado
@@ -48,7 +55,7 @@ class Dragao {
     atacar(personagem) {
         const chance = Math.random(); // controlar a chance do personagem roubar HP para dar mais dano
         let danoFinal;
-        if (chance < 0.30) { // 30% de chance de aumentar o dano dele
+        if (chance < 0.40) { // 34% de chance de aumentar o dano dele
             this.vida -= 5;
             this.ataque += 8;
             danoFinal = Math.floor(Math.random() * this.ataque) + 1; // cálculo aleatório do dado do inimigo
@@ -95,11 +102,11 @@ class Dragao {
     ║                 INIMIGO                 ║
     ╠═════════════════════════════════════════╣
     ║                                         ║
-    ║ NOME        : ${String(this.nome).padEnd(23)}   ║
-    ║ VIDA        : ${String(this.vida).padEnd(23)}   ║
-    ║ ATAQUE      : ${String(this.ataque).padEnd(23)}   ║
-    ║ DEFESA      : ${String(this.defesa).padEnd(23)}   ║
-    ║ HABILIDADE  : ${String(this.habilidade).padEnd(23)} ║
+    ║ NOME        : ${String(this.nome).padEnd(23)}   
+    ║ VIDA        : ${String(this.vida).padEnd(23)}   
+    ║ ATAQUE      : ${String(this.ataque).padEnd(23)}   
+    ║ DEFESA      : ${String(this.defesa).padEnd(23)}   
+    ║ HABILIDADE  : ${String(this.habilidade).padEnd(23)} 
     ║                                         ║
     ╚═════════════════════════════════════════╝
         `);

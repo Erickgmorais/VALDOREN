@@ -29,6 +29,13 @@ export class FadaCorrompida implements Inimigo {
 
     public getHabilidade(): string {
         return this.habilidade
+    }   
+
+    public fichaHabilidade(): void {
+        red(`
+O inimigo que voce ira combater tem o seguinte especial:
+Com uma chance de 60%, esse inimigo podera dar dano duplo.        
+        `)
     }
 
     public tomarDano(dano: number): number {
@@ -124,11 +131,11 @@ export class FadaCorrompida implements Inimigo {
         ║                 INIMIGO                ║
         ╠════════════════════════════════════════╣
         ║                                        ║
-        ║ NOME        : ${this.nome}             ║
-        ║ VIDA        : ${this.vida}             ║
-        ║ ATAQUE      : ${this.ataque}           ║
-        ║ DEFESA      : ${this.defesa}           ║
-        ║ HABILIDADE  : ${this.habilidade}       ║
+        ║ NOME        : ${this.nome}             
+        ║ VIDA        : ${this.vida}             
+        ║ ATAQUE      : ${this.ataque}           
+        ║ DEFESA      : ${this.defesa}           
+        ║ HABILIDADE  : ${this.habilidade}       
         ║                                        ║
         ╚════════════════════════════════════════╝
         `);

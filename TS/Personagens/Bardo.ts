@@ -4,23 +4,25 @@
 import { consoleEspecial } from "../Auxiliares/Auxiliares";
 import { blue } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
+import { Arma } from "../Inventario/Arma";
 import { Personagem } from "./Personagem";
 
 export class Bardo extends Personagem {
 
     constructor(nome: string) {
         super(nome, 'Bardo', 150, 18, 8, 50, 40)
+        this.inventario.push(new Arma('Alaude encantado', 10))
     }
 
     public usarAtaqueEspecial(inimigo: Inimigo): number {
 
-        const danoFinal = this.ataque + 500;
+        const danoFinal = this.ataque + 200;
         
         if (!this.usouAtaqueEspecial) {
             
             consoleEspecial();
             inimigo.tomarDano(danoFinal)
-            blue(`Que a minha melodia desperte o poder que repousa em minha alma! O ATAQUE CAUSOU ${danoFinal} DE DANO!`);
+            blue(`Que a minha melodia desperte o poder que repousa em minha alma! ATAQUE AUMENTADO EM 200!`);
             this.setEspecial() // Seta o especial = true
             return danoFinal;
 
