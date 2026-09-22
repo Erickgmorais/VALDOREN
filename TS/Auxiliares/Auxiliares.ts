@@ -12,7 +12,7 @@ export function stop(): void {
 }
 
 // Método só para nao precisar sempre ficar digitando console.clear para limpar o terminal
-export function clear(): void{
+export function clear(): void {
     console.clear();
 }
 
@@ -31,7 +31,7 @@ export function consoleEspecial(): void {
 }
 
 export function arteInicioConfronto(): void {
-blue(`
+    blue(`
 ----------------------------------------------------------------------------------------------------    
  ███   ███  █   █ █████ ████   ███  █   █ █████  ███     ███ █   █ ███  ███  ███  ███  ████   ███    
 █ ░░░ █ ░░█ ██  █░█░░░░░█░░░█ █ ░░█ ██  █░ ░█░░░█ ░░█     █░░██  █░ █░░█ ░░░  █░░█ ░░█ █░░░█ █ ░░█   
@@ -73,7 +73,7 @@ export function arteVoceMorreu(): void {
 }
 
 export function escolhasCombate(personagem: Personagem): void {
-    if(personagem.getUsouAtaqueEspecial()) {
+    if (personagem.getUsouAtaqueEspecial()) {
         green(`
 =================================
     QUAL A SUA AÇÃO A SEGUIR?
@@ -96,8 +96,8 @@ export function escolhasCombate(personagem: Personagem): void {
 }
 
 export function mostrarInfoCombate(personagem: Personagem, inimigo: Inimigo): void {
-    
-yellow(`
+
+    yellow(`
 ╔═══════════════════════════════════╗     ╔═════════════════════════════════════════╗
 ║            PERSONAGEM             ║     ║                 INIMIGO                 ║
 ╠═══════════════════════════════════╣     ╠═════════════════════════════════════════╣
@@ -138,3 +138,38 @@ Use suas habilidades com estratégia.
         `)
 }
 
+export function lojaMostrarArmaduras(): void {
+    green(`
+ARMADURAS DISPONÍVEIS
+
+1 - Armadura de Couro
+    Defesa: +5
+    Preço: 25 ouro
+
+2 - Cota de Malha
+    Defesa: +10
+    Preço: 50 ouro
+
+3 - Armadura de Aço
+    Defesa: +20
+    Preço: 85 ouro
+
+4 - Voltar    
+    `)
+}
+
+export function lojaMostrarUpArma(): void {
+
+    yellow(`
+    APRIMORAMENTO DA ARMA
+
+    Aumentar o nível da arma
+    Custo: 100 moedas de ouro
+
+    "Uma lâmina bem forjada pode decidir
+    o destino de uma batalha."
+
+    1 - Forjar aprimoramento
+    2 - Voltar ao Menu
+    `)
+}

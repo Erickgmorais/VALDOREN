@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Personagem = void 0;
 const Auxiliares_1 = require("../Auxiliares/Auxiliares");
 const Cores_1 = require("../Auxiliares/Cores");
+const Arma_1 = require("../Inventario/Arma");
 const TiposENUMs_1 = require("../Inventario/TiposENUMs");
 const ask = require('readline-sync');
 class Personagem {
@@ -48,6 +49,9 @@ class Personagem {
     }
     getUsouAtaqueEspecial() {
         return this.usouAtaqueEspecial;
+    }
+    setDefesa(val) {
+        this.defesa += val;
     }
     setVida(val) {
         this.vida += val;
@@ -165,10 +169,16 @@ class Personagem {
                 (0, Cores_1.green)(`- ${item.getNome()}`);
             }
         }
-        (0, Cores_1.green)(`\nARMADURAS E ARMAS:`);
+        (0, Cores_1.green)(`\nARMADURAS:`);
         for (let item of this.inventario) {
-            if (item.getTipo() === 'ARMA' || item.getTipo() === 'ARMADURA') {
+            if (item.getTipo() === 'ARMADURA') {
                 (0, Cores_1.green)(`- ${item.getNome()}`);
+            }
+        }
+        (0, Cores_1.green)(`\nARMAS:`);
+        for (let item of this.inventario) {
+            if (item.getTipo() === 'ARMA' && item instanceof Arma_1.Arma) {
+                (0, Cores_1.green)(`- ${item.getNome()} | Nível ${item.getNivel()}`);
             }
         }
         (0, Cores_1.green)(`\nOUTROS:`);

@@ -10,6 +10,8 @@ exports.arteVoceMorreu = arteVoceMorreu;
 exports.escolhasCombate = escolhasCombate;
 exports.mostrarInfoCombate = mostrarInfoCombate;
 exports.infosConfronto = infosConfronto;
+exports.lojaMostrarArmaduras = lojaMostrarArmaduras;
+exports.lojaMostrarUpArma = lojaMostrarUpArma;
 const Cores_1 = require("./Cores");
 const ask = require('readline-sync');
 exports.logger = console.log;
@@ -133,4 +135,37 @@ Boa sorte, aventureiro!
 Cada confronto pode ser diferente.
 Use suas habilidades com estratégia.
         `);
+}
+function lojaMostrarArmaduras() {
+    (0, Cores_1.green)(`
+ARMADURAS DISPONÍVEIS
+
+1 - Armadura de Couro
+    Defesa: +5
+    Preço: 25 ouro
+
+2 - Cota de Malha
+    Defesa: +10
+    Preço: 50 ouro
+
+3 - Armadura de Aço
+    Defesa: +20
+    Preço: 85 ouro
+
+4 - Voltar    
+    `);
+}
+function lojaMostrarUpArma() {
+    (0, Cores_1.yellow)(`
+    APRIMORAMENTO DA ARMA
+
+    Aumentar o nível da arma
+    Custo: 100 moedas de ouro
+
+    "Uma lâmina bem forjada pode decidir
+    o destino de uma batalha."
+
+    1 - Forjar aprimoramento
+    2 - Voltar ao Menu
+    `);
 }

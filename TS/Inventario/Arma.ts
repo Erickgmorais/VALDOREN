@@ -4,6 +4,7 @@ import { TipoItem } from "./TiposENUMs";
 export class Arma implements Item {
     private nome: string;
     private dano: number;
+    private nivel: number = 1;
     private tipo: TipoItem = TipoItem.ARMA; // Arma índice 4
 
     constructor(nome: string, defesa: number) {
@@ -22,5 +23,13 @@ export class Arma implements Item {
     public getDefesa(): number {
         return this.dano;
     }   
+
+    public getNivel(): number {
+        return this.nivel;
+    }
+
+    public setNivel(): void { // Aumenta o nivel de 1 em 1
+        this.nivel++;
+    } 
 }
 

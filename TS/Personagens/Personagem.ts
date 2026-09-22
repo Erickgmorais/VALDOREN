@@ -2,6 +2,7 @@ import { clear, stop } from "../Auxiliares/Auxiliares";
 import { blue, green, red, yellow } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Item } from "../Interfaces/Item";
+import { Arma } from "../Inventario/Arma";
 import { Pocao } from "../Inventario/Pocao";
 import { EfeitoPocao } from "../Inventario/TiposENUMs";
 
@@ -62,6 +63,10 @@ export abstract class Personagem {
 
     public getUsouAtaqueEspecial(): boolean {
         return this.usouAtaqueEspecial;
+    }
+
+    public setDefesa(val: number): void {
+        this.defesa += val;
     }
 
     public setVida(val: number): void {
@@ -220,11 +225,18 @@ export abstract class Personagem {
             }
         }
 
-        green(`\nARMADURAS E ARMAS:`)
+        green(`\nARMADURAS:`)
         for (let item of this.inventario) {
-            if (item.getTipo() === 'ARMA' || item.getTipo() === 'ARMADURA') {
+            if (item.getTipo() === 'ARMADURA') {
                 green(`- ${item.getNome()}`)
 
+            }
+        }
+
+        green(`\nARMAS:`)
+        for (let item of this.inventario) {
+            if (item.getTipo() === 'ARMA' && item instanceof Arma) {
+                green(`- ${item.getNome()} | Nível ${item.getNivel()}`);
             }
         }
 

@@ -5,6 +5,7 @@ const TiposENUMs_1 = require("./TiposENUMs");
 class Arma {
     nome;
     dano;
+    nivel = 1;
     tipo = TiposENUMs_1.TipoItem.ARMA; // Arma índice 4
     constructor(nome, defesa) {
         this.nome = nome;
@@ -18,6 +19,12 @@ class Arma {
     }
     getDefesa() {
         return this.dano;
+    }
+    getNivel() {
+        return this.nivel;
+    }
+    setNivel() {
+        this.nivel++;
     }
 }
 exports.Arma = Arma;

@@ -5,6 +5,7 @@ import { Dragao } from "./Inimigos/Dragao";
 import { Esqueleto } from "./Inimigos/Esqueleto";
 import { FadaCorrompida } from "./Inimigos/FadaCorrompida";
 import { Fantasma } from "./Inimigos/Fantasma";
+import { loja } from "./Inventario/Loja";
 import { Pocao } from "./Inventario/Pocao";
 
 import { EfeitoPocao } from "./Inventario/TiposENUMs";
@@ -19,12 +20,16 @@ const p1: Bardo = new Bardo('alouuuuu');
 const pocao1: Pocao = new Pocao('Poção de cura', EfeitoPocao.CURA);
 const pocao2: Pocao = new Pocao('Poção de Forca', EfeitoPocao.FORCA);
 
-p1.adicionaInventario(pocao1)
-p1.adicionaInventario(pocao2)
+// p1.mostrarInventario();
 
-const bicho: Esqueleto = new Esqueleto();
+loja(p1);
 
-iniciarConfronto(p1, bicho);
+// p1.adicionaInventario(pocao1)
+// p1.adicionaInventario(pocao2)
+
+// const bicho: Esqueleto = new Esqueleto();
+
+// iniciarConfronto(p1, bicho);
 
 
 
