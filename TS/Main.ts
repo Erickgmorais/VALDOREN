@@ -17,12 +17,16 @@ import { Personagem } from "./Personagens/Personagem";
 
 const p1: Bardo = new Bardo('alouuuuu');
 
-const pocao1: Pocao = new Pocao('Poção de cura', EfeitoPocao.CURA);
-const pocao2: Pocao = new Pocao('Poção de Forca', EfeitoPocao.FORCA);
+const pocao1: Pocao = new Pocao('Poção de cura', 10, EfeitoPocao.CURA);
+const pocao2: Pocao = new Pocao('Poção de Forca', 10, EfeitoPocao.FORCA);
 
 // p1.mostrarInventario();
+p1.setOuro(300);
+
 
 loja(p1);
+
+p1.mostrarInventario()
 
 // p1.adicionaInventario(pocao1)
 // p1.adicionaInventario(pocao2)

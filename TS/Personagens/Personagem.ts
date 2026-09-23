@@ -61,6 +61,10 @@ export abstract class Personagem {
         return this.moeda;
     }
 
+    public getInventario(): Item[] {
+        return this.inventario;
+    }
+
     public getUsouAtaqueEspecial(): boolean {
         return this.usouAtaqueEspecial;
     }
@@ -111,6 +115,7 @@ export abstract class Personagem {
     // método que será implementado em cada classe de uma maneira
     abstract usarAtaqueEspecial(inimigo: Inimigo): number;
 
+    
     // Métodos de combate
     public tomarDano(dano: number): number {
 
@@ -144,6 +149,11 @@ export abstract class Personagem {
     // -- -------------------------------------- --
     // -- controle de inventário dos personagens --
 
+    // método para fazer uma verificação para não comprar mais de uma vez a mesma armadura na loja
+    public possuiItem(nome: string): boolean {
+        return this.inventario.some(item => item.getNome() === nome);
+    }
+
     public adicionaInventario(item: Item): void {
         this.inventario.push(item)
     }
@@ -160,13 +170,13 @@ export abstract class Personagem {
 
     public tomarPocao(pocao: Pocao): void {
         if (pocao.getEfeito() === EfeitoPocao.CURA) { // CURA = 0
-            this.setVida(35);
-            blue('Vida recuperada em 35!');
+            this.setVida(pocao.getValorEfeito());
+            blue(`Vida recuperada em ${pocao.getValorEfeito()} do seu personagem!`);
             stop()
 
         } else if (pocao.getEfeito() === EfeitoPocao.FORCA) { // FORÇA = 1
-            this.setAtaque(20);
-            blue('Ataque aumentado em 20 do seu personagem!');
+            this.setAtaque(pocao.getValorEfeito());
+            blue(`Ataque aumentado em ${pocao.getValorEfeito()} do seu personagem!`);
             stop();
 
         }
@@ -220,8 +230,8 @@ export abstract class Personagem {
 
         green(`POÇOES:`)
         for (let item of this.inventario) {
-            if (item.getTipo() === 'POCAO') {
-                green(`- ${item.getNome()}`)
+            if (item.getTipo() === 'POCAO' && item instanceof Pocao) {
+                green(`- ${item.getNome()} | Efeito: +${item.getValorEfeito()}`);
             }
         }
 

@@ -1,3 +1,4 @@
+import { red } from "../Auxiliares/Cores";
 import { Item } from "../Interfaces/Item";
 import { TipoItem } from "./TiposENUMs";
 
@@ -29,7 +30,13 @@ export class Arma implements Item {
     }
 
     public setNivel(): void { // Aumenta o nivel de 1 em 1
-        this.nivel++;
+        if(this.nivel < 5){
+            this.nivel++;
+
+        } else {
+            red(`Sua arma já está no nível máximo!`);
+            stop();
+        }
     } 
 }
 

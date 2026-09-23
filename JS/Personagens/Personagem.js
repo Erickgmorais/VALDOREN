@@ -4,6 +4,7 @@ exports.Personagem = void 0;
 const Auxiliares_1 = require("../Auxiliares/Auxiliares");
 const Cores_1 = require("../Auxiliares/Cores");
 const Arma_1 = require("../Inventario/Arma");
+const Pocao_1 = require("../Inventario/Pocao");
 const TiposENUMs_1 = require("../Inventario/TiposENUMs");
 const ask = require('readline-sync');
 class Personagem {
@@ -46,6 +47,9 @@ class Personagem {
     }
     getTemMoeda() {
         return this.moeda;
+    }
+    getInventario() {
+        return this.inventario;
     }
     getUsouAtaqueEspecial() {
         return this.usouAtaqueEspecial;
@@ -109,6 +113,10 @@ class Personagem {
     }
     // -- -------------------------------------- --
     // -- controle de inventário dos personagens --
+    // método para fazer uma verificação para não comprar mais de uma vez a mesma armadura na loja
+    possuiItem(nome) {
+        return this.inventario.some(item => item.getNome() === nome);
+    }
     adicionaInventario(item) {
         this.inventario.push(item);
     }
@@ -120,13 +128,13 @@ class Personagem {
     }
     tomarPocao(pocao) {
         if (pocao.getEfeito() === TiposENUMs_1.EfeitoPocao.CURA) { // CURA = 0
-            this.setVida(35);
-            (0, Cores_1.blue)('Vida recuperada em 35!');
+            this.setVida(pocao.getValorEfeito());
+            (0, Cores_1.blue)(`Vida recuperada em ${pocao.getValorEfeito()} do seu personagem!`);
             (0, Auxiliares_1.stop)();
         }
         else if (pocao.getEfeito() === TiposENUMs_1.EfeitoPocao.FORCA) { // FORÇA = 1
-            this.setAtaque(20);
-            (0, Cores_1.blue)('Ataque aumentado em 20 do seu personagem!');
+            this.setAtaque(pocao.getValorEfeito());
+            (0, Cores_1.blue)(`Ataque aumentado em ${pocao.getValorEfeito()} do seu personagem!`);
             (0, Auxiliares_1.stop)();
         }
         const indice = this.inventario.indexOf(pocao);
@@ -165,8 +173,8 @@ class Personagem {
  `);
         (0, Cores_1.green)(`POÇOES:`);
         for (let item of this.inventario) {
-            if (item.getTipo() === 'POCAO') {
-                (0, Cores_1.green)(`- ${item.getNome()}`);
+            if (item.getTipo() === 'POCAO' && item instanceof Pocao_1.Pocao) {
+                (0, Cores_1.green)(`- ${item.getNome()} | Efeito: +${item.getValorEfeito()}`);
             }
         }
         (0, Cores_1.green)(`\nARMADURAS:`);

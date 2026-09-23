@@ -12,6 +12,7 @@ exports.mostrarInfoCombate = mostrarInfoCombate;
 exports.infosConfronto = infosConfronto;
 exports.lojaMostrarArmaduras = lojaMostrarArmaduras;
 exports.lojaMostrarUpArma = lojaMostrarUpArma;
+exports.lojaMostrarPocoes = lojaMostrarPocoes;
 const Cores_1 = require("./Cores");
 const ask = require('readline-sync');
 exports.logger = console.log;
@@ -168,4 +169,32 @@ function lojaMostrarUpArma() {
     1 - Forjar aprimoramento
     2 - Voltar ao Menu
     `);
+}
+function lojaMostrarPocoes() {
+    (0, Cores_1.yellow)(`
+        POÇÕES DE CURA
+
+        1 - Poção de Cura Menor
+            Restaura 10 de vida
+            Preço: 50 moedas de ouro
+
+        2 - Elixir de Cura Maior
+            Restaura 20 de vida
+            Preço: 100 moedas de ouro
+
+        POÇÕES DE FORÇA
+
+        3 - Elixir de Força Menor
+            Aumenta 10 de ataque
+            Preço: 75 moedas de ouro
+
+        4 - Elixir de Força Maior
+            Aumenta 15 de ataque
+            Preço: 125 moedas de ouro
+
+        ──────────────────────────────────────────
+
+        5 - Retornar
+        
+        `);
 }

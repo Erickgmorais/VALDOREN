@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Arma = void 0;
+const Cores_1 = require("../Auxiliares/Cores");
 const TiposENUMs_1 = require("./TiposENUMs");
 class Arma {
     nome;
@@ -24,7 +25,13 @@ class Arma {
         return this.nivel;
     }
     setNivel() {
-        this.nivel++;
+        if (this.nivel < 5) {
+            this.nivel++;
+        }
+        else {
+            (0, Cores_1.red)(`Sua arma já está no nível máximo!`);
+            stop();
+        }
     }
 }
 exports.Arma = Arma;

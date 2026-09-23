@@ -9,10 +9,15 @@ const TiposENUMs_1 = require("./TiposENUMs");
 class Pocao {
     nome;
     tipo = TiposENUMs_1.TipoItem.POCAO; // Pocao indice 0
+    valorEfeito;
     efeito; // Efeito vamos colocar na hora de criarmos o objeto (VIDA OU CURA) e vamos passar por parametro na criação
-    constructor(nome, efeito) {
+    constructor(nome, valorEfeito, efeito) {
         this.nome = nome;
         this.efeito = efeito;
+        this.valorEfeito = valorEfeito;
+    }
+    getValorEfeito() {
+        return this.valorEfeito;
     }
     getNome() {
         return this.nome;
