@@ -2,7 +2,7 @@ import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "../Personagens/Personagem";
 import { blue, green, purple, red, yellow } from "./Cores";
 
-const ask = require('readline-sync')
+export const ask = require('readline-sync');
 
 export const logger = console.log;
 
@@ -201,4 +201,27 @@ export function lojaMostrarPocoes(): void {
         5 - Retornar
         
         `);
+}
+
+// Método para demorar para escrever cada palavra no terminal para controlar falas (Feito por IA)
+export async function falaPersonagem(texto: string): Promise<void> {
+
+    for (const letra of texto) {
+        process.stdout.write(`\x1b[32m${letra}\x1b[0m`);
+
+        await new Promise(resolve => setTimeout(resolve, 50));
+    }
+
+    console.log();
+}
+
+export async function falaFigurante(texto: string): Promise<void> {
+
+    for (const letra of texto) {
+        process.stdout.write(`\x1b[35m${letra}\x1b[0m`);
+
+        await new Promise(resolve => setTimeout(resolve, 50));
+    }
+
+    console.log();
 }

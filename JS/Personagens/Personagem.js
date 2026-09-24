@@ -51,6 +51,9 @@ class Personagem {
     getInventario() {
         return this.inventario;
     }
+    getReputacao() {
+        return this.reputacao;
+    }
     getUsouAtaqueEspecial() {
         return this.usouAtaqueEspecial;
     }
@@ -69,6 +72,13 @@ class Personagem {
     }
     getItens() {
         return this.inventario;
+    }
+    pagarOuro(val) {
+        if (val > this.ouro) {
+            return false;
+        }
+        this.ouro -= val;
+        return true;
     }
     // Método possui uma validação para que, se o valor for neg\pos, vai mostrar mensagens diferentes no terminal para o jogador.
     setReputacao(val) {

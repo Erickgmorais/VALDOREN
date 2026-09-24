@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logger = void 0;
+exports.logger = exports.ask = void 0;
 exports.stop = stop;
 exports.clear = clear;
 exports.consoleEspecial = consoleEspecial;
@@ -13,12 +13,14 @@ exports.infosConfronto = infosConfronto;
 exports.lojaMostrarArmaduras = lojaMostrarArmaduras;
 exports.lojaMostrarUpArma = lojaMostrarUpArma;
 exports.lojaMostrarPocoes = lojaMostrarPocoes;
+exports.falaPersonagem = falaPersonagem;
+exports.falaFigurante = falaFigurante;
 const Cores_1 = require("./Cores");
-const ask = require('readline-sync');
+exports.ask = require('readline-sync');
 exports.logger = console.log;
 // Método para stopar a execução no terminal (Em roxo)
 function stop() {
-    ask.question('\x1b[35mPressione ENTER para continuar...\x1b[0m');
+    exports.ask.question('\x1b[35mPressione ENTER para continuar...\x1b[0m');
 }
 // Método só para nao precisar sempre ficar digitando console.clear para limpar o terminal
 function clear() {
@@ -197,4 +199,19 @@ function lojaMostrarPocoes() {
         5 - Retornar
         
         `);
+}
+// Método para demorar para escrever cada palavra no terminal para controlar falas (Feito por IA)
+async function falaPersonagem(texto) {
+    for (const letra of texto) {
+        process.stdout.write(`\x1b[32m${letra}\x1b[0m`);
+        await new Promise(resolve => setTimeout(resolve, 50));
+    }
+    console.log();
+}
+async function falaFigurante(texto) {
+    for (const letra of texto) {
+        process.stdout.write(`\x1b[35m${letra}\x1b[0m`);
+        await new Promise(resolve => setTimeout(resolve, 50));
+    }
+    console.log();
 }

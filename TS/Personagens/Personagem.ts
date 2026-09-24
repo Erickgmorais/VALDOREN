@@ -65,6 +65,10 @@ export abstract class Personagem {
         return this.inventario;
     }
 
+    public getReputacao(): number {
+        return this.reputacao
+    }
+
     public getUsouAtaqueEspecial(): boolean {
         return this.usouAtaqueEspecial;
     }
@@ -88,6 +92,14 @@ export abstract class Personagem {
 
     public getItens(): Item[] {
         return this.inventario
+    }
+
+    public pagarOuro(val: number): boolean {
+        if(val > this.ouro) {
+            return false
+        }
+        this.ouro -= val
+        return true;
     }
 
     // Método possui uma validação para que, se o valor for neg\pos, vai mostrar mensagens diferentes no terminal para o jogador.
