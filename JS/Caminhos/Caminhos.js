@@ -203,7 +203,7 @@ exports.parte2 = parte2;
 ////Caso personagem escolha ACEITA AJUDA DE UM GUIA LOCAL
 const caminho1Pt2 = (personagem, inimigo) => {
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nUm jovem chamado Tom se aproxima, oferecendo seus servicos como guia.' +
+    (0, Cores_1.cyan)('\nTom se aproxima, oferecendo seus servicos como guia.' +
         '\nEle conhece entradas esquecidas nas catacumbas, mas quer saber como' +
         '\nsera pago.');
     while (true) {
@@ -222,7 +222,7 @@ const caminho1Pt2 = (personagem, inimigo) => {
                     (0, Cores_1.cyan)('\nVoce paga Tom adiantado. Satisfeito, ele se compromete a guia-lo ate' +
                         '\no fim, sem hesitar.');
                     personagem.setReputacao(5);
-                    (0, Cores_1.white)('\n(-10 de ouro, +5 de reputacao)');
+                    (0, Cores_1.white)('\n(-10 de ouro)');
                     (0, Auxiliares_1.stop)();
                 }
                 else {
@@ -246,30 +246,29 @@ const caminho1Pt2 = (personagem, inimigo) => {
     }
     // A traicao de Tom
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nTom, o guia, passa passagens estreitas e pouco iluminadas, desviando dos' +
+    (0, Cores_1.cyan)('\nVoce e tom saem do bordel juntos e vão ao sentido a uma catacumba' +
+        '\nTom, o guia, passa passagens estreitas e pouco iluminadas no trajeto, desviando dos' +
         '\nguardas da cidade com uma facilidade suspeita - ele conhece esses' +
         '\ncaminhos bem demais para alguem que apenas "ouviu falar" das catacumbas.' +
-        '\n\nNo meio do trajeto, ele para de repente diante de uma camara empoeirada.');
+        '\n\nNo meio do trajeto, ele para de repente diante de uma camara empoeirada no inicio da floresta.');
     (0, Auxiliares_1.stop)();
     (0, Auxiliares_1.clear)();
     (0, Cores_1.cyan)('\n- "Desculpe por isso" - diz Tom, dando um passo para tras. - "Alguem' +
-        '\npaga muito mais do que voce por essa moeda... e por qualquer coisa que' +
-        '\nte atrapalhe no caminho."' +
+        '\npaga muito mais do que voce por esse trajeto...' +
         '\n\nAntes que voce possa reagir, ele bate duas vezes na parede de pedra.' +
         '\nUm estalo seco ecoa entre os ossos empilhados ao redor da camara - e um' +
         '\ndeles comeca a se mover. Um esqueleto se ergue das sombras, guiado por' +
         '\numa vontade que nao e mais a sua.' +
         '\n\nTom desaparece corredor afora, deixando voce sozinho com a criatura.');
     personagem.setReputacao(-5);
-    (0, Cores_1.white)('\n(-5 de reputacao: Ravenfall sabera que voce foi enganado com facilidade)');
+    (0, Cores_1.white)('\n(Ravenfall sabera que voce foi enganado com facilidade)');
     (0, Auxiliares_1.stop)();
     //Combate aqui.
     (0, Confronto_1.iniciarConfronto)(personagem, inimigo);
     (0, Auxiliares_1.clear)();
     (0, Cores_1.cyan)('\nO combate e dificil, mas voce consegue destruir o esqueleto, que desaba' +
         '\nem um monte de ossos inertes no chao. Ofegante, voce entende agora que' +
-        '\nnem toda ajuda em Ravenfall pode ser ingenua - e que Tom sabia mais' +
-        '\nsobre a moeda do que aparentava.');
+        '\nnem toda ajuda em Ravenfall pode ser ingenua.');
     (0, Auxiliares_1.stop)();
     (0, Auxiliares_1.clear)();
     (0, Cores_1.cyan)('\nAinda tremulo pelo combate contra o esqueleto, voce segue sozinho pelo' +

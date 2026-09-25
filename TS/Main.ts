@@ -6,12 +6,11 @@ import { Fantasma } from "./Inimigos/Fantasma";
 import { Bardo } from "./Personagens/Bardo";
 import { criaPersonagem } from "./Personagens/CriaPersonagem";
 
-// let personagem = criaPersonagem();
-let personagem: Bardo = new Bardo('Caveira das trevas')
+let personagem = criaPersonagem();
 
-// clear()
-// arteInfoJogo();
-// stop();
+clear()
+arteInfoJogo();
+stop();
 
 let fada: Fantasma = new Fantasma()
 

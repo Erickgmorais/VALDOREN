@@ -262,7 +262,7 @@ export const parte2 = (personagem: Personagem) => {
 export const caminho1Pt2 = (personagem: Personagem, inimigo: Inimigo) => {
     clear();
     cyan(
-    '\nUm jovem chamado Tom se aproxima, oferecendo seus servicos como guia.' +
+    '\nTom se aproxima, oferecendo seus servicos como guia.' +
     '\nEle conhece entradas esquecidas nas catacumbas, mas quer saber como' +
     '\nsera pago.');
 
@@ -289,7 +289,7 @@ export const caminho1Pt2 = (personagem: Personagem, inimigo: Inimigo) => {
                     '\no fim, sem hesitar.');
 
                     personagem.setReputacao(5);
-                    white('\n(-10 de ouro, +5 de reputacao)');
+                    white('\n(-10 de ouro)');
                     stop();
 
                 } else {
@@ -320,18 +320,18 @@ export const caminho1Pt2 = (personagem: Personagem, inimigo: Inimigo) => {
     // A traicao de Tom
     clear();
     cyan(
-    '\nTom, o guia, passa passagens estreitas e pouco iluminadas, desviando dos' +
+    '\nVoce e tom saem do bordel juntos e vão ao sentido a uma catacumba' +
+    '\nTom, o guia, passa passagens estreitas e pouco iluminadas no trajeto, desviando dos' +
     '\nguardas da cidade com uma facilidade suspeita - ele conhece esses' +
     '\ncaminhos bem demais para alguem que apenas "ouviu falar" das catacumbas.' +
 
-    '\n\nNo meio do trajeto, ele para de repente diante de uma camara empoeirada.');
+    '\n\nNo meio do trajeto, ele para de repente diante de uma camara empoeirada no inicio da floresta.');
     stop();
 
     clear();
     cyan(
     '\n- "Desculpe por isso" - diz Tom, dando um passo para tras. - "Alguem' +
-    '\npaga muito mais do que voce por essa moeda... e por qualquer coisa que' +
-    '\nte atrapalhe no caminho."' +
+    '\npaga muito mais do que voce por esse trajeto...' +
 
     '\n\nAntes que voce possa reagir, ele bate duas vezes na parede de pedra.' +
     '\nUm estalo seco ecoa entre os ossos empilhados ao redor da camara - e um' +
@@ -340,7 +340,7 @@ export const caminho1Pt2 = (personagem: Personagem, inimigo: Inimigo) => {
 
     '\n\nTom desaparece corredor afora, deixando voce sozinho com a criatura.');
     personagem.setReputacao(-5);
-    white('\n(-5 de reputacao: Ravenfall sabera que voce foi enganado com facilidade)');
+    white('\n(Ravenfall sabera que voce foi enganado com facilidade)');
     stop();
 
     //Combate aqui.
@@ -350,8 +350,7 @@ export const caminho1Pt2 = (personagem: Personagem, inimigo: Inimigo) => {
     cyan(
     '\nO combate e dificil, mas voce consegue destruir o esqueleto, que desaba' +
     '\nem um monte de ossos inertes no chao. Ofegante, voce entende agora que' +
-    '\nnem toda ajuda em Ravenfall pode ser ingenua - e que Tom sabia mais' +
-    '\nsobre a moeda do que aparentava.');
+    '\nnem toda ajuda em Ravenfall pode ser ingenua.');
     stop();
 
     clear();
