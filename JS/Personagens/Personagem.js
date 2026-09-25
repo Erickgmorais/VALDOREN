@@ -84,10 +84,10 @@ class Personagem {
     setReputacao(val) {
         this.reputacao += val;
         if (val > 0) {
-            (0, Cores_1.blue)(`Seu personagem ganhou ${val} de reputacao! Isso ira te trazer consequencias futuro da sua jornada`);
+            (0, Cores_1.green)(`Seu personagem ganhou ${val} de reputacao! Isso ira te trazer consequencias no futuro da sua jornada\n`);
         }
         else {
-            (0, Cores_1.red)(`Seu personagem perdeu ${val} de reputacao! Isso ira te trazer consequencias futuro da sua jornada`);
+            (0, Cores_1.red)(`Seu personagem perdeu ${val} de reputacao! Isso ira te trazer consequencias no futuro da sua jornada\n`);
         }
     }
     // método para setar que o jogador já usou o ataque especial

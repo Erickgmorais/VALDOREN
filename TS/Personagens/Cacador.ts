@@ -9,7 +9,7 @@ import { Personagem } from "./Personagem";
 export class Cacador extends Personagem {
 
     constructor(nome: string) {
-        super(nome, 'Cacador', 120, 25, 5, 20, 15)
+        super(nome, 'Cacador', 120, 25, 5, 100, 15)
         this.inventario.push(new Arma('Arco Elfico', 10))
     }
 

@@ -1,5 +1,5 @@
 import { ask, clear, stop } from "../Auxiliares/Auxiliares";
-import { blue, cyan, red, white } from "../Auxiliares/Cores";
+import { blue, cyan, green, purple, red, white } from "../Auxiliares/Cores";
 import { Bardo } from "../Personagens/Bardo";
 import { Personagem } from "../Personagens/Personagem"
 import { Inimigo } from "../Interfaces/Inimigo";
@@ -28,15 +28,14 @@ let controle: boolean = false
 export const inicio = (personagem: Personagem): void => {
     clear();
     cyan(
-    '\nA Chegada a Ravenfall.' +
+    '\nA Chegada a Ravenfall.\n' +
 
     '\nVoce chega a Ravenfall ao anoitecer, com a poeira da estrada ainda nas botas.' +
-    '\nNo caminho ate a entrada da cidade, seu pe esbarra em algo enterrado na terra' +
+    '\nNo caminho ate a entrada da cidade, seu pé esbarra em algo enterrado na terra' +
     '\nsolta a beira da estrada. Voce se abaixa e encontra uma moeda antiga, desgastada,' +
     '\ncom um simbolo estranho gravado em uma das faces — parecido com os relatos' + 
     '\nque voce ouviu sobre as Catacumbas de Valdoren.\n' +
-    '\nEla parece nao ter valor nenhum como dinheiro. Talvez seja só uma velha moeda' +
-    '\nsem serventia. Ou talvez nao.');
+    '\nEla parece nao ter valor nenhum como dinheiro. Talvez seja só uma velha moeda');
     
     while(true) {
         const escolhaMoeda: number = Number(ask.question(blue(
@@ -54,12 +53,12 @@ export const inicio = (personagem: Personagem): void => {
 
         switch(escolhaMoeda) {
             case 1:
-                personagem.pegarMoeda()
+                personagem.pegarMoeda();
                 clear();
                 cyan(
                 '\nVoce guarda a moeda no bolso. Ela esta gelada ao toque, mesmo depois' +
                 '\nde minutos carregando-a. Voce nao sabe explicar por que, mas sente que' +
-                '\nfez a escolha certa.');             
+                '\nfez a escolha certa.\n');             
                 stop();
                 parte1(personagem);
                 break;
@@ -70,7 +69,7 @@ export const inicio = (personagem: Personagem): void => {
                 cyan(
                 '\nVoce da de ombros e chuta a moeda de volta para a terra. Provavelmente' +
                 '\ne só mais um pedaco de metal sem valor. Voce segue em frente sem' + 
-                '\nolhar para tras.');             
+                '\nolhar para tras.\n');             
                 stop();
                 parte1(personagem);
                 break;
@@ -88,14 +87,18 @@ export const inicio = (personagem: Personagem): void => {
 export const parte1 = (personagem: Personagem): void => {
     clear();
     cyan(
+`As ruas de Ravenfall estao quase vazias – portas trancadas cedo, olhares
+desconfiados nas janelas. No centro da praca, um sino distante ainda ecoa
+em sua memória, embora tenha parado de tocar ha tres dias. 
+Voce ve um mapa rasgado e esfarrapado voando em meio as casas na cidade e vai até ele e o pega.
+    
+Neste mapa, há um nome escrito na borda
 
-    '\nAs ruas de Ravenfall estao quase vazias – portas trancadas cedo, olhares' +
-    '\ndesconfiados nas janelas. No centro da praca, um sino distante ainda ecoa' +
-    '\nem sua memoria, embora tenha parado de tocar ha tres dias. ' + 
-    '\nUm mercador nervoso lhe entrega um mapa rasgado e some numa viela antes' +
-    '\nque voce possa fazer perguntas.\n' +
+"Se estiver em perigo, me procure. Ass. Mestre Averic"
+    
+Além disso, há um caminho traçado em vermelho no mapa que vai até a 'Taverna do Corvo cinza'
 
-    '\nVoce precisa decidir por onde comecar.');
+Voce precisa decidir por onde comecar.`);
 
     while (true) {
         const escolhaParte1: number = Number(ask.question(blue(
@@ -113,11 +116,11 @@ export const parte1 = (personagem: Personagem): void => {
 
         switch (escolhaParte1) {
             case 1:
-                caminho1Pt1(personagem);
+                caminho1Pt1(personagem); // ir pra taberna
                 break;
 
             case 2:
-                caminho2Pt1(personagem);
+                caminho2Pt1(personagem); // procurar o tal mestre Averic
                 break;
             
             case 3: 
@@ -133,24 +136,28 @@ export const parte1 = (personagem: Personagem): void => {
 export const caminho1Pt1 = (personagem: Personagem) => {
     clear();
     cyan(
-    
-    '\nVoce entra na Taverna do Corvo Cinza em busca de informacoes.' +
+    '\nVoce inicia o trajeto até a taverna do Corvo. Voce fica tranquilo' +
+    '\nporque é perto da entrada da cidade onde tudo começou.\n' +
+    '\nVoce entra na Taverna do Corvo Cinza em busca de informacoes' +
+    '\nsobre o que ouve desde a infancia: O mistério de Valdoren, o motivo de voce ter ido até' +
+    '\na cidade de Ravenfall.\n' +
+    '\nVoce senta no balcão e começa a beber um pouco para relaxar após a viagem árdua.' +
     '\nEntre risadas e bebedeira, voce acaba se envolvendo em uma discussao boba' +
-    '\ncom um bebado, que espalha pela cidade que voce e "mais um forasteiro' +
-    '\nmetido a besta".' );
+    '\ncom um bebado, que espalha pela cidade que voce é "mais um forasteiro' +
+    '\nmetido a besta".\n' );
+
     personagem.setReputacao(-5);
-    white(
-    '\nSua fama em Ravenfall piorou um pouco. (-5 de reputacao)');
     stop();
 
     clear();
     cyan(
     
     '\nMesmo assim, entre uma rodada e outra, voce ouve historias contraditorias:' +
-    '\nuns dizem que um culto quer reabrir um antigo selo; outros juram que os' + 
-    '\nmortos de Eryndor estao voltando. Um velho cacador, bebado o suficiente' +
+    '\nuns dizem que um culto quer reabrir um antigo selo de Valdoren; outros juram que os' + 
+    '\nmortos de Eryndor estao voltando. Um velho caçador, bebado o suficiente' +
     '\npara nao mentir, murmura que viu "algo com muitos olhos" saindo das' +
-    '\ncatacumbas.');
+    '\ncatacumbas.\n');
+
     stop();
     parte2(personagem);
 
@@ -160,23 +167,52 @@ export const caminho1Pt1 = (personagem: Personagem) => {
 export const caminho2Pt1 = (personagem: Personagem) => {
     clear();
     cyan(
+    '\nVoce vai a procura do Mestre Averic, após ficar curioso de quem seria ele.\n' +
+    'Você avista um pequeno comércio de carnes aberto no centro da cidade,\n' +
+    'com o vendedor no balcão afiando sua faca.\n' +
 
-    '\nVoce procura Mestre Averic, como indicava a carta.' +
+    'Ao entrar no estabelecimento, pergunta ao comerciante:\n');
+    stop();
+
+    clear();
+    green(`${personagem.getNome()}: Olá! Cheguei na cidade agora após uma viagem cansativa, você tem alguma bebida forte?`)
+    cyan(`Comerciante: Tenho uma dose de cachaça. Serve?\n`);
+    stop();
+
+    clear();
+    cyan(`
+    Você aceita e ele lhe serve a bebida. Você começa a conversar com o comerciante e 
+    questiona se, por acaso, ele conhece um tal de Mestre Averic. 
+    Ele lhe responde que sim, normalmente, ele vai ao bordel no final da rua 7 e
+    veste um chapéu verde musgo e fuma churuto.
+
+    Você agradece a ele e sai do comércio e verifica no mapa se há algum caminho 
+    para a rua 7 e, segue viagem\n`);
+
+    stop();
+    clear();
+
+    cyan(
+    '\nAo chegar ao bórdel, logo ao entrar, voce avista um homem muito parecido com o retrato' +
+    '\nque o comerciante falou sentado em uma mesa, sozinho, bebendo uma cerveja.' +
     '\nEle o recebe com respeito, reconhecendo sua disposicao em ajudar Ravenfall' +
     '\nem um momento tao delicado. Aos poucos, boatos sobre um forasteiro' +
-    '\nconfiavel comecam a circular.');
+    '\nconfiavel comecam a circular.\n');
     personagem.setReputacao(10);
-    personagem.setOuro(10);
-    white(
-    '\nSua reputacao em Ravenfall melhorou! (+10 de reputacao, +10 de ouro)');
     stop();
 
     clear();
     cyan(
     '\nAveric confirma que foi ele quem pagou pela sua vinda. Ha seculos, os' +
     '\nantigos reis de Valdoren selaram algo nas Catacumbas de Valdoren, e agora' +
-    '\nalguem esta tentando abrir esse selo. Ele lhe entrega uma chave de ferro' +
-    '\nenferrujada.');
+    '\nalguem esta tentando abrir esse selo.');
+
+    cyan(
+    '\nUm homem alto chamado Tom, misterioso e com uma barba por fazer, ' +
+    '\nque estava ouvindo a conversa na mesa de tras, te diz que se você quiser,' +
+    '\npode te ajudar a encontrar as terras de Valdoren,' + 
+    '\nmas que iria cobrar um preço para isso acontecer\n');
+
     stop();
     parte2(personagem);
 
@@ -192,7 +228,7 @@ export const parte2 = (personagem: Personagem) => {
     while(true) {
         const escolhaParte2: number = Number(ask.question(blue(
 
-        '\n1- Aceitar ajuda de um guia local (Toma)' +
+        '\n1- Aceitar ajuda de um guia local (Tom)' +
         '\n2- Ir sozinho' +
         '\n3- Sair do game' +
 
@@ -216,6 +252,7 @@ export const parte2 = (personagem: Personagem) => {
                 white('Saindo...');
                 process.exit();
                 
+
         }
         break;
     }
@@ -225,30 +262,30 @@ export const parte2 = (personagem: Personagem) => {
 export const caminho1Pt2 = (personagem: Personagem, inimigo: Inimigo) => {
     clear();
     cyan(
-    '\nUm jovem chamado Toma se aproxima, oferecendo seus servicos como guia.' +
+    '\nUm jovem chamado Tom se aproxima, oferecendo seus servicos como guia.' +
     '\nEle conhece entradas esquecidas nas catacumbas, mas quer saber como' +
     '\nsera pago.');
 
     while (true) {
-        const escolhaToma: number = Number(ask.question(blue(
+        const escolhaTom: number = Number(ask.question(blue(
 
-        '\n1- Pagar Toma adiantado (10 de ouro)' +
+        '\n1- Pagar Tom adiantado (10 de ouro)' +
         '\n2- Prometer pagamento depois' +
         '\n3- Sair do game' +
 
         '\nEscolha: ')));
 
-        if (escolhaToma < 1 || escolhaToma > 3) {
+        if (escolhaTom < 1 || escolhaTom > 3) {
             red('Opcao invalida!');
             continue;
         }
 
-        switch(escolhaToma) {
+        switch(escolhaTom) {
             case 1:
                 if(personagem.pagarOuro(10)) {
                     clear();
                     cyan(
-                    '\nVoce paga Toma adiantado. Satisfeito, ele se compromete a guia-lo ate' +
+                    '\nVoce paga Tom adiantado. Satisfeito, ele se compromete a guia-lo ate' +
                     '\no fim, sem hesitar.');
 
                     personagem.setReputacao(5);
@@ -258,7 +295,7 @@ export const caminho1Pt2 = (personagem: Personagem, inimigo: Inimigo) => {
                 } else {
                     clear();
                     cyan(
-                    '\nVoce tenta pagar Toma, mas nao tem ouro suficiente. Ele franze a testa,' +
+                    '\nVoce tenta pagar Tom, mas nao tem ouro suficiente. Ele franze a testa,' +
                     '\ndesconfiado, mas aceita guia-lo mesmo assim, sem receber nada agora.');
                     stop();
                 }
@@ -267,7 +304,7 @@ export const caminho1Pt2 = (personagem: Personagem, inimigo: Inimigo) => {
             case 2:
                 clear();
                 cyan(
-                '\nVoce promete pagar Toma depois. Ele aceita, desconfiado, mas guarda' +
+                '\nVoce promete pagar Tom depois. Ele aceita, desconfiado, mas guarda' +
                 '\nessa promessa na memoria.');
                 stop();
                 break;
@@ -280,10 +317,10 @@ export const caminho1Pt2 = (personagem: Personagem, inimigo: Inimigo) => {
         break; // sai do while depois de uma escolha valida
     }
 
-    // A traicao de Toma
+    // A traicao de Tom
     clear();
     cyan(
-    '\nToma, o guia, passa passagens estreitas e pouco iluminadas, desviando dos' +
+    '\nTom, o guia, passa passagens estreitas e pouco iluminadas, desviando dos' +
     '\nguardas da cidade com uma facilidade suspeita - ele conhece esses' +
     '\ncaminhos bem demais para alguem que apenas "ouviu falar" das catacumbas.' +
 
@@ -292,7 +329,7 @@ export const caminho1Pt2 = (personagem: Personagem, inimigo: Inimigo) => {
 
     clear();
     cyan(
-    '\n- "Desculpe por isso" - diz Toma, dando um passo para tras. - "Alguem' +
+    '\n- "Desculpe por isso" - diz Tom, dando um passo para tras. - "Alguem' +
     '\npaga muito mais do que voce por essa moeda... e por qualquer coisa que' +
     '\nte atrapalhe no caminho."' +
 
@@ -301,7 +338,7 @@ export const caminho1Pt2 = (personagem: Personagem, inimigo: Inimigo) => {
     '\ndeles comeca a se mover. Um esqueleto se ergue das sombras, guiado por' +
     '\numa vontade que nao e mais a sua.' +
 
-    '\n\nToma desaparece corredor afora, deixando voce sozinho com a criatura.');
+    '\n\nTom desaparece corredor afora, deixando voce sozinho com a criatura.');
     personagem.setReputacao(-5);
     white('\n(-5 de reputacao: Ravenfall sabera que voce foi enganado com facilidade)');
     stop();
@@ -313,14 +350,14 @@ export const caminho1Pt2 = (personagem: Personagem, inimigo: Inimigo) => {
     cyan(
     '\nO combate e dificil, mas voce consegue destruir o esqueleto, que desaba' +
     '\nem um monte de ossos inertes no chao. Ofegante, voce entende agora que' +
-    '\nnem toda ajuda em Ravenfall pode ser ingenua - e que Toma sabia mais' +
+    '\nnem toda ajuda em Ravenfall pode ser ingenua - e que Tom sabia mais' +
     '\nsobre a moeda do que aparentava.');
     stop();
 
     clear();
     cyan(
     '\nAinda tremulo pelo combate contra o esqueleto, voce segue sozinho pelo' +
-    '\ncaminho que Toma havia prometido guiar. Sem ele, cada sombra parece' +
+    '\ncaminho que Tom havia prometido guiar. Sem ele, cada sombra parece' +
     '\nmais suspeita que a anterior.' +
 
     '\n\nApos alguns minutos caminhando, uma luz amarelada surge entre as arvores' +
@@ -342,7 +379,7 @@ export const caminho1Pt2 = (personagem: Personagem, inimigo: Inimigo) => {
 export const caminho2Pt2 = (personagem: Personagem, inimigo: Inimigo) => {
     clear();
     cyan(
-    '\nSem o conhecimento de Toma sobre os caminhos, voce confia apenas no mapa' +
+    '\nSem o conhecimento de Tom sobre os caminhos, voce confia apenas no mapa' +
     '\nrasgado - e ele se mostra menos confiavel do que parecia. Uma bifurcacao' +
     '\nque nao esta desenhada em lugar nenhum o faz entrar em um antigo cemiterio' +
     '\nabandonado, cercado por lapides tortas e uma neblina baixa.' +
@@ -383,7 +420,7 @@ export const parte3 = (personagem: Personagem): void => {
 
     if (personagem.getTemMoeda()) {
         cyan(
-        '\nVoce deixa o armazem para tras e retoma o caminho ate as Catacumbas de' +
+        '\nVoce deixa o armazem para tras e reTom o caminho ate as Catacumbas de' +
         '\nValdoren. Apos horas caminhando, finalmente avista a entrada: um portao' +
         '\nde pedra coberto por simbolos antigos, que voltaram a brilhar com uma' +
         '\nluz azulada fraca.' +
@@ -393,7 +430,7 @@ export const parte3 = (personagem: Personagem): void => {
         '\nque nao esta sozinho - que algo, la dentro, ja sabe que voce chegou.');
     } else {
         cyan(
-        '\nVoce deixa o armazem para tras e retoma o caminho ate as Catacumbas de' +
+        '\nVoce deixa o armazem para tras e reTom o caminho ate as Catacumbas de' +
         '\nValdoren. Apos horas caminhando, finalmente avista a entrada: um portao' +
         '\nde pedra coberto por simbolos antigos, que voltaram a brilhar com uma' +
         '\nluz azulada fraca.' +
@@ -497,7 +534,7 @@ export const parte4CorredorPrincipal = (personagem: Personagem, inimigo: Inimigo
         stop();
     }
     cyan(
-    '\nEnquanto as figuras recuam, uma presenca gelada toma forma no centro' +
+    '\nEnquanto as figuras recuam, uma presenca gelada Tom forma no centro' +
     '\ndo salao - o verdadeiro guardiao do ritual nao e humano.');
 
     iniciarConfronto(personagem, inimigo);
@@ -737,7 +774,7 @@ export const parte6 = (personagem: Personagem, inimigo: Inimigo, romperSelo: boo
 
     clear();
     cyan(
-    '\nVoce retoma o caminho ate a camara final. La, um guardiao do selo' +
+    '\nVoce reTom o caminho ate a camara final. La, um guardiao do selo' +
     '\nse ergue diante de voce - a ultima linha de defesa entre voce e o' +
     '\ndestino de Valdoren.');
     stop();

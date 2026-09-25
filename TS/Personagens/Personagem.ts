@@ -108,9 +108,9 @@ export abstract class Personagem {
         this.reputacao += val;
 
         if (val > 0) {
-            blue(`Seu personagem ganhou ${val} de reputacao! Isso ira te trazer consequencias futuro da sua jornada`);
+            green(`Seu personagem ganhou ${val} de reputacao! Isso ira te trazer consequencias no futuro da sua jornada\n`);
         } else {
-            red(`Seu personagem perdeu ${val} de reputacao! Isso ira te trazer consequencias futuro da sua jornada`);
+            red(`Seu personagem perdeu ${val} de reputacao! Isso ira te trazer consequencias no futuro da sua jornada\n`);
         }
     }
 

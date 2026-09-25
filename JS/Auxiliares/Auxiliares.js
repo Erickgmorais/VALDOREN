@@ -13,8 +13,6 @@ exports.infosConfronto = infosConfronto;
 exports.lojaMostrarArmaduras = lojaMostrarArmaduras;
 exports.lojaMostrarUpArma = lojaMostrarUpArma;
 exports.lojaMostrarPocoes = lojaMostrarPocoes;
-exports.falaPersonagem = falaPersonagem;
-exports.falaFigurante = falaFigurante;
 exports.arteCriaPersonagem = arteCriaPersonagem;
 exports.arteInfoJogo = arteInfoJogo;
 const Cores_1 = require("./Cores");
@@ -201,21 +199,6 @@ function lojaMostrarPocoes() {
         5 - Retornar
         
         `);
-}
-// Método para demorar para escrever cada palavra no terminal para controlar falas (Feito por IA)
-async function falaPersonagem(texto) {
-    for (const letra of texto) {
-        process.stdout.write(`\x1b[32m${letra}\x1b[0m`);
-        await new Promise(resolve => setTimeout(resolve, 50));
-    }
-    console.log();
-}
-async function falaFigurante(texto) {
-    for (const letra of texto) {
-        process.stdout.write(`\x1b[35m${letra}\x1b[0m`);
-        await new Promise(resolve => setTimeout(resolve, 50));
-    }
-    console.log();
 }
 function arteCriaPersonagem() {
     (0, Cores_1.orange)(`

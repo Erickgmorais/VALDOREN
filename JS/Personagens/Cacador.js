@@ -8,7 +8,7 @@ const Arma_1 = require("../Inventario/Arma");
 const Personagem_1 = require("./Personagem");
 class Cacador extends Personagem_1.Personagem {
     constructor(nome) {
-        super(nome, 'Cacador', 120, 25, 5, 20, 15);
+        super(nome, 'Cacador', 120, 25, 5, 100, 15);
         this.inventario.push(new Arma_1.Arma('Arco Elfico', 10));
     }
     usarAtaqueEspecial(inimigo) {

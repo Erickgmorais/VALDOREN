@@ -3,14 +3,18 @@ import { inicio } from "./Caminhos/Caminhos";
 import { iniciarConfronto } from "./Inimigos/Confronto";
 import { FadaCorrompida } from "./Inimigos/FadaCorrompida";
 import { Fantasma } from "./Inimigos/Fantasma";
+import { Bardo } from "./Personagens/Bardo";
 import { criaPersonagem } from "./Personagens/CriaPersonagem";
 
-let personagem = criaPersonagem();
+// let personagem = criaPersonagem();
+let personagem: Bardo = new Bardo('Caveira das trevas')
 
-clear()
-arteInfoJogo();
-stop();
+// clear()
+// arteInfoJogo();
+// stop();
 
 let fada: Fantasma = new Fantasma()
 
-iniciarConfronto(personagem, fada)
+inicio(personagem)
+// dialogoComerciante(personagem);
+

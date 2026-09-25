@@ -10,7 +10,7 @@ import { Personagem } from "./Personagem";
 export class Paladino extends Personagem {
 
     constructor(nome: string) {
-        super(nome, 'Paladino', 100, 15, 5, 30, 30)
+        super(nome, 'Paladino', 100, 15, 5, 100, 30)
         this.inventario.push(new Arma('Espada Sagrada', 10))
     }
 

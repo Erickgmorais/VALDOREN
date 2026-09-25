@@ -8,7 +8,7 @@ const Arma_1 = require("../Inventario/Arma");
 const Personagem_1 = require("./Personagem");
 class Necromante extends Personagem_1.Personagem {
     constructor(nome) {
-        super(nome, 'Necromante', 130, 20, 10, 60, -30);
+        super(nome, 'Necromante', 130, 20, 10, 100, -30);
         this.inventario.push(new Arma_1.Arma('Foice das Almas', 10));
     }
     // método especial de ataque subscrito 

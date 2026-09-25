@@ -10,7 +10,7 @@ import { Personagem } from "./Personagem";
 export class Necromante extends Personagem {
 
     constructor(nome: string) {
-        super(nome, 'Necromante', 130, 20, 10, 60, -30)
+        super(nome, 'Necromante', 130, 20, 10, 100, -30)
         this.inventario.push(new Arma('Foice das Almas', 10))
     }
 
