@@ -15,6 +15,8 @@ exports.lojaMostrarUpArma = lojaMostrarUpArma;
 exports.lojaMostrarPocoes = lojaMostrarPocoes;
 exports.falaPersonagem = falaPersonagem;
 exports.falaFigurante = falaFigurante;
+exports.arteCriaPersonagem = arteCriaPersonagem;
+exports.arteInfoJogo = arteInfoJogo;
 const Cores_1 = require("./Cores");
 exports.ask = require('readline-sync');
 exports.logger = console.log;
@@ -214,4 +216,64 @@ async function falaFigurante(texto) {
         await new Promise(resolve => setTimeout(resolve, 50));
     }
     console.log();
+}
+function arteCriaPersonagem() {
+    (0, Cores_1.orange)(`
+ ███  ████  ███  ███   ███   ███   ███     ████   ███     ████  █████ ████   ████  ███  █   █  ███   ███  █████ █   █   
+█ ░░░ █░░░█  █░░█ ░░█ █ ░░░ █ ░░█ █ ░░█    █░░░█ █ ░░█    █░░░█ █░░░░░█░░░█ █ ░░░░█ ░░█ ██  █░█ ░░█ █ ░░░ █░░░░░██ ██░  
+█░ ░░░████░░ █░░█████░█░ ░░░█████░█░ ░█░   █░░░█░█░ ░█░   ████░░████░░████░░ ███░░█░ ░█░█░█ █░█████░█░ ██░████░░█░█ █░░ 
+█░░   █░░█░ ░█░░█░░░█░█░░   █░░░█░█░░ █░░  █░░ █░█░░ █░░  █░░░░ █░░░░ █░░█░ ░ ░░█ █░░ █░█░░██░█░░░█░█░░ █░█░░░░ █░░░█░░ 
+ ███  █░░░█░███░█░░░█░░███  █░░░█░░███ ░░  ████ ░░███ ░░  █░░░░░█████░█░░░█░████░░ ███ ░█░░ █░█░░░█░░███ ░█████░█░░ █░░ 
+  ░░░  ░░  ░ ░░░ ░░  ░░ ░░░  ░░  ░░ ░░░ ░   ░░░░ ░ ░░░ ░   ░░    ░░░░░ ░░  ░ ░░░░ ░ ░░░ ░░░  ░░░░  ░░ ░░░ ░░░░░░ ░░  ░░ 
+   ░░░  ░   ░ ░░░ ░   ░  ░░░  ░   ░  ░░░     ░░░░   ░░░     ░     ░░░░░ ░   ░ ░░░░   ░░░  ░   ░ ░   ░  ░░░  ░░░░░ ░   ░         
+        `);
+}
+function arteInfoJogo() {
+    (0, Cores_1.yellow)(`
+╔══════════════════════════════════════════════════════════╗
+║                    COMO FUNCIONA O JOGO                  ║
+╠══════════════════════════════════════════════════════════╣
+║                                                          ║
+║  VALDOREN é uma aventura baseada em escolhas.            ║
+║                                                          ║
+║  Durante sua jornada, suas decisões irão alterar o       ║
+║  caminho da história e poderão levar a diferentes        ║
+║  acontecimentos e finais.                                ║
+║                                                          ║
+║  ⚔ BATALHAS                                              
+║  Você encontrará inimigos durante sua jornada.           ║
+║  Nos confrontos, poderá atacar, utilizar poções e        ║
+║  habilidades especiais para sobreviver.                  ║
+║                                                          ║
+║                                                          ║
+║  💰 OURO                                                 
+║  O ouro encontrado durante sua jornada poderá ser        ║
+║  utilizado para melhorar seu personagem.                 ║
+║                                                          ║
+║  Você poderá utilizá-lo para comprar:                    ║
+║    • Armaduras                                           ║
+║    • Poções                                              ║
+║    • Melhorias para sua arma                             ║
+║                                                          ║
+║  Quanto melhor preparado você estiver, maiores serão     ║
+║  suas possibilidades durante os confrontos.              ║
+║                                                          ║
+║  ⭐ REPUTAÇÃO                                             
+║  Suas escolhas também irão alterar sua reputação.        ║
+║                                                          ║
+║  Dependendo do nível de reputação alcançado durante      ║
+║  sua jornada, determinadas possibilidades poderão        ║
+║  ser desbloqueadas, incluindo novos finais.              ║
+║                                                          ║
+║  ⚠ SUAS ESCOLHAS IMPORTAM                               
+║  Não existe apenas um caminho para chegar ao fim.        ║
+║                                                          ║
+║  Suas decisões, seu ouro, sua reputação e sua            ║
+║  preparação para os confrontos irão acompanhar você      ║
+║  durante toda a aventura.                                ║
+║                                                          ║
+║              ESCOLHA COM SABEDORIA...                    ║
+║                                                          ║
+╚══════════════════════════════════════════════════════════╝
+`);
 }
