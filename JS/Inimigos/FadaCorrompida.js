@@ -2,11 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FadaCorrompida = void 0;
 //Causa dano em dobro dependendo de uma chance variável 
+const Auxiliares_1 = require("../Auxiliares/Auxiliares");
 const Cores_1 = require("../Auxiliares/Cores");
 class FadaCorrompida {
     nome = 'Fada Corrompida';
-    vida = 30;
-    ataque = 9;
+    vida = 60;
+    ataque = 12;
     defesa = 3;
     habilidade = 'Dano em dobro';
     getNome() {
@@ -70,10 +71,11 @@ Com uma chance de 60%, esse inimigo podera dar dano duplo.
         ╚════════════════════════════════════════╝
         `);
             personagem.tomarDano(danoFinal);
+            (0, Auxiliares_1.stop)();
         }
         else {
             danoFinal = danoAleatorio;
-            (0, Cores_1.yellow)(`
+            (0, Cores_1.red)(`
         ATAQUE DO INIMIGO:
         ╔════════════════════════════════════════╗
         ║                 ATAQUE                 ║
@@ -85,6 +87,7 @@ Com uma chance de 60%, esse inimigo podera dar dano duplo.
         ║                                        ║
         ╚════════════════════════════════════════╝
             `);
+            (0, Auxiliares_1.stop)();
         }
     }
     //Método de habilidade do inimigo

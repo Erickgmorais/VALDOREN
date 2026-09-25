@@ -1,4 +1,5 @@
 //Causa dano em dobro dependendo de uma chance variável 
+import { stop } from "../Auxiliares/Auxiliares";
 import { blue, red, yellow } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "../Personagens/Personagem";
@@ -6,8 +7,8 @@ import { Personagem } from "../Personagens/Personagem";
 
 export class FadaCorrompida implements Inimigo {
     private nome: string = 'Fada Corrompida';
-    private vida: number = 30;
-    private ataque: number = 9;
+    private vida: number = 60;
+    private ataque: number = 12;
     private defesa: number = 3;
     private habilidade: string = 'Dano em dobro'
 
@@ -88,10 +89,11 @@ Com uma chance de 60%, esse inimigo podera dar dano duplo.
         ╚════════════════════════════════════════╝
         `);
             personagem.tomarDano(danoFinal);
+            stop()
 
         } else {
             danoFinal = danoAleatorio;
-            yellow(`
+            red(`
         ATAQUE DO INIMIGO:
         ╔════════════════════════════════════════╗
         ║                 ATAQUE                 ║
@@ -103,6 +105,7 @@ Com uma chance de 60%, esse inimigo podera dar dano duplo.
         ║                                        ║
         ╚════════════════════════════════════════╝
             `)
+            stop()
         }
 
     }

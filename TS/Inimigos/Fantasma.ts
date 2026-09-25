@@ -1,5 +1,6 @@
 //Chance de ignorar completamente um ataque
 
+import { stop } from "../Auxiliares/Auxiliares";
 import { blue, red } from "../Auxiliares/Cores";
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Personagem } from "../Personagens/Personagem";
@@ -83,6 +84,7 @@ Com uma chance de 40%, esse inimigo poderá se esquivar totalmente do dano do se
     ║                                               ║
     ╚═══════════════════════════════════════════════╝
         `)
+        stop()
         } else {
 
             this.vida -= danoFinal;
@@ -95,6 +97,7 @@ Com uma chance de 40%, esse inimigo poderá se esquivar totalmente do dano do se
     Dano efetivo recebido: ${danoFinal}
 -- ----------------------------------------- -- 
         `)
+        stop()
 
         }
 

@@ -2,6 +2,7 @@
 //Chance de ignorar completamente um ataque
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Fantasma = void 0;
+const Auxiliares_1 = require("../Auxiliares/Auxiliares");
 const Cores_1 = require("../Auxiliares/Cores");
 class Fantasma {
     nome = 'Fantasma do Clerigo';
@@ -68,6 +69,7 @@ Com uma chance de 40%, esse inimigo poderá se esquivar totalmente do dano do se
     ║                                               ║
     ╚═══════════════════════════════════════════════╝
         `);
+            (0, Auxiliares_1.stop)();
         }
         else {
             this.vida -= danoFinal;
@@ -79,6 +81,7 @@ Com uma chance de 40%, esse inimigo poderá se esquivar totalmente do dano do se
     Dano efetivo recebido: ${danoFinal}
 -- ----------------------------------------- -- 
         `);
+            (0, Auxiliares_1.stop)();
         }
         if (this.vida < 0) {
             this.vida = 0;

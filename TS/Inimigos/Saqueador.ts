@@ -52,6 +52,7 @@ em vez de atacar normalmente.
     Dano efetivo recebido: ${danoFinal}
 -- ----------------------------------------- --    
         `)
+        stop()
 
         if (this.vida < 0) {
             this.vida = 0;
@@ -84,6 +85,7 @@ em vez de atacar normalmente.
         ╚════════════════════════════════════════╝
             `)
         personagem.tomarDano(danoFinal);
+        stop()
     }
 
     //Método de habilidade do inimigo
