@@ -178,21 +178,21 @@ function lojaMostrarPocoes() {
 
         1 - Poção de Cura Menor
             Restaura 10 de vida
-            Preço: 50 moedas de ouro
+            Preço: 20 moedas de ouro
 
         2 - Elixir de Cura Maior
             Restaura 20 de vida
-            Preço: 100 moedas de ouro
+            Preço: 35 moedas de ouro
 
         POÇÕES DE FORÇA
 
         3 - Elixir de Força Menor
             Aumenta 10 de ataque
-            Preço: 75 moedas de ouro
+            Preço: 35 moedas de ouro
 
         4 - Elixir de Força Maior
             Aumenta 15 de ataque
-            Preço: 125 moedas de ouro
+            Preço: 45 moedas de ouro
 
         ──────────────────────────────────────────
 

@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.parte6 = exports.caminho2Pt5 = exports.caminho1Pt5 = exports.parte5 = exports.caminho2Pt4 = exports.caminho1Pt4 = exports.parte4EscadaLateral = exports.parte4CorredorPrincipal = exports.caminho2Pt3 = exports.caminho1Pt3 = exports.parte3 = exports.caminho2Pt2 = exports.caminho1Pt2 = exports.parte2 = exports.caminho2Pt1 = exports.caminho1Pt1 = exports.parte1 = exports.inicio = void 0;
 const Auxiliares_1 = require("../Auxiliares/Auxiliares");
 const Cores_1 = require("../Auxiliares/Cores");
-const Bardo_1 = require("../Personagens/Bardo");
 const Esqueleto_1 = require("../Inimigos/Esqueleto");
 const Loja_1 = require("../Inventario/Loja");
 const Dragao_1 = require("../Inimigos/Dragao");
@@ -11,15 +10,12 @@ const FadaCorrompida_1 = require("../Inimigos/FadaCorrompida");
 const Fantasma_1 = require("../Inimigos/Fantasma");
 const Confronto_1 = require("../Inimigos/Confronto");
 const Saqueador_1 = require("../Inimigos/Saqueador");
-const bardoTeste = new Bardo_1.Bardo('Bardo Teste');
-const personagens = [];
 //Inimigos
 const esqueleto = new Esqueleto_1.Esqueleto();
 const dragao = new Dragao_1.Dragao();
 const fadaCorrompida = new FadaCorrompida_1.FadaCorrompida();
 const fantasma = new Fantasma_1.Fantasma();
 const saqueador = new Saqueador_1.Saqueador();
-personagens.push(bardoTeste);
 let controle = false;
 //INICIO GAME
 const inicio = (personagem) => {

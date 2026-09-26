@@ -63,13 +63,6 @@ export function iniciarConfronto(personagem: Personagem, inimigo: Inimigo) {
                                 break;
 
                             case 2:
-                                clear()
-                                red('Ainda em desenvolvimento!');
-                                stop()
-                                
-                                break;
-
-                            case 3:
                                 //Apenas faz voltar para o menu
                                 break;    
 

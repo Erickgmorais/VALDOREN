@@ -278,14 +278,11 @@ export abstract class Personagem {
             green(`
 Opcoes:                
 1 - Usar pocao
-2 - Dropar item
-3 - Fechar inventário            
-                `)
+2 - Fechar inventário`)
         } else {
             green(`
 1̶ ̶-̶ ̶U̶s̶a̶r̶ ̶p̶o̶c̶a̶o̶ (Voce não possui pocoes a serem utilizadas)
-2 - Dropar item
-3 - Fechar inventário`)
+2 - Fechar inventário`)
         }
     }
 

@@ -1,6 +1,5 @@
 import { ask, clear, stop } from "../Auxiliares/Auxiliares";
 import { blue, cyan, green, purple, red, white } from "../Auxiliares/Cores";
-import { Bardo } from "../Personagens/Bardo";
 import { Personagem } from "../Personagens/Personagem"
 import { Inimigo } from "../Interfaces/Inimigo";
 import { Esqueleto } from "../Inimigos/Esqueleto";
@@ -11,9 +10,6 @@ import { Fantasma } from "../Inimigos/Fantasma";
 import { iniciarConfronto } from "../Inimigos/Confronto";
 import { Saqueador } from "../Inimigos/Saqueador";
 
-const bardoTeste: Bardo = new Bardo('Bardo Teste');
-const personagens: Personagem[] = [];
-
 //Inimigos
 const esqueleto: Esqueleto = new Esqueleto();
 const dragao: Dragao = new Dragao();
@@ -21,8 +17,7 @@ const fadaCorrompida: FadaCorrompida = new FadaCorrompida();
 const fantasma: Fantasma = new Fantasma();
 const saqueador: Saqueador = new Saqueador();
 
-personagens.push(bardoTeste) 
-let controle: boolean = false
+let controle: boolean = false;
 
 //INICIO GAME
 export const inicio = (personagem: Personagem): void => {

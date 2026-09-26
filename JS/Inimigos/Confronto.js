@@ -45,11 +45,6 @@ function iniciarConfronto(personagem, inimigo) {
                                 }
                                 break;
                             case 2:
-                                (0, Auxiliares_1.clear)();
-                                (0, Cores_1.red)('Ainda em desenvolvimento!');
-                                (0, Auxiliares_1.stop)();
-                                break;
-                            case 3:
                                 //Apenas faz voltar para o menu
                                 break;
                             default:
