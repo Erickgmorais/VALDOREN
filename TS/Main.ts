@@ -1,14 +1,23 @@
-import { arteInfoJogo, clear, stop } from "./Auxiliares/Auxiliares";
+import { arteInfoJogo, clear, stop, tituloJogo } from "./Auxiliares/Auxiliares";
 import { inicio } from "./Caminhos/Caminhos";
+import { iniciarConfronto } from "./Inimigos/Confronto";
+import { FadaCorrompida } from "./Inimigos/FadaCorrompida";
+import { Fantasma } from "./Inimigos/Fantasma";
+import { Bardo } from "./Personagens/Bardo";
 import { criaPersonagem } from "./Personagens/CriaPersonagem";
 
+
+//Logger de apresentação do game.
+tituloJogo();
+
+//Criação Personagem
 let personagem = criaPersonagem();
 
 clear()
 arteInfoJogo();
 stop();
 
+//Inicio Historia
 inicio(personagem);
-
 
 

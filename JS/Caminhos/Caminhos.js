@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parte6 = exports.caminho2Pt5 = exports.caminho1Pt5 = exports.parte5 = exports.caminho2Pt4 = exports.caminho1Pt4 = exports.parte4EscadaLateral = exports.parte4CorredorPrincipal = exports.caminho2Pt3 = exports.caminho1Pt3 = exports.parte3 = exports.caminho2Pt2 = exports.caminho1Pt2 = exports.parte2 = exports.caminho2Pt1 = exports.caminho1Pt1 = exports.parte1 = exports.inicio = void 0;
+exports.parte6 = exports.caminho2Pt5 = exports.caminho1Pt5 = exports.parte5 = exports.encontrarItens = exports.caminho2Pt4 = exports.caminho1Pt4 = exports.parte4EscadaLateral = exports.parte4CorredorPrincipal = exports.caminho2Pt3 = exports.caminho1Pt3 = exports.parte3 = exports.caminho2Pt2 = exports.caminho1Pt2 = exports.parte2 = exports.caminho2Pt1 = exports.caminho1Pt1 = exports.parte1 = exports.inicio = void 0;
 const Auxiliares_1 = require("../Auxiliares/Auxiliares");
 const Cores_1 = require("../Auxiliares/Cores");
 const Esqueleto_1 = require("../Inimigos/Esqueleto");
@@ -16,46 +16,47 @@ const dragao = new Dragao_1.Dragao();
 const fadaCorrompida = new FadaCorrompida_1.FadaCorrompida();
 const fantasma = new Fantasma_1.Fantasma();
 const saqueador = new Saqueador_1.Saqueador();
-let controle = false;
+//let controle: boolean = false
 //INICIO GAME
 const inicio = (personagem) => {
     (0, Auxiliares_1.clear)();
     (0, Cores_1.cyan)('\nA Chegada a Ravenfall.\n' +
-        '\nVoce chega a Ravenfall ao anoitecer, com a poeira da estrada ainda nas botas.' +
-        '\nNo caminho ate a entrada da cidade, seu pé esbarra em algo enterrado na terra' +
-        '\nsolta a beira da estrada. Voce se abaixa e encontra uma moeda antiga, desgastada,' +
-        '\ncom um simbolo estranho gravado em uma das faces — parecido com os relatos' +
-        '\nque voce ouviu sobre as Catacumbas de Valdoren.\n' +
-        '\nEla parece nao ter valor nenhum como dinheiro. Talvez seja só uma velha moeda');
+        '\nVocê chega a Ravenfall ao anoitecer, com a poeira da estrada ainda nas botas.' +
+        '\nNo caminho até a entrada da cidade, seu pé esbarra em algo enterrado na terra' +
+        '\nsolta a beira da estrada. Você se abaixa e encontra uma moeda antiga, desgastada,' +
+        '\ncom um símbolo estranho gravado em uma das faces — parecido com os relatos' +
+        '\nque você ouviu sobre as Catacumbas de Valdoren.\n' +
+        '\nEla parece não ter valor nenhum como dinheiro. Talvez seja só uma velha moeda');
     while (true) {
-        const escolhaMoeda = Number(Auxiliares_1.ask.question((0, Cores_1.blue)('\n1- Pegar a moeda e guarda-la' +
+        (0, Cores_1.blue)('\n1- Pegar a moeda e guarda-la' +
             '\n2- Ignorar e seguir viagem' +
-            '\n3- Sair do game' +
-            '\nEscolha: ')));
-        if (escolhaMoeda < 1 || escolhaMoeda > 3) {
-            (0, Cores_1.red)('Opcao invalida!');
+            '\n3- Sair do game');
+        const escolhaMoeda = Number(Auxiliares_1.ask.question('Escolha: '));
+        let opcaoInvalida = escolhaMoeda === 1 || escolhaMoeda === 2 || escolhaMoeda === 3;
+        if (!opcaoInvalida) {
+            (0, Cores_1.red)('Opção inválida!');
             continue;
         }
         switch (escolhaMoeda) {
             case 1:
                 personagem.pegarMoeda();
                 (0, Auxiliares_1.clear)();
-                (0, Cores_1.cyan)('\nVoce guarda a moeda no bolso. Ela esta gelada ao toque, mesmo depois' +
-                    '\nde minutos carregando-a. Voce nao sabe explicar por que, mas sente que' +
+                (0, Cores_1.cyan)('\nVocê guarda a moeda no bolso. Ela está gelada ao toque, mesmo depois' +
+                    '\nde minutos carregando-a. Você não sabe explicar por que, mas sente que' +
                     '\nfez a escolha certa.\n');
                 (0, Auxiliares_1.stop)();
                 (0, exports.parte1)(personagem);
                 break;
             case 2:
                 (0, Auxiliares_1.clear)();
-                (0, Cores_1.cyan)('\nVoce da de ombros e chuta a moeda de volta para a terra. Provavelmente' +
-                    '\ne só mais um pedaco de metal sem valor. Voce segue em frente sem' +
+                (0, Cores_1.cyan)('\nVocê da de ombros e chuta a moeda de volta para a terra. Provavelmente' +
+                    '\ne só mais um pedaço de metal sem valor. Você segue em frente sem' +
                     '\nolhar para tras.\n');
                 (0, Auxiliares_1.stop)();
                 (0, exports.parte1)(personagem);
                 break;
             case 3:
-                (0, Cores_1.white)('Saindo...');
+                (0, Auxiliares_1.consoleSaindo)();
                 process.exit();
         }
         break;
@@ -65,25 +66,22 @@ exports.inicio = inicio;
 // Inicio PARTE 1
 const parte1 = (personagem) => {
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)(`As ruas de Ravenfall estao quase vazias – portas trancadas cedo, olhares
-desconfiados nas janelas. No centro da praca, um sino distante ainda ecoa
-em sua memória, embora tenha parado de tocar ha tres dias. 
-Voce ve um mapa rasgado e esfarrapado voando em meio as casas na cidade e vai até ele e o pega.
-    
-Neste mapa, há um nome escrito na borda
-
-"Se estiver em perigo, me procure. Ass. Mestre Averic"
-    
-Além disso, há um caminho traçado em vermelho no mapa que vai até a 'Taverna do Corvo cinza'
-
-Voce precisa decidir por onde comecar.`);
+    (0, Cores_1.cyan)('\nAs ruas de Ravenfall estão quase vazias – portas trancadas cedo, olhares' +
+        '\ndesconfiados nas janelas. No centro da praca, um sino distante ainda ecoa' +
+        '\nem sua memória, embora tenha parado de tocar ha três dias.' +
+        '\nVocê ve um mapa rasgado e esfarrapado voando em meio as casas na cidade e vai até ele e o pega.' +
+        '\nNeste mapa, há um nome escrito na borda' +
+        '\nSe estiver em perigo, me procure. Ass. Mestre Averic' +
+        '\nAlém disso, há um caminho traçado em vermelho no mapa que vai até a "Taverna do Corvo cinza"' +
+        '\nVocê precisa decidir por onde comecar.');
     while (true) {
-        const escolhaParte1 = Number(Auxiliares_1.ask.question((0, Cores_1.blue)('\n1- Ir a caminho da Taverna do Corvo Cinza' +
+        (0, Cores_1.blue)('\n1- Ir a caminho da Taverna do Corvo Cinza' +
             '\n2- Procurar o tal Mestre Averic' +
-            '\n3- Sair do game' +
-            '\nEscolha: ')));
-        if (escolhaParte1 < 1 || escolhaParte1 > 3) {
-            (0, Cores_1.red)('Opcao invalida!');
+            '\n3- Sair do game');
+        const escolhaParte1 = Number(Auxiliares_1.ask.question('Escolha: '));
+        let opcaoInvalida = escolhaParte1 === 1 || escolhaParte1 === 2 || escolhaParte1 === 3;
+        if (!opcaoInvalida) {
+            (0, Cores_1.red)('Opção inválida!');
             continue;
         }
         switch (escolhaParte1) {
@@ -94,7 +92,7 @@ Voce precisa decidir por onde comecar.`);
                 (0, exports.caminho2Pt1)(personagem); // procurar o tal mestre Averic
                 break;
             case 3:
-                (0, Cores_1.white)('Saindo...');
+                (0, Auxiliares_1.consoleSaindo)();
                 process.exit();
         }
         break;
@@ -104,22 +102,22 @@ exports.parte1 = parte1;
 ////Caso personagem escolha IR A TAVERNA DO CORVO CINZA
 const caminho1Pt1 = (personagem) => {
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nVoce inicia o trajeto até a taverna do Corvo. Voce fica tranquilo' +
+    (0, Cores_1.cyan)('\nVocê inicia o trajeto até a taverna do Corvo. Você fica tranquilo' +
         '\nporque é perto da entrada da cidade onde tudo começou.\n' +
-        '\nVoce entra na Taverna do Corvo Cinza em busca de informacoes' +
-        '\nsobre o que ouve desde a infancia: O mistério de Valdoren, o motivo de voce ter ido até' +
+        '\nVocê entra na Taverna do Corvo Cinza em busca de informações' +
+        '\nsobre o que ouve desde a infância: O mistério de Valdoren, o motivo de você ter ido até' +
         '\na cidade de Ravenfall.\n' +
-        '\nVoce senta no balcão e começa a beber um pouco para relaxar após a viagem árdua.' +
-        '\nEntre risadas e bebedeira, voce acaba se envolvendo em uma discussao boba' +
-        '\ncom um bebado, que espalha pela cidade que voce é "mais um forasteiro' +
+        '\nVocê senta no balcão e começa a beber um pouco para relaxar após a viagem árdua.' +
+        '\nEntre risadas e bebedeira, você acaba se envolvendo em uma discussão boba' +
+        '\ncom um bêbado, que espalha pela cidade que você é "mais um forasteiro' +
         '\nmetido a besta".\n');
     personagem.setReputacao(-5);
     (0, Auxiliares_1.stop)();
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nMesmo assim, entre uma rodada e outra, voce ouve historias contraditorias:' +
+    (0, Cores_1.cyan)('\nMesmo assim, entre uma rodada e outra, você ouve historias contraditórias:' +
         '\nuns dizem que um culto quer reabrir um antigo selo de Valdoren; outros juram que os' +
-        '\nmortos de Eryndor estao voltando. Um velho caçador, bebado o suficiente' +
-        '\npara nao mentir, murmura que viu "algo com muitos olhos" saindo das' +
+        '\nmortos de Eryndor estão voltando. Um velho caçador, bêbado o suficiente' +
+        '\npara não mentir, murmura que viu "algo com muitos olhos" saindo das' +
         '\ncatacumbas.\n');
     (0, Auxiliares_1.stop)();
     (0, exports.parte2)(personagem);
@@ -128,7 +126,7 @@ exports.caminho1Pt1 = caminho1Pt1;
 //Caso personagem escolha PROCURAR MESTRE AVERIC
 const caminho2Pt1 = (personagem) => {
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nVoce vai a procura do Mestre Averic, após ficar curioso de quem seria ele.\n' +
+    (0, Cores_1.cyan)('\nVocê vai a procura do Mestre Averic, após ficar curioso de quem seria ele.\n' +
         'Você avista um pequeno comércio de carnes aberto no centro da cidade,\n' +
         'com o vendedor no balcão afiando sua faca.\n' +
         'Ao entrar no estabelecimento, pergunta ao comerciante:\n');
@@ -138,29 +136,27 @@ const caminho2Pt1 = (personagem) => {
     (0, Cores_1.cyan)(`Comerciante: Tenho uma dose de cachaça. Serve?\n`);
     (0, Auxiliares_1.stop)();
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)(`
-    Você aceita e ele lhe serve a bebida. Você começa a conversar com o comerciante e 
-    questiona se, por acaso, ele conhece um tal de Mestre Averic. 
-    Ele lhe responde que sim, normalmente, ele vai ao bordel no final da rua 7 e
-    veste um chapéu verde musgo e fuma churuto.
-
-    Você agradece a ele e sai do comércio e verifica no mapa se há algum caminho 
-    para a rua 7 e, segue viagem\n`);
+    (0, Cores_1.cyan)('\nVocê aceita e ele lhe serve a bebida. Você começa a conversar com o comerciante e' +
+        '\nquestiona se, por acaso, ele conhece um tal de Mestre Averic.' +
+        '\nEle lhe responde que sim, normalmente, ele vai ao bordel no final da rua 7 e' +
+        '\nveste um chapéu verde musgo e fuma charuto.' +
+        '\nVocê agradece a ele e sai do comércio e verifica no mapa se há algum caminho' +
+        '\npara a rua 7 e, segue viagem\n');
     (0, Auxiliares_1.stop)();
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nAo chegar ao bórdel, logo ao entrar, voce avista um homem muito parecido com o retrato' +
+    (0, Cores_1.cyan)('\nAo chegar ao bordel, logo ao entrar, você avista um homem muito parecido com o retrato' +
         '\nque o comerciante falou sentado em uma mesa, sozinho, bebendo uma cerveja.' +
-        '\nEle o recebe com respeito, reconhecendo sua disposicao em ajudar Ravenfall' +
+        '\nEle o recebe com respeito, reconhecendo sua disposição em ajudar Ravenfall' +
         '\nem um momento tao delicado. Aos poucos, boatos sobre um forasteiro' +
-        '\nconfiavel comecam a circular.\n');
+        '\nconfiavel começam a circular.\n');
     personagem.setReputacao(10);
     (0, Auxiliares_1.stop)();
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nAveric confirma que foi ele quem pagou pela sua vinda. Ha seculos, os' +
+    (0, Cores_1.cyan)('\nAveric confirma que foi ele quem pagou pela sua vinda. Ha séculos, os' +
         '\nantigos reis de Valdoren selaram algo nas Catacumbas de Valdoren, e agora' +
-        '\nalguem esta tentando abrir esse selo.');
+        '\nalguem está tentando abrir esse selo.');
     (0, Cores_1.cyan)('\nUm homem alto chamado Tom, misterioso e com uma barba por fazer, ' +
-        '\nque estava ouvindo a conversa na mesa de tras, te diz que se você quiser,' +
+        '\nque estava ouvindo a conversa na mesa de tras, diz a você que se você quiser,' +
         '\npode te ajudar a encontrar as terras de Valdoren,' +
         '\nmas que iria cobrar um preço para isso acontecer\n');
     (0, Auxiliares_1.stop)();
@@ -170,15 +166,16 @@ exports.caminho2Pt1 = caminho2Pt1;
 //Inicio PARTE 2
 const parte2 = (personagem) => {
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nDe um jeito ou de outro, fica claro: as respostas estao embaixo da terra,' +
+    (0, Cores_1.cyan)('\nDe um jeito ou de outro, fica claro: as respostas estão embaixo da terra,' +
         '\nnas Catacumbas de Valdoren.');
     while (true) {
-        const escolhaParte2 = Number(Auxiliares_1.ask.question((0, Cores_1.blue)('\n1- Aceitar ajuda de um guia local (Tom)' +
+        (0, Cores_1.blue)('\n1- Aceitar ajuda de um guia local (Tom)' +
             '\n2- Ir sozinho' +
-            '\n3- Sair do game' +
-            '\nEscolha: ')));
-        if (escolhaParte2 < 1 || escolhaParte2 > 3) {
-            (0, Cores_1.red)('Opcao invalida!');
+            '\n3- Sair do game');
+        const escolhaParte2 = Number(Auxiliares_1.ask.question('Escolha: '));
+        let opcaoInvalida = escolhaParte2 === 1 || escolhaParte2 === 2 || escolhaParte2 === 3;
+        if (!opcaoInvalida) {
+            (0, Cores_1.red)('Opção inválida!');
             continue;
         }
         switch (escolhaParte2) {
@@ -189,7 +186,7 @@ const parte2 = (personagem) => {
                 (0, exports.caminho2Pt2)(personagem, saqueador);
                 break;
             case 3:
-                (0, Cores_1.white)('Saindo...');
+                (0, Auxiliares_1.consoleSaindo)();
                 process.exit();
         }
         break;
@@ -203,19 +200,20 @@ const caminho1Pt2 = (personagem, inimigo) => {
         '\nEle conhece entradas esquecidas nas catacumbas, mas quer saber como' +
         '\nsera pago.');
     while (true) {
-        const escolhaTom = Number(Auxiliares_1.ask.question((0, Cores_1.blue)('\n1- Pagar Tom adiantado (10 de ouro)' +
+        (0, Cores_1.blue)('\n1- Pagar Tom adiantado (10 de ouro)' +
             '\n2- Prometer pagamento depois' +
-            '\n3- Sair do game' +
-            '\nEscolha: ')));
-        if (escolhaTom < 1 || escolhaTom > 3) {
-            (0, Cores_1.red)('Opcao invalida!');
+            '\n3- Sair do game');
+        const escolhaTom = Number(Auxiliares_1.ask.question('Escolha: '));
+        let opcaoInvalida = escolhaTom === 1 || escolhaTom === 2 || escolhaTom === 3;
+        if (!opcaoInvalida) {
+            (0, Cores_1.red)('Opção inválida!');
             continue;
         }
         switch (escolhaTom) {
             case 1:
                 if (personagem.pagarOuro(10)) {
                     (0, Auxiliares_1.clear)();
-                    (0, Cores_1.cyan)('\nVoce paga Tom adiantado. Satisfeito, ele se compromete a guia-lo ate' +
+                    (0, Cores_1.cyan)('\nVocê paga Tom adiantado. Satisfeito, ele se compromete a guia-lo até' +
                         '\no fim, sem hesitar.');
                     personagem.setReputacao(5);
                     (0, Cores_1.white)('\n(-10 de ouro)');
@@ -223,56 +221,56 @@ const caminho1Pt2 = (personagem, inimigo) => {
                 }
                 else {
                     (0, Auxiliares_1.clear)();
-                    (0, Cores_1.cyan)('\nVoce tenta pagar Tom, mas nao tem ouro suficiente. Ele franze a testa,' +
+                    (0, Cores_1.cyan)('\nVocê tenta pagar Tom, mas não tem ouro suficiente. Ele franze a testa,' +
                         '\ndesconfiado, mas aceita guia-lo mesmo assim, sem receber nada agora.');
                     (0, Auxiliares_1.stop)();
                 }
                 break;
             case 2:
                 (0, Auxiliares_1.clear)();
-                (0, Cores_1.cyan)('\nVoce promete pagar Tom depois. Ele aceita, desconfiado, mas guarda' +
-                    '\nessa promessa na memoria.');
+                (0, Cores_1.cyan)('\nVocê promete pagar Tom depois. Ele aceita, desconfiado, mas guarda' +
+                    '\nessa promessa na memória.');
                 (0, Auxiliares_1.stop)();
                 break;
             case 3:
-                (0, Cores_1.white)('Saindo...');
+                (0, Auxiliares_1.consoleSaindo)();
                 process.exit();
         }
         break; // sai do while depois de uma escolha valida
     }
     // A traicao de Tom
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nVoce e tom saem do bordel juntos e vão ao sentido a uma catacumba' +
+    (0, Cores_1.cyan)('\nVocê e tom saem do bordel juntos e seguem em direção a uma catacumba' +
         '\nTom, o guia, passa passagens estreitas e pouco iluminadas no trajeto, desviando dos' +
         '\nguardas da cidade com uma facilidade suspeita - ele conhece esses' +
-        '\ncaminhos bem demais para alguem que apenas "ouviu falar" das catacumbas.' +
-        '\n\nNo meio do trajeto, ele para de repente diante de uma camara empoeirada no inicio da floresta.');
+        '\ncaminhos bem demais para alguém que apenas "ouviu falar" das catacumbas.' +
+        '\n\nNo meio do trajeto, ele para de repente diante de uma câmara empoeirada no inicio da floresta.');
     (0, Auxiliares_1.stop)();
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\n- "Desculpe por isso" - diz Tom, dando um passo para tras. - "Alguem' +
-        '\npaga muito mais do que voce por esse trajeto...' +
-        '\n\nAntes que voce possa reagir, ele bate duas vezes na parede de pedra.' +
-        '\nUm estalo seco ecoa entre os ossos empilhados ao redor da camara - e um' +
-        '\ndeles comeca a se mover. Um esqueleto se ergue das sombras, guiado por' +
-        '\numa vontade que nao e mais a sua.' +
-        '\n\nTom desaparece corredor afora, deixando voce sozinho com a criatura.');
+    (0, Cores_1.cyan)('\n- "Desculpe por isso" - diz Tom, dando um passo para tras. - "Alguém' +
+        '\npaga muito mais do que você por esse trajeto...' +
+        '\n\nAntes que você possa reagir, ele bate duas vezes na parede de pedra.' +
+        '\nUm estalo seco ecoa entre os ossos empilhados ao redor da câmara - e um' +
+        '\ndeles começa a se mover. Um esqueleto se ergue das sombras, guiado por' +
+        '\numa vontade que não e mais a sua.' +
+        '\n\nTom desaparece corredor afora, deixando você sozinho com a criatura.');
     personagem.setReputacao(-5);
-    (0, Cores_1.white)('\n(Ravenfall sabera que voce foi enganado com facilidade)');
+    (0, Cores_1.white)('\n(Ravenfall saberá que você foi enganado com facilidade)');
     (0, Auxiliares_1.stop)();
     //Combate aqui.
     (0, Confronto_1.iniciarConfronto)(personagem, inimigo);
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nO combate e dificil, mas voce consegue destruir o esqueleto, que desaba' +
-        '\nem um monte de ossos inertes no chao. Ofegante, voce entende agora que' +
-        '\nnem toda ajuda em Ravenfall pode ser ingenua.');
+    (0, Cores_1.cyan)('\nO combate é difícil, mas você consegue destruir o esqueleto, que desaba' +
+        '\nem um monte de ossos inertes no chão. Ofegante, você entende agora que' +
+        '\nnem toda ajuda em Ravenfall pode ser ingênua.');
     (0, Auxiliares_1.stop)();
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nAinda tremulo pelo combate contra o esqueleto, voce segue sozinho pelo' +
+    (0, Cores_1.cyan)('\nAinda trêmulo pelo combate contra o esqueleto, você segue sozinho pelo' +
         '\ncaminho que Tom havia prometido guiar. Sem ele, cada sombra parece' +
         '\nmais suspeita que a anterior.' +
-        '\n\nApos alguns minutos caminhando, uma luz amarelada surge entre as arvores' +
-        '\n- um pequeno armazem de madeira, isolado na beira da estrada, com fumaca' +
-        '\nsaindo da chamine. Uma placa gasta balanca no vento: "ARMAZEM DO ELFO LUCIO".' +
+        '\n\nApos alguns minutos caminhando, uma luz amarelada surge entre as árvores' +
+        '\n- um pequeno armazém de madeira, isolado na beira da estrada, com fumaça' +
+        '\nsaindo da chaminé. Uma placa gasta balança no vento: "ARMAZEM DO ELFO LUCIO".' +
         '\n\nDepois do que acabou de enfrentar, parece um bom lugar para recuperar o' +
         '\nfolego - e talvez gastar o que sobrou de ouro antes de entrar nas catacumbas' +
         '\nde verdade.');
@@ -284,25 +282,25 @@ exports.caminho1Pt2 = caminho1Pt2;
 //Caso personagem escolha IR SOZINHO
 const caminho2Pt2 = (personagem, inimigo) => {
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nSem o conhecimento de Tom sobre os caminhos, voce confia apenas no mapa' +
-        '\nrasgado - e ele se mostra menos confiavel do que parecia. Uma bifurcacao' +
-        '\nque nao esta desenhada em lugar nenhum o faz entrar em um antigo cemiterio' +
-        '\nabandonado, cercado por lapides tortas e uma neblina baixa.' +
-        '\nVultos se movem entre os tumulos - saqueadores que vasculham as ruinas em' +
-        '\nbusca do mesmo segredo que voce. Nao ha tempo para escolhas. Voce luta.');
+    (0, Cores_1.cyan)('\nSem o conhecimento de Tom sobre os caminhos, você confia apenas no mapa' +
+        '\nrasgado - e ele se mostra menos confiável do que parecia. Uma bifurcação' +
+        '\nque não está desenhada em lugar nenhum o faz entrar em um antigo cemitério' +
+        '\nabandonado, cercado por lápides tortas e uma neblina baixa.' +
+        '\nVultos se movem entre os túmulos - saqueadores que vasculham as ruínas em' +
+        '\nbusca do mesmo segredo que você. Não ha tempo para escolhas. Você luta.');
     (0, Auxiliares_1.stop)();
     (0, Confronto_1.iniciarConfronto)(personagem, inimigo);
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nO combate e rapido e bruto. Voce derrota os saqueadores, mas sai com' +
-        '\num corte no braco.');
+    (0, Cores_1.cyan)('\nO combate é rápido e bruto. Você derrota os saqueadores, mas sai com' +
+        '\num corte no braço.');
     (0, Auxiliares_1.stop)();
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nCom o corte no braco ainda ardendo, voce deixa o cemiterio para tras,' +
-        '\ndeterminado a nao cometer o mesmo erro duas vezes. O mapa rasgado parece' +
-        '\nainda menos confiavel agora do que parecia horas atras.' +
-        '\n\nApos alguns minutos caminhando, uma luz amarelada surge entre as arvores' +
-        '\n- um pequeno armazem de madeira, isolado na beira da estrada, com fumaca' +
-        '\nsaindo da chamine. Uma placa gasta balanca no vento: "ARMAZEM DO ELFO LUCIO".' +
+    (0, Cores_1.cyan)('\nCom o corte no braço ainda ardendo, você deixa o cemitério para tras,' +
+        '\ndeterminado a não cometer o mesmo erro duas vezes. O mapa rasgado parece' +
+        '\nainda menos confiável agora do que parecia horas atras.' +
+        '\n\nApos alguns minutos caminhando, uma luz amarelada surge entre as árvores' +
+        '\n- um pequeno armazém de madeira, isolado na beira da estrada, com fumaça' +
+        '\nsaindo da chaminé. Uma placa gasta balança no vento: "ARMAZEM DO ELFO LUCIO".' +
         '\n\nDepois do que acabou de enfrentar, parece um bom lugar para recuperar o' +
         '\nfolego - e talvez gastar o que sobrou de ouro antes de entrar nas catacumbas' +
         '\nde verdade.');
@@ -315,32 +313,33 @@ exports.caminho2Pt2 = caminho2Pt2;
 const parte3 = (personagem) => {
     (0, Auxiliares_1.clear)();
     if (personagem.getTemMoeda()) {
-        (0, Cores_1.cyan)('\nVoce deixa o armazem para tras e reTom o caminho ate as Catacumbas de' +
-            '\nValdoren. Apos horas caminhando, finalmente avista a entrada: um portao' +
-            '\nde pedra coberto por simbolos antigos, que voltaram a brilhar com uma' +
+        (0, Cores_1.cyan)('\nVocê deixa o armazém para tras e retoma o caminho até as Catacumbas de' +
+            '\nValdoren. Após horas caminhando, finalmente avista a entrada: um portão' +
+            '\nde pedra coberto por símbolos antigos, que voltaram a brilhar com uma' +
             '\nluz azulada fraca.' +
             '\n\nAo se aproximar, a moeda em seu bolso esquenta de leve, como se' +
-            '\nreconhecesse o simbolo gravado na pedra. Por um instante, voce sente' +
-            '\nque nao esta sozinho - que algo, la dentro, ja sabe que voce chegou.');
+            '\nreconhecesse o símbolo gravado na pedra. Por um instante, você sente' +
+            '\nque não está sozinho - que algo, la dentro, ja sabe que você chegou.');
     }
     else {
-        (0, Cores_1.cyan)('\nVoce deixa o armazem para tras e reTom o caminho ate as Catacumbas de' +
-            '\nValdoren. Apos horas caminhando, finalmente avista a entrada: um portao' +
-            '\nde pedra coberto por simbolos antigos, que voltaram a brilhar com uma' +
+        (0, Cores_1.cyan)('\nVocê deixa o armazém para tras e retoma o caminho até as Catacumbas de' +
+            '\nValdoren. Após horas caminhando, finalmente avista a entrada: um portão' +
+            '\nde pedra coberto por símbolos antigos, que voltaram a brilhar com uma' +
             '\nluz azulada fraca.' +
-            '\n\nVoce nao sente nada alem do peso do proprio cansaco. So resta decidir' +
+            '\n\nVocê não sente nada alem do peso do próprio cansaco. So resta decidir' +
             '\npor onde entrar.');
     }
     (0, Cores_1.white)('\n\nNo ar, um cheiro de terra molhada e metal. As tochas na parede ainda' +
-        '\nardem, embora ninguem deveria estar ali ha seculos.');
+        '\nardem, embora ninguém deveria estar ali ha séculos.');
     (0, Auxiliares_1.stop)();
     while (true) {
-        const escolhaParte3 = Number(Auxiliares_1.ask.question((0, Cores_1.blue)('\n1- Seguir o corredor principal (mais largo e iluminado, mas vigiado)' +
+        (0, Cores_1.blue)('\n1- Seguir o corredor principal (mais largo e iluminado, mas vigiado)' +
             '\n2- Descer por uma escada lateral (estreita, escura e silenciosa)' +
-            '\n3- Sair do game' +
-            '\nEscolha: ')));
-        if (escolhaParte3 < 1 || escolhaParte3 > 3) {
-            (0, Cores_1.red)('Opcao invalida!');
+            '\n3- Sair do game');
+        const escolhaParte3 = Number(Auxiliares_1.ask.question('Escolha: '));
+        let opcaoInvalida = escolhaParte3 === 1 || escolhaParte3 === 2 || escolhaParte3 === 3;
+        if (!opcaoInvalida) {
+            (0, Cores_1.red)('Opção inválida!');
             continue;
         }
         switch (escolhaParte3) {
@@ -351,7 +350,7 @@ const parte3 = (personagem) => {
                 (0, exports.caminho2Pt3)(personagem);
                 break;
             case 3:
-                (0, Cores_1.white)('Saindo...');
+                (0, Auxiliares_1.consoleSaindo)();
                 process.exit();
         }
         break;
@@ -361,11 +360,11 @@ exports.parte3 = parte3;
 //Caso personagem escolha SEGUIR O CORREDOR PRINCIPAL
 const caminho1Pt3 = (personagem) => {
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nVoce segue pelo corredor principal, mais largo e iluminado por tochas' +
-        '\nque nao deveriam mais estar acesas. O caminho desce suavemente, e o som' +
-        '\nde vozes distantes comeca a ecoar pelas paredes de pedra.' +
-        '\n\nQuanto mais voce avanca, mais claro fica: voce nao esta sozinho aqui' +
-        '\nembaixo - e quem quer que esteja la na frente, esta fazendo barulho' +
+    (0, Cores_1.cyan)('\nVocê segue pelo corredor principal, mais largo e iluminado por tochas' +
+        '\nque não deveriam mais estar acesas. O caminho desce suavemente, e o som' +
+        '\nde vozes distantes começa a ecoar pelas paredes de pedra.' +
+        '\n\nQuanto mais você avança, mais claro fica: você não está sozinho aqui' +
+        '\nembaixo - e quem quer que esteja la na frente, está fazendo barulho' +
         '\no suficiente para ser ouvido de longe.');
     (0, Auxiliares_1.stop)();
     (0, exports.parte4CorredorPrincipal)(personagem, fantasma);
@@ -374,13 +373,13 @@ exports.caminho1Pt3 = caminho1Pt3;
 //Caso personagem escolha DESCER PELA ESCADA LATERAL
 const caminho2Pt3 = (personagem) => {
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nVoce opta pela escada lateral, estreita e sem luz alguma. Cada degrau' +
-        '\nrange sob seus pes, e o silencio ali embaixo e pesado demais para ser' +
+    (0, Cores_1.cyan)('\nVocê opta pela escada lateral, estreita e sem luz alguma. Cada degrau' +
+        '\nrange sob seus pés, e o silêncio ali embaixo é pesado demais para ser' +
         '\nconfortavel.' +
-        '\n\nApos descer o que parecem ser dezenas de degraus, voce chega a uma' +
-        '\ncamara antiga. Ossos estao cuidadosamente organizados pelo chao, formando' +
-        '\npadroes que claramente nao sao obra do acaso. No centro, uma inscricao' +
-        '\ngravada na pedra avisa: "O que dorme aqui nao sonha. Espera."');
+        '\n\nApos descer o que parecem ser dezenas de degraus, você chega a uma' +
+        '\ncamara antiga. Ossos estão cuidadosamente organizados pelo chão, formando' +
+        '\npadroes que claramente não sao obra do acaso. No centro, uma inscricao' +
+        '\ngravada na pedra avisa: "O que dorme aqui não sonha. Espera."');
     (0, Auxiliares_1.stop)();
     (0, exports.parte4EscadaLateral)(personagem);
 };
@@ -388,46 +387,47 @@ exports.caminho2Pt3 = caminho2Pt3;
 //PARTE 4
 const parte4CorredorPrincipal = (personagem, inimigo) => {
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nO corredor termina em um salao cerimonial imenso. Figuras encapuzadas' +
-        '\nse movem ao redor de um pilar rachado no centro - o proprio selo,' +
-        '\ngravado com o mesmo simbolo do sino da Catedral.');
+    (0, Cores_1.cyan)('\nO corredor termina em um salão cerimonial imenso. Figuras encapuzadas' +
+        '\nse movem ao redor de um pilar rachado no centro - o próprio selo,' +
+        '\ngravado com o mesmo símbolo do sino da Catedral.');
     (0, Auxiliares_1.stop)();
     if (personagem.getReputacao() >= 15) {
         (0, Auxiliares_1.clear)();
-        (0, Cores_1.cyan)('\nUm dos encapuzados se vira e hesita ao reconhecer voce. Rumores' +
-            '\nsobre um forasteiro confiavel ja correram por Ravenfall - ele parece' +
-            '\ninseguro sobre atacar ou nao.');
+        (0, Cores_1.cyan)('\nUm dos encapuzados se vira e hesita ao reconhecer você. Rumores' +
+            '\nsobre um forasteiro confiável ja correram por Ravenfall - ele parece' +
+            '\ninseguro sobre atacar ou não.');
         (0, Cores_1.white)('\n(Sua reputacao alta abriu uma chance de negociar.)');
         (0, Auxiliares_1.stop)();
     }
     else {
         (0, Auxiliares_1.clear)();
-        (0, Cores_1.cyan)('\nEles nem hesitam. Para eles, voce e apenas mais um intruso a ser' +
+        (0, Cores_1.cyan)('\nEles nem hesitam. Para eles, você e apenas mais um intruso a ser' +
             '\neliminado. As figuras avancam.');
         (0, Auxiliares_1.stop)();
     }
-    (0, Cores_1.cyan)('\nEnquanto as figuras recuam, uma presenca gelada Tom forma no centro' +
-        '\ndo salao - o verdadeiro guardiao do ritual nao e humano.');
+    (0, Cores_1.cyan)('\nEnquanto as figuras recuam, uma presença gelada se forma no centro' +
+        '\ndo salão - o verdadeiro guardião do ritual não e humano.');
     (0, Confronto_1.iniciarConfronto)(personagem, inimigo);
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nO combate e intenso, mas voce consegue dispersar os encapuzados.' +
+    (0, Cores_1.cyan)('\nO combate é intenso, mas você consegue dispersar os encapuzados.' +
         '\nAlguns fogem pelos corredores; outros caem.');
     (0, Auxiliares_1.stop)();
     while (true) {
-        const escolhaSaque = Number(Auxiliares_1.ask.question((0, Cores_1.blue)('\n1- Revistar os corpos em busca de valores' +
+        (0, Cores_1.blue)('\n1- Revistar os corpos em busca de valores' +
             '\n2- Seguir em frente sem tocar em nada' +
-            '\n3- Sair do game' +
-            '\nEscolha: ')));
-        if (escolhaSaque < 1 || escolhaSaque > 3) {
-            (0, Cores_1.red)('Opcao invalida!');
+            '\n3- Sair do game');
+        const escolhaSaque = Number(Auxiliares_1.ask.question('Escolha: '));
+        let opcaoInvalida = escolhaSaque === 1 || escolhaSaque === 2 || escolhaSaque === 3;
+        if (!opcaoInvalida) {
+            (0, Cores_1.red)('Opção inválida!');
             continue;
         }
         switch (escolhaSaque) {
             case 1:
                 (0, Auxiliares_1.clear)();
-                (0, Cores_1.cyan)('\nVoce revista os corpos rapidamente. Encontra uma bolsa com' +
+                (0, Cores_1.cyan)('\nVocê revista os corpos rapidamente. Encontra uma bolsa com' +
                     '\nmoedas, mas a sensacao de profanar os mortos - ou o que sobrou' +
-                    '\ndeles - nao te deixa em paz.');
+                    '\ndeles - não te deixa em paz.');
                 personagem.setOuro(15);
                 personagem.setReputacao(-5);
                 (0, Cores_1.white)('\n(+15 de ouro, -5 de reputacao)');
@@ -435,12 +435,12 @@ const parte4CorredorPrincipal = (personagem, inimigo) => {
                 break;
             case 2:
                 (0, Auxiliares_1.clear)();
-                (0, Cores_1.cyan)('\nVoce decide nao tocar em nada. Seja la o que estivesse' +
-                    '\nacontecendo aqui, nao e sua parte nisso.');
+                (0, Cores_1.cyan)('\nVocê decide não tocar em nada. Seja la o que estivesse' +
+                    '\nacontecendo aqui, não e sua parte nisso.');
                 (0, Auxiliares_1.stop)();
                 break;
             case 3:
-                (0, Cores_1.white)('Saindo...');
+                (0, Auxiliares_1.consoleSaindo)();
                 process.exit();
         }
         break;
@@ -451,12 +451,13 @@ exports.parte4CorredorPrincipal = parte4CorredorPrincipal;
 const parte4EscadaLateral = (personagem) => {
     (0, Auxiliares_1.clear)();
     while (true) {
-        const escolhaParte4 = Number(Auxiliares_1.ask.question((0, Cores_1.blue)('\n1- Confrontar os responsaveis diretamente' +
-            '\n2- Recuar e sabotar o ritual em silencio' +
-            '\n3- Sair do game' +
-            '\nEscolha: ')));
-        if (escolhaParte4 < 1 || escolhaParte4 > 3) {
-            (0, Cores_1.red)('Opcao invalida!');
+        (0, Cores_1.blue)('\n1- Confrontar os responsáveis diretamente' +
+            '\n2- Recuar e sabotar o ritual em silêncio' +
+            '\n3- Sair do game');
+        const escolhaParte4 = Number(Auxiliares_1.ask.question('Escolha: '));
+        let opcaoInvalida = escolhaParte4 === 1 || escolhaParte4 === 2 || escolhaParte4 === 3;
+        if (!opcaoInvalida) {
+            (0, Cores_1.red)('Opção inválida!');
             continue;
         }
         switch (escolhaParte4) {
@@ -467,7 +468,7 @@ const parte4EscadaLateral = (personagem) => {
                 (0, exports.caminho2Pt4)(personagem);
                 break;
             case 3:
-                (0, Cores_1.white)('Saindo...');
+                (0, Auxiliares_1.consoleSaindo)();
                 process.exit();
         }
         break;
@@ -477,21 +478,21 @@ exports.parte4EscadaLateral = parte4EscadaLateral;
 //Caso personagem escolha CONFRONTAR
 const caminho1Pt4 = (personagem, inimigo) => {
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nVoce avanca sem hesitar, surpreendendo quem quer que estivesse por' +
+    (0, Cores_1.cyan)('\nVocê avança sem hesitar, surpreendendo quem quer que estivesse por' +
         '\nperto. O confronto e curto, mas brutal - e barulhento demais para' +
         '\npassar despercebido.');
     personagem.setReputacao(-5);
-    (0, Cores_1.white)('\n(-5 de reputacao: a violencia no local nao passou despercebida)');
+    (0, Cores_1.white)('\n(-5 de reputacao: a violência no local não passou despercebida)');
     (0, Auxiliares_1.stop)();
-    (0, Cores_1.cyan)('\nEntre os ossos espalhados pelo chao, uma luz fraca e doentia comeca' +
-        '\na pulsar. O que parecia ser apenas uma camara vazia revela sua' +
-        '\nverdadeira guardia: uma fada corrompida, atraida pelo barulho, com' +
-        '\nasas rasgadas e um brilho verde-palido nos olhos - tudo o que restou' +
+    (0, Cores_1.cyan)('\nEntre os ossos espalhados pelo chão, uma luz fraca e doentia começa' +
+        '\na pulsar. O que parecia ser apenas uma câmara vazia revela sua' +
+        '\nverdadeira guardiã: uma fada corrompida, atraída pelo barulho, com' +
+        '\nasas rasgadas e um brilho verde-pálido nos olhos - tudo o que restou' +
         '\nde uma criatura que um dia foi bela.');
     (0, Auxiliares_1.stop)();
     (0, Confronto_1.iniciarConfronto)(personagem, inimigo);
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nVoce vence o confronto, mas sem tempo para procurar nada alem do' +
+    (0, Cores_1.cyan)('\nVocê vence o confronto, mas sem tempo para procurar nada alem do' +
         '\nque precisa. Segue em frente, ofegante.');
     (0, Auxiliares_1.stop)();
     (0, exports.parte5)(personagem);
@@ -500,47 +501,64 @@ exports.caminho1Pt4 = caminho1Pt4;
 //Caso personagem escolha SABOTAR EM SILENCIO
 const caminho2Pt4 = (personagem) => {
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nVoce se move com cuidado, evitando qualquer confronto direto. Entre' +
+    (0, Cores_1.cyan)('\nVocê se move com cuidado, evitando qualquer confronto direto. Entre' +
         '\nas sombras, encontra um pequeno bau escondido atras de uma pilastra -' +
         '\nesquecido ha tempos, mas ainda com algumas moedas dentro.');
     personagem.setOuro(10);
     (0, Cores_1.white)('\n(+10 de ouro)');
     (0, Auxiliares_1.stop)();
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nCom paciencia, voce sabota o mecanismo do ritual sem ser notado.' +
-        '\nRavenfall jamais saberia o quanto isso custou - mas voce sabe.');
+    (0, Cores_1.cyan)('\nCom paciencia, você sabota o mecanismo do ritual sem ser notado.' +
+        '\nRavenfall jamais saberia o quanto isso custou - mas você sabe.');
     personagem.setReputacao(5);
     (0, Cores_1.white)('\n(+5 de reputacao: sua discricao evitou um banho de sangue)');
     (0, Auxiliares_1.stop)();
     (0, exports.parte5)(personagem);
 };
 exports.caminho2Pt4 = caminho2Pt4;
+// EXPLORAÇÃO: ENCONTRAR ITENS
+const encontrarItens = (personagem) => {
+    (0, Auxiliares_1.clear)();
+    (0, Cores_1.cyan)('\nVocê encontra uma pequena sala escondida atrás de uma parede quebrada.' +
+        '\nNo chão há uma mochila antiga coberta de poeira. Dentro dela, você encontra' +
+        '\nalguns objetos que podem ser úteis na jornada.' +
+        '\n\nHá uma poção simples, uma chave enferrujada e algumas moedas antigas.' +
+        '\nA poção pode ser útil em um momento de perigo, enquanto a chave parece' +
+        '\npertencer a alguma porta antiga das catacumbas.' +
+        '\n\nVocê decide levar tudo o que encontrou.');
+    personagem.setOuro(10);
+    (0, Cores_1.white)('\n(+10 de ouro)');
+    (0, Auxiliares_1.stop)();
+};
+exports.encontrarItens = encontrarItens;
 //PARTE 5
 const parte5 = (personagem) => {
     (0, Auxiliares_1.clear)();
+    (0, exports.encontrarItens)(personagem);
     if (personagem.getTemMoeda()) {
-        (0, Cores_1.cyan)('\nEntre os destroços do ritual, voce encontra documentos antigos' +
+        (0, Cores_1.cyan)('\nEntre os destroços do ritual, você encontra documentos antigos' +
             '\nescondidos atras do pilar rachado. A moeda em seu bolso combina' +
-            '\nperfeitamente com um encaixe vazio nos papeis - ela nao era apenas' +
+            '\nperfeitamente com um encaixe vazio nos papéis - ela não era apenas' +
             '\num achado qualquer. Era parte do mecanismo do selo o tempo todo.');
     }
     else {
-        (0, Cores_1.cyan)('\nEntre os destroços do ritual, voce encontra documentos antigos' +
+        (0, Cores_1.cyan)('\nEntre os destroços do ritual, você encontra documentos antigos' +
             '\nescondidos atras do pilar rachado. Eles revelam a verdadeira' +
-            '\nnatureza do selo: os antigos reis de Valdoren nao seculo trancaram' +
+            '\nnatureza do selo: os antigos reis de Valdoren não simplesmente trancaram' +
             '\num monstro, mas um poder capaz de reescrever quem governa o reino.');
     }
     (0, Auxiliares_1.stop)();
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.white)('\nAgora voce precisa decidir o que fazer com essa verdade - e com o' +
+    (0, Cores_1.white)('\nAgora você precisa decidir o que fazer com essa verdade - e com o' +
         '\nque resta do selo.');
     while (true) {
-        const escolhaParte5 = Number(Auxiliares_1.ask.question((0, Cores_1.blue)('\n1- Selar novamente as catacumbas para sempre' +
+        (0, Cores_1.blue)('\n1- Selar novamente as catacumbas para sempre' +
             '\n2- Deixar o selo se romper' +
-            '\n3- Sair do game' +
-            '\nEscolha: ')));
-        if (escolhaParte5 < 1 || escolhaParte5 > 3) {
-            (0, Cores_1.red)('Opcao invalida!');
+            '\n3- Sair do game');
+        const escolhaParte5 = Number(Auxiliares_1.ask.question('Escolha: '));
+        let opcaoInvalida = escolhaParte5 === 1 || escolhaParte5 === 2 || escolhaParte5 === 3;
+        if (!opcaoInvalida) {
+            (0, Cores_1.red)('Opção inválida!');
             continue;
         }
         switch (escolhaParte5) {
@@ -551,7 +569,7 @@ const parte5 = (personagem) => {
                 (0, exports.caminho2Pt5)(personagem);
                 break;
             case 3:
-                (0, Cores_1.white)('Saindo...');
+                (0, Auxiliares_1.consoleSaindo)();
                 process.exit();
         }
         break;
@@ -561,11 +579,11 @@ exports.parte5 = parte5;
 //Caso personagem escolha SELAR NOVAMENTE
 const caminho1Pt5 = (personagem) => {
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nVoce decide esconder essa verdade do mundo, como fizeram os reis' +
-        '\nantigos antes de voce. Ninguem em Ravenfall precisa saber o que' +
+    (0, Cores_1.cyan)('\nVocê decide esconder essa verdade do mundo, como fizeram os reis' +
+        '\nantigos antes de você. Ninguem em Ravenfall precisa saber o que' +
         '\nquase aconteceu aqui embaixo.');
     personagem.setReputacao(-5);
-    (0, Cores_1.white)('\n(-5 de reputacao: guardar segredos tem um preco, mesmo sem ninguem saber)');
+    (0, Cores_1.white)('\n(-5 de reputacao: guardar segredos tem um preço, mesmo sem ninguém saber)');
     (0, Auxiliares_1.stop)();
     (0, exports.parte6)(personagem, dragao, false);
 };
@@ -573,11 +591,11 @@ exports.caminho1Pt5 = caminho1Pt5;
 //Caso personagem escolha DEIXAR O SELO SE ROMPER
 const caminho2Pt5 = (personagem) => {
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nVoce decide que o que foi aprisionado merece uma chance de ser' +
-        '\njulgado, nao esquecido para sempre. E uma aposta - e talvez Ravenfall' +
-        '\nnao concorde com ela.');
+    (0, Cores_1.cyan)('\nVocê decide que o que foi aprisionado merece uma chance de ser' +
+        '\njulgado, não esquecido para sempre. E uma aposta - e talvez Ravenfall' +
+        '\nnão concorde com ela.');
     personagem.setReputacao(5);
-    (0, Cores_1.white)('\n(+5 de reputacao: a coragem da escolha impressiona quem esta por perto)');
+    (0, Cores_1.white)('\n(+5 de reputacao: a coragem da escolha impressiona quem está por perto)');
     (0, Auxiliares_1.stop)();
     (0, exports.parte6)(personagem, dragao, true);
 };
@@ -585,52 +603,115 @@ exports.caminho2Pt5 = caminho2Pt5;
 //FINAL
 const parte6 = (personagem, inimigo, romperSelo) => {
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nAntes de seguir para o coracao das catacumbas, voce passa por uma' +
+    (0, Cores_1.cyan)('\nAntes de seguir para o coracao das catacumbas, você passa por uma' +
         '\npequena barraca improvisada, deixada para tras por algum viajante -' +
-        '\nou talvez por alguem que nao conseguiu voltar. Ainda ha itens' +
+        '\nou talvez por alguém que não conseguiu voltar. Ainda ha itens' +
         '\nutilizaveis ali. Talvez valha a pena gastar o que resta do seu ouro' +
         '\nantes do que vem pela frente.');
     (0, Auxiliares_1.stop)();
     (0, Loja_1.loja)(personagem);
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nVoce reTom o caminho ate a camara final. La, um guardiao do selo' +
-        '\nse ergue diante de voce - a ultima linha de defesa entre voce e o' +
+    (0, Cores_1.cyan)('\nVocê retoma o caminho até a câmara final. La, um guardião do selo' +
+        '\nse ergue diante de você - a última linha de defesa entre você e o' +
         '\ndestino de Valdoren.');
     (0, Auxiliares_1.stop)();
     (0, Confronto_1.iniciarConfronto)(personagem, inimigo);
     (0, Auxiliares_1.clear)();
-    (0, Cores_1.cyan)('\nApos um combate exaustivo, o guardiao finalmente cai, e o caminho' +
-        '\nate o selo esta livre.');
+    (0, Cores_1.cyan)('\nApos um combate exaustivo, o guardião finalmente cai, e o caminho' +
+        '\nate o selo está livre.');
     (0, Auxiliares_1.stop)();
     (0, Auxiliares_1.clear)();
     if (romperSelo) {
         if (personagem.getReputacao() >= 15) {
             (0, Cores_1.white)('\n=== FINAL: O Despertar Aceito ===');
-            (0, Cores_1.cyan)('\nO selo se rompe com um som que ninguem em Ravenfall esquecera.' +
+            (0, Cores_1.cyan)('\nO selo se rompe com um som que ninguém em Ravenfall esquecera.' +
                 '\nA figura antiga que emerge reconhece seu nome entre os poucos' +
-                '\nque confiaram em voce. Ravenfall recebe essa nova era com' +
-                '\ncautela, mas nao com panico - sua reputacao abriu caminho para' +
-                '\na aceitacao.');
+                '\nque confiaram em você. Ravenfall recebe essa nova era com' +
+                '\ncautela, mas não com pânico - sua reputacao abriu caminho para' +
+                '\na aceitação.');
         }
         else {
             (0, Cores_1.white)('\n=== FINAL: O Despertar Temido ===');
-            (0, Cores_1.cyan)('\nO selo se rompe, mas sem ninguem em Ravenfall disposto a' +
-                '\nconfiar no que vem a seguir. Voce se ve sozinho diante de uma' +
-                '\nfigura antiga e de uma cidade que ja decidiu temer voce.');
+            (0, Cores_1.cyan)('\nO selo se rompe, mas sem ninguém em Ravenfall disposto a' +
+                '\nconfiar no que vem a seguir. Você se ve sozinho diante de uma' +
+                '\nfigura antiga e de uma cidade que ja decidiu temer você.');
         }
     }
     else {
         if (personagem.getTemMoeda()) {
-            (0, Cores_1.white)('\n=== FINAL: O Guardiao Silencioso ===');
-            (0, Cores_1.cyan)('\nUsando a moeda como parte do ritual de selagem, voce nao' +
-                '\napenas esconde a verdade, mas se torna, sem saber, o novo' +
-                '\nguardiao do selo. Anos depois, voce ainda sente um leve calor' +
-                '\nna moeda em noites de lua cheia.');
+            (0, Auxiliares_1.clear)();
+            (0, Cores_1.white)('\n=== FINAL SECRETO: O CORAÇÃO DE VALDOREN ===');
+            (0, Cores_1.cyan)('\nA moeda começa a brilhar intensamente em sua mão.' +
+                '\nO símbolo gravado nela deixa de ser apenas uma marca: ele se transforma' +
+                '\nem uma pequena runa azul, exatamente igual à que existe no centro do selo.' +
+                '\n\nUma parte da parede se move lentamente, revelando uma câmara que esteve' +
+                '\nescondida por séculos. No centro há um pedestal de pedra com uma inscrição:' +
+                '\n\n"Somente aquele que encontrou a chave pode escolher o destino de Valdoren."');
+            (0, Auxiliares_1.stop)();
+            while (true) {
+                (0, Cores_1.blue)('\n1- Colocar a moeda no pedestal' +
+                    '\n2- Guardar a moeda e fechar a câmara' +
+                    '\n3- Sair do game');
+                const escolhaMoedaFinal = Number(Auxiliares_1.ask.question('Escolha: '));
+                let opcaoInvalida = escolhaMoedaFinal === 1 || escolhaMoedaFinal === 2 || escolhaMoedaFinal === 3;
+                if (!opcaoInvalida) {
+                    (0, Cores_1.red)('Opção inválida!');
+                    continue;
+                }
+                switch (escolhaMoedaFinal) {
+                    case 1:
+                        (0, Auxiliares_1.clear)();
+                        (0, Cores_1.cyan)('\nVocê coloca a moeda no pedestal.' +
+                            '\n\nPor alguns segundos, nada acontece.' +
+                            '\nEntão, as paredes das Catacumbas começam a tremer.' +
+                            '\nO selo se fecha completamente, mas uma energia antiga percorre seu corpo.' +
+                            '\n\nUma voz ecoa pela câmara:' +
+                            '\n"Você não encontrou apenas uma moeda. Você encontrou a chave."');
+                        personagem.setOuro(50);
+                        personagem.setReputacao(20);
+                        (0, Cores_1.white)('\n(+50 de ouro, +20 de reputação)');
+                        (0, Auxiliares_1.stop)();
+                        (0, Auxiliares_1.clear)();
+                        (0, Cores_1.white)('\n=== FINAL VERDADEIRO: O NOVO GUARDIÃO ===');
+                        (0, Cores_1.cyan)('\nA câmara secreta se transforma em um santuário antigo.' +
+                            '\nVocê encontra um baú contendo moedas de Valdoren e um símbolo real.' +
+                            '\n\nA partir daquele dia, Ravenfall passa a contar uma nova lenda:' +
+                            '\nA lenda do viajante que chegou à cidade sem saber seu destino,' +
+                            '\nencontrou a moeda perdida e impediu que o poder de Valdoren' +
+                            '\ncaísse nas mãos erradas.' +
+                            '\n\nVocê não destruiu o poder.' +
+                            '\nVocê se tornou seu guardião.');
+                        (0, Auxiliares_1.stop)();
+                        (0, Cores_1.white)('\n\nFIM DE JOGO. Obrigado por jogar!');
+                        process.exit();
+                        break;
+                    case 2:
+                        (0, Auxiliares_1.clear)();
+                        (0, Cores_1.cyan)('\nVocê olha para a moeda uma última vez e decide não colocá-la no pedestal.' +
+                            '\n\nA passagem secreta começa a desaparecer, mas antes de fechar,' +
+                            '\nvocê percebe uma inscrição escondida na parede:' +
+                            '\n\n"Quando Valdoren precisar novamente, a moeda encontrará seu próximo dono."');
+                        personagem.setReputacao(10);
+                        (0, Cores_1.white)('\n(+10 de reputação)');
+                        (0, Auxiliares_1.stop)();
+                        (0, Cores_1.white)('\n\n=== FINAL: O GUARDIÃO SILENCIOSO ===');
+                        (0, Cores_1.cyan)('\nVocê deixa as catacumbas levando consigo o segredo da moeda.' +
+                            '\nTalvez sua aventura em Valdoren tenha terminado...' +
+                            '\nmas a história da moeda ainda não.');
+                        (0, Auxiliares_1.stop)();
+                        (0, Cores_1.white)('\n\nFIM DE JOGO. Obrigado por jogar!');
+                        process.exit();
+                        break;
+                    case 3:
+                        (0, Auxiliares_1.consoleSaindo)();
+                        process.exit();
+                }
+            }
         }
         else {
-            (0, Cores_1.white)('\n=== FINAL: O Silencio Eterno ===');
-            (0, Cores_1.cyan)('\nO selo e reforcado, mas de forma incompleta e instavel.' +
-                '\nRavenfall nunca sabera a verdade, mas o selo pode, um dia,' +
+            (0, Cores_1.white)('\n=== FINAL: O SILÊNCIO ETERNO ===');
+            (0, Cores_1.cyan)('\nO selo é reforçado, mas de forma incompleta e instável.' +
+                '\nRavenfall nunca saberá a verdade, mas o selo pode, um dia,' +
                 '\nvoltar a se romper.');
         }
     }

@@ -8,17 +8,10 @@ const Pocao_1 = require("../Inventario/Pocao");
 const TiposENUMs_1 = require("../Inventario/TiposENUMs");
 const ask = require('readline-sync');
 class Personagem {
-    nome;
-    classe;
-    vida;
-    ataque;
-    defesa;
-    ouro;
-    reputacao;
-    usouAtaqueEspecial = false;
-    inventario = [];
-    moeda = false;
     constructor(nome, classe, vida, ataque, defesa, ouro, reputacao) {
+        this.usouAtaqueEspecial = false;
+        this.inventario = [];
+        this.moeda = false;
         this.nome = nome;
         this.classe = classe;
         this.vida = vida;

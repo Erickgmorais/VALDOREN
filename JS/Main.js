@@ -3,8 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Auxiliares_1 = require("./Auxiliares/Auxiliares");
 const Caminhos_1 = require("./Caminhos/Caminhos");
 const CriaPersonagem_1 = require("./Personagens/CriaPersonagem");
+//Logger de apresentação do game.
+(0, Auxiliares_1.tituloJogo)();
+//Criação Personagem
 let personagem = (0, CriaPersonagem_1.criaPersonagem)();
 (0, Auxiliares_1.clear)();
 (0, Auxiliares_1.arteInfoJogo)();
 (0, Auxiliares_1.stop)();
+//Inicio Historia
 (0, Caminhos_1.inicio)(personagem);

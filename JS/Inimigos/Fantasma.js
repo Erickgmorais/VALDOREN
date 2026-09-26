@@ -5,11 +5,13 @@ exports.Fantasma = void 0;
 const Auxiliares_1 = require("../Auxiliares/Auxiliares");
 const Cores_1 = require("../Auxiliares/Cores");
 class Fantasma {
-    nome = 'Fantasma do Clerigo';
-    vida = 50;
-    ataque = 15;
-    defesa = 3;
-    habilidade = 'Esquiva';
+    constructor() {
+        this.nome = 'Fantasma do Clerigo';
+        this.vida = 50;
+        this.ataque = 15;
+        this.defesa = 3;
+        this.habilidade = 'Esquiva';
+    }
     getNome() {
         return this.nome;
     }

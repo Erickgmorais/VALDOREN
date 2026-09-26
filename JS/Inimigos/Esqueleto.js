@@ -6,11 +6,13 @@ exports.Esqueleto = void 0;
 const Auxiliares_1 = require("../Auxiliares/Auxiliares");
 const Cores_1 = require("../Auxiliares/Cores");
 class Esqueleto {
-    nome = 'Esqueleto das Trevas';
-    vida = 40;
-    ataque = 15;
-    defesa = 0;
-    habilidade = 'Roubo de vida do oponente';
+    constructor() {
+        this.nome = 'Esqueleto das Trevas';
+        this.vida = 40;
+        this.ataque = 15;
+        this.defesa = 0;
+        this.habilidade = 'Roubo de vida do oponente';
+    }
     getNome() {
         return this.nome;
     }

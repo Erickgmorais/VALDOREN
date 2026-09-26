@@ -3,10 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Moeda = void 0;
 const TiposENUMs_1 = require("./TiposENUMs");
 class Moeda {
-    nome;
-    tipo = TiposENUMs_1.TipoItem.MOEDA; // Moeda indice 1
-    usada = false;
     constructor(nome) {
+        this.tipo = TiposENUMs_1.TipoItem.MOEDA; // Moeda indice 1
+        this.usada = false;
         this.nome = nome;
     }
     getNome() {

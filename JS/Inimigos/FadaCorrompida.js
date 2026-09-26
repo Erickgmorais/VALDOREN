@@ -5,11 +5,13 @@ exports.FadaCorrompida = void 0;
 const Auxiliares_1 = require("../Auxiliares/Auxiliares");
 const Cores_1 = require("../Auxiliares/Cores");
 class FadaCorrompida {
-    nome = 'Fada Corrompida';
-    vida = 60;
-    ataque = 12;
-    defesa = 3;
-    habilidade = 'Dano em dobro';
+    constructor() {
+        this.nome = 'Fada Corrompida';
+        this.vida = 60;
+        this.ataque = 12;
+        this.defesa = 3;
+        this.habilidade = 'Dano em dobro';
+    }
     getNome() {
         return this.nome;
     }

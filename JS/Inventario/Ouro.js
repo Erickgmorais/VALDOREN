@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Ouro = void 0;
 const TiposENUMs_1 = require("./TiposENUMs");
 class Ouro {
-    nome = 'Ouro';
-    tipo = TiposENUMs_1.TipoItem.OURO; // Tipo indice 2
-    qtd = 0;
     constructor(ouro) {
+        this.nome = 'Ouro';
+        this.tipo = TiposENUMs_1.TipoItem.OURO; // Tipo indice 2
+        this.qtd = 0;
         this.qtd = ouro;
     }
     getNome() {

@@ -4,11 +4,13 @@ exports.Saqueador = void 0;
 //Chance de roubar ouro do personagem em vez de atacar
 const Cores_1 = require("../Auxiliares/Cores");
 class Saqueador {
-    nome = 'Saqueador do Cemiterio';
-    vida = 35;
-    ataque = 10;
-    defesa = 2;
-    habilidade = 'Roubo Rapido';
+    constructor() {
+        this.nome = 'Saqueador do Cemiterio';
+        this.vida = 35;
+        this.ataque = 10;
+        this.defesa = 2;
+        this.habilidade = 'Roubo Rapido';
+    }
     getNome() {
         return this.nome;
     }

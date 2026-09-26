@@ -4,11 +4,9 @@ exports.Arma = void 0;
 const Cores_1 = require("../Auxiliares/Cores");
 const TiposENUMs_1 = require("./TiposENUMs");
 class Arma {
-    nome;
-    dano;
-    nivel = 1;
-    tipo = TiposENUMs_1.TipoItem.ARMA; // Arma índice 4
     constructor(nome, defesa) {
+        this.nivel = 1;
+        this.tipo = TiposENUMs_1.TipoItem.ARMA; // Arma índice 4
         this.nome = nome;
         this.dano = defesa;
     }

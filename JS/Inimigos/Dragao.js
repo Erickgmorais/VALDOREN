@@ -5,11 +5,13 @@ exports.Dragao = void 0;
 const Auxiliares_1 = require("../Auxiliares/Auxiliares");
 const Cores_1 = require("../Auxiliares/Cores");
 class Dragao {
-    nome = 'Dragao da montanha';
-    vida = 100;
-    ataque = 25;
-    defesa = 10;
-    habilidade = 'Conversão vida em Ataque';
+    constructor() {
+        this.nome = 'Dragao da montanha';
+        this.vida = 100;
+        this.ataque = 25;
+        this.defesa = 10;
+        this.habilidade = 'Conversão vida em Ataque';
+    }
     getNome() {
         return this.nome;
     }
