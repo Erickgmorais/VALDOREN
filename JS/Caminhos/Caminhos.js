@@ -118,7 +118,11 @@ const caminho1Pt1 = (personagem) => {
         '\nuns dizem que um culto quer reabrir um antigo selo de Valdoren; outros juram que os' +
         '\nmortos de Eryndor estão voltando. Um velho caçador, bêbado o suficiente' +
         '\npara não mentir, murmura que viu "algo com muitos olhos" saindo das' +
-        '\ncatacumbas.\n');
+        '\ncatacumbas.\n' +
+        '\nEm meio a confusão, você ouve um nome sendo repetido por alguns clientes:' +
+        '\nTom. Dizem que ele conhece as catacumbas como a palma da mão e vive' +
+        '\noferecendo seus servicos como guia para quem tiver coragem - e ouro -' +
+        '\npara pagar por isso.\n');
     (0, Auxiliares_1.stop)();
     (0, exports.parte2)(personagem);
 };
@@ -398,6 +402,46 @@ const parte4CorredorPrincipal = (personagem, inimigo) => {
             '\ninseguro sobre atacar ou não.');
         (0, Cores_1.white)('\n(Sua reputacao alta abriu uma chance de negociar.)');
         (0, Auxiliares_1.stop)();
+        while (true) {
+            (0, Cores_1.blue)('\n1- Tentar negociar com o encapuzado' +
+                '\n2- Atacar antes que ele reaja' +
+                '\n3- Sair do game');
+            const escolhaNegociacao = Number(Auxiliares_1.ask.question('Escolha: '));
+            let opcaoInvalida = escolhaNegociacao === 1 || escolhaNegociacao === 2 || escolhaNegociacao === 3;
+            if (!opcaoInvalida) {
+                (0, Cores_1.red)('Opção inválida!');
+                continue;
+            }
+            switch (escolhaNegociacao) {
+                case 1:
+                    (0, Auxiliares_1.clear)();
+                    (0, Cores_1.cyan)('\nVocê ergue as mãos, mostrando que não veio para lutar. O' +
+                        '\nencapuzado hesita, olhando para os outros, e por fim murmura' +
+                        '\nalgumas palavras: "Você não devia estar aqui... mas talvez' +
+                        '\nisso ainda sirva para alguma coisa."\n' +
+                        '\nEle entrega a você uma pequena bolsa de moedas e um fragmento' +
+                        '\nde pergaminho antes de recuar entre as sombras junto aos outros.' +
+                        '\n\n"O que vem a seguir não e problema meu. Boa sorte, forasteiro."');
+                    personagem.setOuro(20);
+                    personagem.setReputacao(10);
+                    (0, Cores_1.white)('\n(+20 de ouro, +10 de reputacao: sua fama te poupou de um confronto desnecessario)');
+                    (0, Auxiliares_1.stop)();
+                    break;
+                case 2:
+                    (0, Auxiliares_1.clear)();
+                    (0, Cores_1.cyan)('\nMesmo com a hesitação dele, você decide não arriscar e ataca' +
+                        '\nprimeiro. O encapuzado mal tem tempo de reagir antes de cair.' +
+                        '\nOs outros se dispersam, alarmados com a violência repentina.');
+                    personagem.setReputacao(-5);
+                    (0, Cores_1.white)('\n(-5 de reputacao: atacar alguém que hesitava em lutar não passou despercebido)');
+                    (0, Auxiliares_1.stop)();
+                    break;
+                case 3:
+                    (0, Auxiliares_1.consoleSaindo)();
+                    process.exit();
+            }
+            break;
+        }
     }
     else {
         (0, Auxiliares_1.clear)();
@@ -405,8 +449,9 @@ const parte4CorredorPrincipal = (personagem, inimigo) => {
             '\neliminado. As figuras avancam.');
         (0, Auxiliares_1.stop)();
     }
-    (0, Cores_1.cyan)('\nEnquanto as figuras recuam, uma presença gelada se forma no centro' +
-        '\ndo salão - o verdadeiro guardião do ritual não e humano.');
+    (0, Cores_1.cyan)('\nAntes que qualquer coisa mais aconteça, uma presença gelada toma conta' +
+        '\ndo salão - o verdadeiro guardião do ritual finalmente desperta, e não' +
+        '\ne humano.');
     (0, Confronto_1.iniciarConfronto)(personagem, inimigo);
     (0, Auxiliares_1.clear)();
     (0, Cores_1.cyan)('\nO combate é intenso, mas você consegue dispersar os encapuzados.' +
@@ -450,6 +495,11 @@ const parte4CorredorPrincipal = (personagem, inimigo) => {
 exports.parte4CorredorPrincipal = parte4CorredorPrincipal;
 const parte4EscadaLateral = (personagem) => {
     (0, Auxiliares_1.clear)();
+    (0, Cores_1.cyan)('\nAo virar um corredor estreito, você avista uma luz fraca vindo de uma' +
+        '\ncâmara adiante. Figuras encapuzadas se movem em silêncio ao redor de um' +
+        '\naltar improvisado, murmurando palavras em uma língua antiga - um ritual' +
+        '\nestá em andamento, e você chegou bem no meio dele.');
+    (0, Auxiliares_1.stop)();
     while (true) {
         (0, Cores_1.blue)('\n1- Confrontar os responsáveis diretamente' +
             '\n2- Recuar e sabotar o ritual em silêncio' +
@@ -615,6 +665,33 @@ const parte6 = (personagem, inimigo, romperSelo) => {
         '\nse ergue diante de você - a última linha de defesa entre você e o' +
         '\ndestino de Valdoren.');
     (0, Auxiliares_1.stop)();
+    // Reação do Dragão baseada na reputação acumulada durante a jornada
+    (0, Auxiliares_1.clear)();
+    if (personagem.getReputacao() >= 15) {
+        (0, Cores_1.purple)('\nO Dragão ergue a cabeça lentamente, os olhos antigos fixos em você.' +
+            '\n\n- "Ouvi falar de você em Ravenfall... o forasteiro que ajudou mais' +
+            '\ndo que destruiu." - ele murmura, sua voz ecoando como trovão distante.' +
+            '\n\n"Poucos chegam até aqui carregando tanta confiança de quem deixaram' +
+            '\npara tras. Isso não muda o que preciso fazer, mas... você tem meu' +
+            '\nrespeito antes da batalha."');
+        (0, Auxiliares_1.stop)();
+    }
+    else if (personagem.getReputacao() <= -15) {
+        (0, Cores_1.purple)('\nO Dragão solta um rosnado profundo antes mesmo de você se aproximar.' +
+            '\n\n- "Sei quem você é." - ele diz, quase com desprezo. - "O mesmo que' +
+            '\nsaqueou os mortos e traiu quem confiou em você para chegar até aqui."' +
+            '\n\n"Não veio em busca de respostas. Veio em busca de poder. E eu não' +
+            '\ntenho piedade para quem só pensa em si."');
+        (0, Cores_1.red)('\n(A fúria do Dragão parece mais intensa que o normal...)');
+        (0, Auxiliares_1.stop)();
+    }
+    else {
+        (0, Cores_1.purple)('\nO Dragão observa você em silêncio por um instante, avaliando o' +
+            '\nintruso à sua frente.' +
+            '\n\n- "Mais um. Nem melhor, nem pior que os outros que tentaram." - ele' +
+            '\ndiz, sem grande interesse. - "Vamos ver se seu destino é diferente."');
+        (0, Auxiliares_1.stop)();
+    }
     (0, Confronto_1.iniciarConfronto)(personagem, inimigo);
     (0, Auxiliares_1.clear)();
     (0, Cores_1.cyan)('\nApos um combate exaustivo, o guardião finalmente cai, e o caminho' +
@@ -684,7 +761,6 @@ const parte6 = (personagem, inimigo, romperSelo) => {
                         (0, Auxiliares_1.stop)();
                         (0, Cores_1.white)('\n\nFIM DE JOGO. Obrigado por jogar!');
                         process.exit();
-                        break;
                     case 2:
                         (0, Auxiliares_1.clear)();
                         (0, Cores_1.cyan)('\nVocê olha para a moeda uma última vez e decide não colocá-la no pedestal.' +
@@ -701,7 +777,6 @@ const parte6 = (personagem, inimigo, romperSelo) => {
                         (0, Auxiliares_1.stop)();
                         (0, Cores_1.white)('\n\nFIM DE JOGO. Obrigado por jogar!');
                         process.exit();
-                        break;
                     case 3:
                         (0, Auxiliares_1.consoleSaindo)();
                         process.exit();

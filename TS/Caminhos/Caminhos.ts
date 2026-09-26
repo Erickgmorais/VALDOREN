@@ -89,14 +89,13 @@ export const parte1 = (personagem: Personagem): void => {
     '\nAs ruas de Ravenfall estão quase vazias – portas trancadas cedo, olhares' +
     '\ndesconfiados nas janelas. No centro da praca, um sino distante ainda ecoa' +
     '\nem sua memória, embora tenha parado de tocar ha três dias.' +
-    '\nVocê ve um mapa rasgado e esfarrapado voando em meio as casas na cidade e vai até ele e o pega.' +
-        
+    
+    '\n\nVocê ve um mapa rasgado e esfarrapado voando em meio as casas na cidade e vai até ele e o pega.' +
     '\nNeste mapa, há um nome escrito na borda' +
 
-    '\nSe estiver em perigo, me procure. Ass. Mestre Averic' +
+    '\n\n"Se estiver em perigo, me procure. Ass. Mestre Averic"' +
         
-    '\nAlém disso, há um caminho traçado em vermelho no mapa que vai até a "Taverna do Corvo cinza"' +
-
+    '\n\nAlém disso, há um caminho traçado em vermelho no mapa que vai até a "Taverna do Corvo cinza"' +
     '\nVocê precisa decidir por onde comecar.');
 
     while (true) {
@@ -158,7 +157,12 @@ export const caminho1Pt1 = (personagem: Personagem) => {
     '\nuns dizem que um culto quer reabrir um antigo selo de Valdoren; outros juram que os' + 
     '\nmortos de Eryndor estão voltando. Um velho caçador, bêbado o suficiente' +
     '\npara não mentir, murmura que viu "algo com muitos olhos" saindo das' +
-    '\ncatacumbas.\n');
+    '\ncatacumbas.\n' +
+
+    '\nEm meio a confusão, você ouve um nome sendo repetido por alguns clientes:' +
+    '\nTom. Dizem que ele conhece as catacumbas como a palma da mão e vive' +
+    '\noferecendo seus servicos como guia para quem tiver coragem - e ouro -' +
+    '\npara pagar por isso.\n');
 
     stop();
     parte2(personagem);
@@ -536,6 +540,59 @@ export const parte4CorredorPrincipal = (personagem: Personagem, inimigo: Inimigo
         '\ninseguro sobre atacar ou não.');
         white('\n(Sua reputacao alta abriu uma chance de negociar.)');
         stop();
+
+        while (true) {
+            blue(
+            '\n1- Tentar negociar com o encapuzado' +
+            '\n2- Atacar antes que ele reaja' +
+            '\n3- Sair do game'
+            );
+
+            const escolhaNegociacao: number = Number(ask.question('Escolha: '));
+
+            let opcaoInvalida: boolean = escolhaNegociacao === 1 || escolhaNegociacao === 2 || escolhaNegociacao === 3;
+
+            if (!opcaoInvalida) {
+                red('Opção inválida!');
+                continue;
+            }
+
+            switch (escolhaNegociacao) {
+                case 1:
+                    clear();
+                    cyan(
+                    '\nVocê ergue as mãos, mostrando que não veio para lutar. O' +
+                    '\nencapuzado hesita, olhando para os outros, e por fim murmura' +
+                    '\nalgumas palavras: "Você não devia estar aqui... mas talvez' +
+                    '\nisso ainda sirva para alguma coisa."\n' +
+
+                    '\nEle entrega a você uma pequena bolsa de moedas e um fragmento' +
+                    '\nde pergaminho antes de recuar entre as sombras junto aos outros.' +
+                    '\n\n"O que vem a seguir não e problema meu. Boa sorte, forasteiro."');
+                    personagem.setOuro(20);
+                    personagem.setReputacao(10);
+                    white('\n(+20 de ouro, +10 de reputacao: sua fama te poupou de um confronto desnecessario)');
+                    stop();
+                    break;
+
+                case 2:
+                    clear();
+                    cyan(
+                    '\nMesmo com a hesitação dele, você decide não arriscar e ataca' +
+                    '\nprimeiro. O encapuzado mal tem tempo de reagir antes de cair.' +
+                    '\nOs outros se dispersam, alarmados com a violência repentina.');
+                    personagem.setReputacao(-5);
+                    white('\n(-5 de reputacao: atacar alguém que hesitava em lutar não passou despercebido)');
+                    stop();
+                    break;
+
+                case 3:
+                    consoleSaindo();
+                    process.exit();
+            }
+            break;
+        }
+
     } else {
         clear();
         cyan(
@@ -543,9 +600,11 @@ export const parte4CorredorPrincipal = (personagem: Personagem, inimigo: Inimigo
         '\neliminado. As figuras avancam.');
         stop();
     }
+
     cyan(
-    '\nEnquanto as figuras recuam, uma presença gelada se forma no centro' +
-    '\ndo salão - o verdadeiro guardião do ritual não e humano.');
+    '\nAntes que qualquer coisa mais aconteça, uma presença gelada toma conta' +
+    '\ndo salão - o verdadeiro guardião do ritual finalmente desperta, e não' +
+    '\ne humano.');
 
     iniciarConfronto(personagem, inimigo);
     clear();
@@ -604,10 +663,15 @@ export const parte4CorredorPrincipal = (personagem: Personagem, inimigo: Inimigo
 
 export const parte4EscadaLateral = (personagem: Personagem) => {
     clear();
+    cyan(
+    '\nAo virar um corredor estreito, você avista uma luz fraca vindo de uma' +
+    '\ncâmara adiante. Figuras encapuzadas se movem em silêncio ao redor de um' +
+    '\naltar improvisado, murmurando palavras em uma língua antiga - um ritual' +
+    '\nestá em andamento, e você chegou bem no meio dele.');
+    stop();
 
     while (true) {
         blue(
-
         '\n1- Confrontar os responsáveis diretamente' +
         '\n2- Recuar e sabotar o ritual em silêncio' +
         '\n3- Sair do game'
@@ -798,7 +862,6 @@ export const caminho2Pt5 = (personagem: Personagem) => {
     parte6(personagem, dragao, true);
 }
 
-
 //FINAL
 export const parte6 = (personagem: Personagem, inimigo: Inimigo, romperSelo: boolean) => {
     clear();
@@ -818,6 +881,37 @@ export const parte6 = (personagem: Personagem, inimigo: Inimigo, romperSelo: boo
     '\nse ergue diante de você - a última linha de defesa entre você e o' +
     '\ndestino de Valdoren.');
     stop();
+
+    // Reação do Dragão baseada na reputação acumulada durante a jornada
+    clear();
+    if (personagem.getReputacao() >= 15) {
+        purple(
+        '\nO Dragão ergue a cabeça lentamente, os olhos antigos fixos em você.' +
+        '\n\n- "Ouvi falar de você em Ravenfall... o forasteiro que ajudou mais' +
+        '\ndo que destruiu." - ele murmura, sua voz ecoando como trovão distante.' +
+        '\n\n"Poucos chegam até aqui carregando tanta confiança de quem deixaram' +
+        '\npara tras. Isso não muda o que preciso fazer, mas... você tem meu' +
+        '\nrespeito antes da batalha."');
+        stop();
+
+    } else if (personagem.getReputacao() <= -15) {
+        purple(
+        '\nO Dragão solta um rosnado profundo antes mesmo de você se aproximar.' +
+        '\n\n- "Sei quem você é." - ele diz, quase com desprezo. - "O mesmo que' +
+        '\nsaqueou os mortos e traiu quem confiou em você para chegar até aqui."' +
+        '\n\n"Não veio em busca de respostas. Veio em busca de poder. E eu não' +
+        '\ntenho piedade para quem só pensa em si."');
+        red('\n(A fúria do Dragão parece mais intensa que o normal...)');
+        stop();
+
+    } else {
+        purple(
+        '\nO Dragão observa você em silêncio por um instante, avaliando o' +
+        '\nintruso à sua frente.' +
+        '\n\n- "Mais um. Nem melhor, nem pior que os outros que tentaram." - ele' +
+        '\ndiz, sem grande interesse. - "Vamos ver se seu destino é diferente."');
+        stop();
+    }
 
     iniciarConfronto(personagem, inimigo)
     clear();
@@ -902,7 +996,7 @@ export const parte6 = (personagem: Personagem, inimigo: Inimigo, romperSelo: boo
                         stop();
                         white('\n\nFIM DE JOGO. Obrigado por jogar!');
                         process.exit();
-                        break;
+                        
 
                     case 2:
                         clear();
@@ -922,7 +1016,7 @@ export const parte6 = (personagem: Personagem, inimigo: Inimigo, romperSelo: boo
                         stop();
                         white('\n\nFIM DE JOGO. Obrigado por jogar!');
                         process.exit();
-                        break;
+                        
 
                     case 3:
                         consoleSaindo();

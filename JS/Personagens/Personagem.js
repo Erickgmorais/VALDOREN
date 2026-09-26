@@ -227,12 +227,14 @@ Opcoes:
     ║            ATRIBUTOS              ║
     ╠═══════════════════════════════════╣
     ║                                   ║
-    ║  VIDA   : ${String(this.vida).padEnd(23)} 
-    ║  ATAQUE : ${String(this.ataque).padEnd(23)} 
-    ║  DEFESA : ${String(this.defesa).padEnd(23)} 
+    ║  VIDA      : ${String(this.vida).padEnd(20)} 
+    ║  ATAQUE    : ${String(this.ataque).padEnd(20)} 
+    ║  DEFESA    : ${String(this.defesa).padEnd(20)} 
+    ║  OURO      : ${String(this.ouro).padEnd(20)} 
+    ║  REPUTACAO : ${String(this.reputacao).padEnd(20)} 
     ║                                   ║
     ╚═══════════════════════════════════╝
-                `);
+            `);
         }
         else {
             (0, Cores_1.yellow)(`
@@ -247,9 +249,11 @@ Opcoes:
     ║            ATRIBUTOS              ║
     ╠═══════════════════════════════════╣
     ║                                   ║
-    ║  VIDA   : ${String(this.vida).padEnd(23)} 
-    ║  ATAQUE : ${String(this.ataque).padEnd(23)} 
-    ║  DEFESA : ${String(this.defesa).padEnd(23)} 
+    ║  VIDA      : ${String(this.vida).padEnd(20)} 
+    ║  ATAQUE    : ${String(this.ataque).padEnd(20)} 
+    ║  DEFESA    : ${String(this.defesa).padEnd(20)} 
+    ║  OURO      : ${String(this.ouro).padEnd(20)} 
+    ║  REPUTACAO : ${String(this.reputacao).padEnd(20)} 
     ║                                   ║
     ║  ATAQUE ESPECIAL AINDA DISPONIVEL ║
     ║                                   ║
