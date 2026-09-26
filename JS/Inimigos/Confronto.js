@@ -68,7 +68,7 @@ function iniciarConfronto(personagem, inimigo) {
             else {
                 (0, Auxiliares_1.clear)();
                 (0, Auxiliares_1.arteInimigoDerrotado)(); // Arte de inimigo derrotado
-                personagem.setReputacao(15); // ao vencer confronto, ganha reputação 
+                personagem.setReputacao(10); // ao vencer confronto, ganha reputação 
                 finalConfronto = true;
                 (0, Auxiliares_1.stop)();
             }

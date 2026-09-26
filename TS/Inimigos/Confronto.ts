@@ -91,7 +91,7 @@ export function iniciarConfronto(personagem: Personagem, inimigo: Inimigo) {
 
                 clear();
                 arteInimigoDerrotado();      // Arte de inimigo derrotado
-                personagem.setReputacao(15); // ao vencer confronto, ganha reputação 
+                personagem.setReputacao(10); // ao vencer confronto, ganha reputação 
                 finalConfronto = true;
                 stop();
 
